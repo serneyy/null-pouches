@@ -867,6 +867,14 @@
     .null-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
     .null-footer-legal { font-size: 11px; line-height: 1.8; color: rgba(255,255,255,.48); }
     .null-footer-legal strong { font-weight: 500; color: rgba(255,255,255,.72); }
+    .null-footer-prelaunch-note {
+      max-width: 580px;
+      margin: 9px 0 0;
+      color: rgba(255,255,255,.36);
+      font-size: 10px;
+      line-height: 1.65;
+      letter-spacing: .005em;
+    }
     .null-footer-link { border: 0; padding: 9px 0; background: none; color: rgba(255,255,255,.70); font-family: inherit; font-size: 12px; cursor: pointer; transition: color .2s ease; }
     .null-footer-link:hover, .null-footer-link:focus-visible { color: #bb93ff; }
     .null-footer-link:focus-visible, .null-privacy-close:focus-visible { outline: 2px solid #a67bff; outline-offset: 4px; }
@@ -1852,6 +1860,9 @@
         <div class="null-footer-legal">
           <strong>Operated by ENORDA s.r.o.</strong><br>
           © 2026 NULL. All rights reserved.
+          <p class="null-footer-prelaunch-note">
+            NULL is currently in development. We're gauging interest in our first production batch through the planned Join the Waitlist feature. If enough people sign up once registration is live, we'll announce the first batch by email to our subscribers.
+          </p>
         </div>
         <button type="button" class="null-footer-link" id="null-open-privacy" aria-haspopup="dialog" aria-controls="null-privacy-dialog">Privacy Policy</button>
       </div>
