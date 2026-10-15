@@ -902,7 +902,6 @@
     }
     .null-waitlist-consent { display: inline-flex; align-items: flex-start; gap: 7px; color: rgba(255,255,255,.66); cursor: pointer; }
     .null-waitlist-consent input { margin: 1px 0 0; width: 13px; height: 13px; flex: 0 0 13px; accent-color: #8659fa; cursor: pointer; }
-    .null-meta-consent { flex-basis: 100%; margin-top: 5px; }
     .null-waitlist-privacy-link { padding: 0; border: 0; color: #bba0ff; background: transparent; font: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
     .null-waitlist-privacy-link:focus-visible { outline: 2px solid #a67bff; outline-offset: 3px; }
     .null-waitlist-honeypot { position: absolute !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; clip-path: inset(100%) !important; }
@@ -1413,9 +1412,7 @@
         </div>
           <div class="null-waitlist-consent-row">
             <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>I agree to receive NULL launch and first-batch emails.</span></label>
-            <label class="null-waitlist-consent null-meta-consent"><input type="checkbox" name="null-meta-consent"><span>Optional: I agree to Meta advertising measurement of my registration.</span></label>
-            <button class="null-waitlist-privacy-link" data-null-open-privacy type="button">Privacy Policy</button>
-          </div>
+            </div>
           <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
           <div class="null-turnstile-slot" aria-label="Spam protection"></div>
         </form>
@@ -1473,9 +1470,7 @@
           </div>
           <div class="null-waitlist-consent-row">
             <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>I agree to receive NULL launch and first-batch emails.</span></label>
-            <label class="null-waitlist-consent null-meta-consent"><input type="checkbox" name="null-meta-consent"><span>Optional: I agree to Meta advertising measurement of my registration.</span></label>
-            <button class="null-waitlist-privacy-link" data-null-open-privacy type="button">Privacy Policy</button>
-          </div>
+            </div>
           <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
           <div class="null-turnstile-slot" aria-label="Spam protection"></div>
         </form>
@@ -1961,12 +1956,12 @@
   <!-- Optional Meta visit tracking: no browser marketing scripts until user consent. -->
   <section class="null-meta-consent-banner" id="null-meta-consent-banner" role="region" aria-label="Optional marketing cookies" hidden>
     <div class="null-meta-consent-copy">
-      <strong>Optional advertising analytics</strong>
-      <span>Allow Meta Pixel to measure visits to NULL. You can browse and join the waitlist without accepting.</span>
+      <strong>We use cookies</strong>
+      <span>Essential cookies help our website work. With your permission, Meta Pixel measures visits and waitlist signups to improve our advertising. You can reject optional cookies and still use NULL. <button class="null-waitlist-privacy-link" type="button" data-null-open-privacy>Privacy Policy</button></span>
     </div>
     <div class="null-meta-consent-actions">
-      <button type="button" id="null-meta-consent-reject" class="null-meta-consent-decline">No thanks</button>
-      <button type="button" id="null-meta-consent-allow" class="null-meta-consent-accept">Allow tracking</button>
+      <button type="button" id="null-meta-consent-reject" class="null-meta-consent-decline">Reject optional</button>
+      <button type="button" id="null-meta-consent-allow" class="null-meta-consent-accept">Accept all</button>
     </div>
   </section>
 
@@ -2013,8 +2008,8 @@
         </section>
         <section>
           <h3>7. Cookies, analytics and automated decisions</h3>
-          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only for visitors who separately opt in to advertising measurement when joining the waitlist. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. The browser Pixel can track PageView after a separate optional visit-tracking choice in the cookie banner; it can also track Lead after a new registration with explicit, optional registration-measurement consent.</p>
-          <p>Meta Pixel may create browser identifiers such as _fbp and _fbc after consent. The visit-tracking choice is saved in local storage and can be changed with Cookie settings in the footer; refusing or revoking consent does not prevent waitlist registration. Marketing measurement consent is optional and separate from consent to receive launch emails. Refusing measurement does not prevent joining the waitlist. We record an advertising consent timestamp for new registrations that opt in. To withdraw consent for future processing, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Data already transmitted to Meta may also be subject to Meta's own retention and privacy controls.</p>
+          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only when visitors explicitly accept optional advertising cookies in our cookie banner. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. The browser Pixel can track PageView after a separate optional visit-tracking choice in the cookie banner; it can also track Lead when a new waitlist registration succeeds while optional advertising consent remains active.</p>
+          <p>Meta Pixel may create browser identifiers such as _fbp and _fbc after consent. The visit-tracking choice is saved in local storage and can be changed with Cookie settings in the footer; refusing or revoking consent does not prevent waitlist registration. Cookie-based advertising consent is optional and separate from consent to receive launch emails. Refusing measurement does not prevent joining the waitlist. For new registrations made with advertising consent, we record the consent timestamp. To withdraw consent for future processing, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Data already transmitted to Meta may also be subject to Meta's own retention and privacy controls.</p>
           <p>We do not currently use automated decision-making that produces legal or similarly significant effects based on data collected through this website.</p>
         </section>
         <section>
@@ -2185,8 +2180,7 @@
 
     function nullMetaPixelLead(eventId) {
       if (!/^null_lead_[a-f0-9-]{36}$/i.test(eventId)) return;
-      // An explicit checkbox for measuring THIS registration is required by
-      // handleWaitlistSubmit, independently from optional visit tracking.
+      // Lead is tracked only after the optional marketing cookie consent.
       nullMetaLoadPixel();
       window.fbq("track", "Lead", { content_name: "NULL Waitlist" }, { eventID: eventId });
     }
@@ -2287,7 +2281,6 @@
       const form = e.currentTarget;
       const email = form.querySelector('input[type="email"]');
       const consent = form.querySelector('input[name="null-waitlist-consent"]');
-      const metaConsent = form.querySelector('input[name="null-meta-consent"]');
       const honeypot = form.querySelector('input[name="website"]');
       const button = form.querySelector('button[type="submit"]');
       const feedback = document.getElementById(form.id === 'null-nav-waitlist-form' ? 'null-nav-waitlist-feedback' : 'waitlist-feedback');
@@ -2303,10 +2296,10 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: email.value.trim(), consent: consent.checked,
-            marketingConsent: Boolean(metaConsent?.checked),
+            marketingConsent: nullMetaReadVisitConsent() === "allowed",
             pageUrl: window.location.href,
-            fbp: metaConsent?.checked ? nullMetaCookie("_fbp") : undefined,
-            fbc: metaConsent?.checked ? nullMetaCookie("_fbc") : undefined,
+            fbp: nullMetaReadVisitConsent() === "allowed" ? nullMetaCookie("_fbp") : undefined,
+            fbc: nullMetaReadVisitConsent() === "allowed" ? nullMetaCookie("_fbc") : undefined,
             source: form.id === 'null-nav-waitlist-form' ? 'menu' : 'hero',
             website: honeypot?.value || '',
             turnstileToken
@@ -2314,7 +2307,7 @@
         });
         const data = await response.json().catch(() => ({}));
         if (!response.ok || data.success !== true) throw new Error(data.error || 'Could not join the waitlist. Please try again.');
-        if (metaConsent?.checked && data.isNew === true && typeof data.leadEventId === "string") {
+        if (nullMetaReadVisitConsent() === "allowed" && data.isNew === true && typeof data.leadEventId === "string") {
           nullMetaPixelLead(data.leadEventId);
         }
         feedback.textContent = "You're on the list. We'll email you when NULL launches.";
