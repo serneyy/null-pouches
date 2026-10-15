@@ -585,7 +585,8 @@
       50% { opacity: 1; transform: scale(1.09); }
     }
     @media (max-width: 767px) {
-      .null-lineup { padding: 8px 0 12px; }
+      /* Bring the mobile tins closer to the waitlist without shrinking them. */
+      .null-lineup { padding: 0 0 12px; margin-top: -60px; }
       .null-lineup-inner { width: 100%; }
       .null-lineup-track {
         --null-slide-width: 53vw;
