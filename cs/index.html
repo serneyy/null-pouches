@@ -1393,6 +1393,7 @@
     .null-language-select option { background: #14101d; color: white; }
     @media (max-width: 410px) { .null-header-actions { gap: 5px; } .null-language-select { min-width: 51px; padding-left: 6px; } }
 
+    @media (max-width: 359px) { .null-header-waitlist { display: none; } }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1410,7 +1411,7 @@
         <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL – zpět nahoru">
           <img
             src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
-            alt="NULL Logo"
+            alt="Logo NULL"
             class="h-8 sm:h-9 w-auto object-contain"
           />
         </a>
@@ -1418,7 +1419,7 @@
 
       <div class="null-header-actions">
         <label class="null-language-wrap" aria-label="Vybrat jazyk"><select id="null-language-select" class="null-language-select" aria-label="Vybrat jazyk"><option value="en">EN</option><option value="sk">SK</option><option value="cs">CZ</option><option value="pl">PL</option><option value="ro">RO</option></select></label>
-        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Join the waitlist">
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Přidat se">
           <span class="null-header-waitlist-full">Přidat se</span>
           <span class="null-header-waitlist-short">Přidat</span>
           <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
@@ -1525,7 +1526,7 @@
             <!-- SAME desktop-format image on both. On mobile this entire media layer is absolutely positioned behind the copy. -->
             <img
               src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217"
-              alt="NULL FOCUS, SLEEP and ENERGY functional pouch containers"
+              alt="Balení funkčních sáčků NULL FOCUS, SLEEP a ENERGY"
               class="null-hero-image w-full h-auto object-cover select-none"
               fetchpriority="high"
               decoding="async"
@@ -1551,7 +1552,7 @@
       <div class="null-lineup-track" id="null-lineup-track" aria-label="Procházet produkty NULL Focus, Energy a Sleep" tabindex="0">
         <figure class="null-lineup-item null-lineup-item--focus" data-lineup-index="0">
           <div class="null-lineup-visual">
-            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus.png?v=1792061193" alt="NULL FOCUS nicotine-free pouch tin" loading="eager" decoding="async" width="1024" height="1024" draggable="false">
+            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus.png?v=1792061193" alt="Balení sáčků NULL FOCUS bez nikotinu" loading="eager" decoding="async" width="1024" height="1024" draggable="false">
           </div>
           <figcaption class="null-lineup-caption">
             <div class="null-lineup-name">FOCUS</div>
@@ -1560,7 +1561,7 @@
         </figure>
         <figure class="null-lineup-item null-lineup-item--energy" data-lineup-index="1">
           <div class="null-lineup-visual">
-            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/energy.png?v=1792061190" alt="NULL ENERGY nicotine-free pouch tin" loading="lazy" decoding="async" width="1024" height="1024" draggable="false">
+            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/energy.png?v=1792061190" alt="Balení sáčků NULL ENERGY bez nikotinu" loading="lazy" decoding="async" width="1024" height="1024" draggable="false">
           </div>
           <figcaption class="null-lineup-caption">
             <div class="null-lineup-name">ENERGY</div>
@@ -1569,7 +1570,7 @@
         </figure>
         <figure class="null-lineup-item null-lineup-item--sleep" data-lineup-index="2">
           <div class="null-lineup-visual">
-            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/sleep.png?v=1792061197" alt="NULL SLEEP nicotine-free pouch tin" loading="lazy" decoding="async" width="1024" height="1024" draggable="false">
+            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/sleep.png?v=1792061197" alt="Balení sáčků NULL SLEEP bez nikotinu" loading="lazy" decoding="async" width="1024" height="1024" draggable="false">
           </div>
           <figcaption class="null-lineup-caption">
             <div class="null-lineup-name">SLEEP</div>
@@ -1605,15 +1606,11 @@
           </h2>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-5">
-            NULL pouches are nicotine-free, tobacco-free
-            pouches designed to support focus, energy
-            and better sleep using functional ingredients.
+            Sáčky NULL neobsahují nikotin ani tabák. Jsou navržené s funkčními složkami pro soustředění, energii a večerní odpočinek.
           </p>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-8">
-            A modern alternative for anyone who wants
-            more from their day — without nicotine,
-            without smoke, without compromise.
+            Moderní alternativa pro každého, kdo chce ze svého dne víc. Bez nikotinu, kouře a kompromisů.
           </p>
 
           <a
@@ -1638,7 +1635,7 @@
                 <img
                   id="img-pouches"
                   src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/vrecuska.png?v=1792017219"
-                  alt="Two floating white NULL functional pouches"
+                  alt="Dva bílé funkční sáčky NULL"
                   width="1254"
                   height="1254"
                   loading="lazy"
@@ -1675,7 +1672,7 @@
             </div>
             <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus_details.png?v=1792074119"
-                   alt="Open NULL FOCUS tin showing white functional pouches alongside ingredient imagery"
+                   alt="Otevřené balení NULL FOCUS s bílými sáčky a přísadami"
                    width="1224" height="1224" loading="lazy" decoding="async" />
             </div>
             <p class="null-ingredient-tagline">Méně rozptýlení. Více soustředění.</p>
@@ -1701,7 +1698,7 @@
             </div>
             <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/energy_details.png?v=1792074142"
-                   alt="Open NULL ENERGY tin showing white functional pouches alongside ingredient imagery"
+                   alt="Otevřené balení NULL ENERGY s bílými sáčky a přísadami"
                    width="1224" height="1224" loading="lazy" decoding="async" />
             </div>
             <p class="null-ingredient-tagline">Udrž si tempo.</p>
@@ -1727,7 +1724,7 @@
             </div>
             <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/sleep_details.png?v=1792074120"
-                   alt="Open NULL SLEEP tin showing white functional pouches alongside ingredient imagery"
+                   alt="Otevřené balení NULL SLEEP s bílými sáčky a přísadami"
                    width="1224" height="1224" loading="lazy" decoding="async" />
             </div>
             <p class="null-ingredient-tagline">Vypni po svém.</p>
@@ -1770,33 +1767,33 @@
           <tbody>
             <tr>
               <td><span class="null-compare-feature">FUNKČNÍ SLOŽKY</span><span class="null-compare-detail">Nootropika, aminokyseliny a rostlinné extrakty.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Ne"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">BEZ NIKOTINOVÉ ZÁVISLOSTI</span><span class="null-compare-detail">Bez nikotinu a závislosti na něm.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Ne"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Vyber si sáček podle toho, co právě potřebuješ.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Ne"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">PRO KAŽDOU CHVÍLI</span><span class="null-compare-detail">Soustředění při učení, energie během dne i večerní odpočinek.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Ne"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">BEZ NIKOTINOVÉHO ÚTLUMU</span><span class="null-compare-detail">Bez nikotinového návalu a následného útlumu.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Ne"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">DISKRÉTNÍ A BEZ KOUŘE</span><span class="null-compare-detail">Jednoduché a diskrétní použití.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Ano"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
           </tbody>
         </table>
@@ -2122,7 +2119,7 @@
       const close = (restoreFocus = false) => {
         if (!isOpen()) return;
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open navigation menu');
+        toggle.setAttribute('aria-label', 'Otevřít menu');
         toggle.classList.remove('is-open');
         panel.hidden = true;
         backdrop.hidden = true;
@@ -2131,7 +2128,7 @@
       const open = () => {
         if (isOpen()) return;
         toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', 'Close navigation menu');
+        toggle.setAttribute('aria-label', 'Zavřít menu');
         toggle.classList.add('is-open');
         panel.hidden = false;
         backdrop.hidden = false;
@@ -2292,7 +2289,7 @@
     const nullTurnstilePending = new WeakMap();
 
     function nullTurnstileToken(form) {
-      if (!window.turnstile) return Promise.reject(new Error('Security check could not load. Please refresh or try another browser.'));
+      if (!window.turnstile) return Promise.reject(new Error('Bezpečnostní ověření se nenačetlo. Obnov stránku nebo použij jiný prohlížeč.'));
       let widgetId = nullTurnstileWidgetIds.get(form);
       if (widgetId === undefined) {
         const slot = form.querySelector('.null-turnstile-slot');
@@ -2321,7 +2318,7 @@
           }
         });
         if (widgetId === undefined || widgetId === null) {
-          return Promise.reject(new Error('Security check could not start.'));
+          return Promise.reject(new Error('Bezpečnostní ověření nelze spustit.'));
         }
         nullTurnstileWidgetIds.set(form, widgetId);
       }
@@ -2331,7 +2328,7 @@
           window.turnstile.execute(widgetId);
         } catch {
           nullTurnstilePending.delete(form);
-          reject(new Error('Security check could not start. Please try again.'));
+          reject(new Error('Bezpečnostní ověření nelze spustit. Zkus to znovu.'));
         }
       });
     }
@@ -2378,7 +2375,7 @@
             continue;
           }
           if (!response.ok || data.success !== true) {
-            throw new Error(data.error || 'Registrace se nezdařila. Zkus to znovu.');
+            throw new Error('Registrace se nezdařila. Zkus to znovu.');
           }
           break;
         }
