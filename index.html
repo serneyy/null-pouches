@@ -616,14 +616,16 @@
       .null-lineup { padding: 18px 0 35px; }
       .null-lineup-inner { width: 100%; }
       .null-lineup-track {
+        --null-slide-width: 53vw;
+        position: relative;
         display: flex;
-        gap: 0;
+        gap: 8px;
         align-items: stretch;
-        padding: 0 0 12px;
+        padding: 0 calc((100% - var(--null-slide-width)) / 2) 12px;
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline: 0;
+        scroll-padding-inline: calc((100% - var(--null-slide-width)) / 2);
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
@@ -631,14 +633,20 @@
       }
       .null-lineup-track::-webkit-scrollbar { display: none; }
       .null-lineup-item {
-        flex: 0 0 100%;
-        max-width: 100%;
+        flex: 0 0 var(--null-slide-width);
+        max-width: var(--null-slide-width);
         scroll-snap-align: center;
         scroll-snap-stop: always;
       }
-      .null-lineup-visual { height: clamp(256px, 77vw, 328px); }
-      .null-lineup-product { width: min(91%, 310px); }
-      .null-lineup-caption { margin-top: 0; }
+      .null-lineup-visual { height: clamp(240px, 65vw, 320px); }
+      .null-lineup-product { width: min(100%, 285px); }
+      /* Only the currently centered tin displays its title and description. */
+      .null-lineup-caption {
+        margin-top: 0;
+        opacity: 0;
+        transition: opacity .2s ease;
+      }
+      .null-lineup-item.is-centered .null-lineup-caption { opacity: 1; }
       .null-lineup-name { font-size: 16px; }
       .null-lineup-caption p { font-size: 12px; margin-top: 8px; }
     }
@@ -1194,7 +1202,7 @@
       });
     })();
 
-    // Infinite centered swipe carousel on mobile. Desktop keeps the original three tins.
+    // Seamless infinite carousel: show neighboring tins and keep the active tin centered.
     (() => {
       const track = document.getElementById('null-lineup-track');
       if (!track) return;
@@ -1203,111 +1211,118 @@
       if (originals.length !== 3) return;
       const groupSize = originals.length;
       let loopEnabled = false;
-      let isTouching = false;
-      let settling = false;
+      let touching = false;
+      let normalizing = false;
       let settleTimer = null;
 
-      const slideWidth = () => track.clientWidth;
-      const withoutSnap = (callback) => {
-        const oldSnap = track.style.scrollSnapType;
-        const oldBehavior = track.style.scrollBehavior;
+      const allSlides = () => Array.from(track.querySelectorAll('.null-lineup-item'));
+      const nearestIndex = () => {
+        const slides = allSlides();
+        const frame = track.getBoundingClientRect();
+        const center = frame.left + frame.width / 2;
+        let nearest = 0, closest = Infinity;
+        slides.forEach((slide, i) => {
+          const box = slide.getBoundingClientRect();
+          const delta = Math.abs(box.left + box.width / 2 - center);
+          if (delta < closest) { closest = delta; nearest = i; }
+        });
+        return nearest;
+      };
+      const paintCenter = () => {
+        if (!loopEnabled) return;
+        const selected = nearestIndex();
+        allSlides().forEach((slide, index) => {
+          slide.classList.toggle('is-centered', index === selected);
+        });
+      };
+      // Center by the element's actual position; each mobile slide is narrower than the viewport.
+      const jump = (index) => {
+        const slide = allSlides()[index];
+        if (!slide) return;
+        const previousSnap = track.style.scrollSnapType;
+        const previousBehavior = track.style.scrollBehavior;
         track.style.scrollSnapType = 'none';
         track.style.scrollBehavior = 'auto';
-        callback();
-        // Restore snap on the next frame, after the instant jump has rendered.
+        const slideRect = slide.getBoundingClientRect();
+        const trackRect = track.getBoundingClientRect();
+        track.scrollLeft += slideRect.left + slideRect.width / 2 - trackRect.left - trackRect.width / 2;
+        paintCenter();
         window.requestAnimationFrame(() => {
-          track.style.scrollSnapType = oldSnap;
-          track.style.scrollBehavior = oldBehavior;
+          track.style.scrollSnapType = previousSnap;
+          track.style.scrollBehavior = previousBehavior;
         });
       };
-      const jump = (index) => withoutSnap(() => {
-        track.scrollLeft = slideWidth() * index;
-      });
 
-      const makeClones = () => {
-        const copiesBefore = document.createDocumentFragment();
-        const copiesAfter = document.createDocumentFragment();
+      const populate = () => {
+        const first = document.createDocumentFragment();
+        const last = document.createDocumentFragment();
         originals.forEach((slide) => {
-          const before = slide.cloneNode(true);
-          const after = slide.cloneNode(true);
-          before.classList.add('null-lineup-clone');
-          after.classList.add('null-lineup-clone');
-          before.setAttribute('aria-hidden', 'true');
-          after.setAttribute('aria-hidden', 'true');
-          before.querySelector('img').loading = 'lazy';
-          after.querySelector('img').loading = 'lazy';
-          copiesBefore.appendChild(before);
-          copiesAfter.appendChild(after);
+          for (const [target, position] of [[first, 'before'], [last, 'after']]) {
+            const clone = slide.cloneNode(true);
+            clone.classList.add('null-lineup-clone');
+            clone.classList.remove('is-centered');
+            clone.setAttribute('aria-hidden', 'true');
+            clone.dataset.clonePosition = position;
+            const img = clone.querySelector('img');
+            if (img) img.loading = 'lazy';
+            target.appendChild(clone);
+          }
         });
-        track.prepend(copiesBefore);
-        track.append(copiesAfter);
+        track.prepend(first);
+        track.append(last);
       };
-
-      const activateMobile = () => {
+      const activate = () => {
         if (loopEnabled) return;
-        makeClones();
+        populate();
         loopEnabled = true;
-        // Middle group index 4 = ENERGY, centered on the first mobile view.
-        jump(groupSize + 1);
+        jump(groupSize + 1); // ENERGY is initially centered.
       };
-
-      const deactivateMobile = () => {
+      const deactivate = () => {
         if (!loopEnabled) return;
-        track.querySelectorAll('.null-lineup-clone').forEach(node => node.remove());
+        track.querySelectorAll('.null-lineup-clone').forEach(el => el.remove());
+        originals.forEach(el => el.classList.remove('is-centered'));
         loopEnabled = false;
         track.scrollLeft = 0;
       };
-
-      const normalizePosition = () => {
-        if (!loopEnabled || !mobile.matches || isTouching || settling) return;
-        const width = slideWidth();
-        if (!width) return;
-        const index = Math.round(track.scrollLeft / width);
+      const normalize = () => {
+        if (!loopEnabled || !mobile.matches || touching || normalizing) return;
+        const index = nearestIndex();
         if (index < groupSize || index >= groupSize * 2) {
-          const normalized = groupSize + ((index % groupSize) + groupSize) % groupSize;
-          settling = true;
-          jump(normalized);
-          window.requestAnimationFrame(() => { settling = false; });
+          normalizing = true;
+          const middleIndex = groupSize + ((index % groupSize) + groupSize) % groupSize;
+          jump(middleIndex);
+          window.requestAnimationFrame(() => { normalizing = false; });
         }
+        paintCenter();
       };
-
-      const scheduleNormalize = () => {
+      const schedule = () => {
+        if (!loopEnabled) return;
+        paintCenter();
         window.clearTimeout(settleTimer);
-        settleTimer = window.setTimeout(normalizePosition, 150);
+        settleTimer = window.setTimeout(normalize, 170);
+      };
+      const sync = () => {
+        window.clearTimeout(settleTimer);
+        if (mobile.matches) activate();
+        else deactivate();
       };
 
-      const syncMode = () => {
-        if (mobile.matches) {
-          activateMobile();
-        } else {
-          window.clearTimeout(settleTimer);
-          deactivateMobile();
-        }
-      };
-
-      track.addEventListener('touchstart', () => { isTouching = true; }, { passive: true });
-      track.addEventListener('touchend', () => { isTouching = false; scheduleNormalize(); }, { passive: true });
-      track.addEventListener('touchcancel', () => { isTouching = false; scheduleNormalize(); }, { passive: true });
-      track.addEventListener('scroll', scheduleNormalize, { passive: true });
-      track.addEventListener('scrollend', normalizePosition, { passive: true });
-      mobile.addEventListener('change', syncMode);
+      track.addEventListener('touchstart', () => { touching = true; }, { passive: true });
+      track.addEventListener('touchend', () => { touching = false; schedule(); }, { passive: true });
+      track.addEventListener('touchcancel', () => { touching = false; schedule(); }, { passive: true });
+      track.addEventListener('scroll', schedule, { passive: true });
+      track.addEventListener('scrollend', normalize, { passive: true });
+      mobile.addEventListener('change', sync);
+      let lastWidth = track.clientWidth;
       window.addEventListener('resize', () => {
         if (!loopEnabled) return;
-        const width = slideWidth();
-        if (!width) return;
-        // Preserve current product when viewport width changes.
-        const slides = Array.from(track.children);
-        const viewportCenter = track.getBoundingClientRect().left + width / 2;
-        let nearest = groupSize + 1;
-        let minDistance = Infinity;
-        slides.forEach((slide, index) => {
-          const rect = slide.getBoundingClientRect();
-          const distance = Math.abs(rect.left + rect.width / 2 - viewportCenter);
-          if (distance < minDistance) { minDistance = distance; nearest = index; }
-        });
-        jump(nearest);
+        const width = track.clientWidth;
+        if (width === lastWidth) return;
+        lastWidth = width;
+        const index = nearestIndex();
+        jump(index);
       }, { passive: true });
-      syncMode();
+      sync();
     })();
   </script>
 </body>
