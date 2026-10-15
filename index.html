@@ -955,17 +955,165 @@
       .null-compare-mark { width: 22px; height: 22px; }
     }
 
-    </style>
+      /* Site menu: compact editorial dropdown alongside the header CTA */
+    .null-site-header { isolation: isolate; }
+    .null-header-inner { position: relative; gap: 16px; }
+    .null-header-logo { flex: 0 1 auto; min-width: 0; }
+    .null-header-logo img { display: block; max-width: 136px; }
+    .null-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex: 0 0 auto; }
+    .null-header-waitlist-short { display: none; }
+    .null-nav-trigger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      height: 40px;
+      min-width: 88px;
+      padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      color: #f8f7ff;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background .22s ease, border-color .22s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .null-nav-trigger:hover,
+    .null-nav-trigger.is-open {
+      background: rgba(116,75,205,.13);
+      border-color: rgba(165,119,255,.60);
+    }
+    .null-nav-trigger-label { font-size: 12px; font-weight: 600; line-height: 1; }
+    .null-nav-trigger-icon { position: relative; width: 16px; height: 16px; flex-shrink: 0; }
+    .null-nav-trigger-icon span {
+      position: absolute;
+      left: 0;
+      width: 16px;
+      height: 1.5px;
+      border-radius: 2px;
+      background: currentColor;
+      transition: top .23s ease, transform .23s ease;
+    }
+    .null-nav-trigger-icon span:first-child { top: 5px; }
+    .null-nav-trigger-icon span:last-child { top: 10px; }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:first-child { top: 7.5px; transform: rotate(45deg); }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:last-child { top: 7.5px; transform: rotate(-45deg); }
+    .null-nav-trigger:focus-visible,
+    .null-nav-link:focus-visible,
+    .null-nav-cta:focus-visible {
+      outline: 2px solid #a978ff;
+      outline-offset: 3px;
+    }
+    .null-nav-backdrop[hidden],
+    .null-nav-panel[hidden] { display: none !important; }
+    .null-nav-backdrop {
+      position: fixed;
+      z-index: 39;
+      inset: 0;
+      background: rgba(0,0,0,.34);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .null-nav-panel {
+      position: absolute;
+      top: calc(100% + 11px);
+      right: 32px;
+      z-index: 50;
+      width: min(328px, calc(100vw - 32px));
+      padding: 19px 18px 17px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 17px;
+      background: #0e0d13;
+      box-shadow: 0 24px 62px rgba(0,0,0,.68), 0 1px 0 rgba(255,255,255,.04) inset;
+      color: #fff;
+    }
+    .null-nav-panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 0 12px;
+      padding: 0 5px;
+      color: rgba(255,255,255,.48);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+    .null-nav-panel-symbol { color: #a57dff; font-size: 16px; line-height: 1; }
+    .null-nav-links { display: flex; flex-direction: column; }
+    .null-nav-link {
+      display: grid;
+      grid-template-columns: 26px minmax(0,1fr) 20px;
+      align-items: center;
+      gap: 8px;
+      min-height: 49px;
+      padding: 8px 8px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-radius: 4px;
+      color: #f3f1f6;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color .2s ease, background .2s ease;
+    }
+    .null-nav-link:hover { background: rgba(255,255,255,.045); color: #c3a4ff; }
+    .null-nav-index { font-size: 10px; font-weight: 500; color: rgba(255,255,255,.38); }
+    .null-nav-arrow { justify-self: end; color: rgba(255,255,255,.42); font-size: 16px; line-height: 1; }
+    .null-nav-link:hover .null-nav-arrow { color: #b38cff; }
+    .null-nav-cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding: 14px 15px;
+      border-radius: 9px;
+      background: #6322db;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .2s ease;
+    }
+    .null-nav-cta:hover { background: #7b39eb; }
+    .null-nav-cta span:last-child { font-size: 18px; font-weight: 400; }
+    .null-nav-panel-foot {
+      padding: 15px 4px 0;
+      font-size: 9px;
+      letter-spacing: .085em;
+      color: rgba(255,255,255,.36);
+      text-align: center;
+    }
+    #top, #products, #about, #ingredients, #null-comparison, #faq, #waitlist-form { scroll-margin-top: 86px; }
+    @media (max-width: 639px) {
+      .null-header-inner { gap: 8px; }
+      .null-header-logo img { max-width: 110px; }
+      .null-header-actions { gap: 8px; }
+      .null-nav-trigger { width: 40px; min-width: 40px; height: 40px; padding: 0; border-radius: 12px; }
+      .null-nav-trigger-label { display: none; }
+      .null-nav-panel { right: 20px; top: calc(100% + 9px); }
+    }
+    @media (max-width: 410px) {
+      .null-header-waitlist-full { display: none; }
+      .null-header-waitlist-short { display: inline; }
+      .null-header-logo img { max-width: 105px; }
+      .null-header-waitlist { padding-left: 12px; padding-right: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .null-nav-trigger, .null-nav-trigger-icon span, .null-nav-link, .null-nav-cta { transition: none !important; }
+    }
+
+  </style>
 </head>
 <body class="selection:bg-purple-600 selection:text-white">
 
   <!-- ======================================================================= -->
   <!-- TOP NAVIGATION BAR                                                      -->
   <!-- ======================================================================= -->
-  <header class="w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
-    <div class="max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
-      <!-- Brand Logo (White logo without background) -->
-      <a href="#" class="flex items-center select-none">
+  <header class="null-site-header w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
+    <div class="null-header-inner max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
+      <!-- Brand logo -->
+      <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL - back to top">
         <img
           src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
           alt="NULL Logo"
@@ -973,18 +1121,46 @@
         />
       </a>
 
-      <!-- Right CTA Pill -->
-      <a href="#waitlist-form" class="btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2">
-        <span>Join the waitlist</span>
-        <span class="text-white/80 text-xs leading-none">→</span>
-      </a>
+      <div class="null-header-actions">
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Join the waitlist">
+          <span class="null-header-waitlist-full">Join the waitlist</span>
+          <span class="null-header-waitlist-short">Join</span>
+          <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
+        </a>
+
+        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Open navigation menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
+          <span class="null-nav-trigger-label" aria-hidden="true">Menu</span>
+          <span class="null-nav-trigger-icon" aria-hidden="true"><span></span><span></span></span>
+        </button>
+      </div>
+
+      <nav class="null-nav-panel" id="null-nav-panel" aria-label="Site navigation" hidden>
+        <div class="null-nav-panel-top">
+          <span>EXPLORE NULL</span>
+          <span class="null-nav-panel-symbol" aria-hidden="true">✳</span>
+        </div>
+        <div class="null-nav-links">
+          <a href="#products" class="null-nav-link"><span class="null-nav-index">01</span><span>Our pouches</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
+          <a href="#about" class="null-nav-link"><span class="null-nav-index">02</span><span>What is NULL?</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
+          <a href="#ingredients" class="null-nav-link"><span class="null-nav-index">03</span><span>Ingredients</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
+          <a href="#null-comparison" class="null-nav-link"><span class="null-nav-index">04</span><span>Why NULL?</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
+          <a href="#faq" class="null-nav-link"><span class="null-nav-index">05</span><span>FAQ</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
+        </div>
+        <a href="#waitlist-form" class="null-nav-cta">
+          <span>Join the waitlist</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <div class="null-nav-panel-foot">ZERO NICOTINE. THREE WAYS TO NULL.</div>
+      </nav>
     </div>
   </header>
+
+  <div class="null-nav-backdrop" id="null-nav-backdrop" hidden aria-hidden="true"></div>
 
   <!-- ======================================================================= -->
   <!-- 1. HERO SECTION                                                         -->
   <!-- ======================================================================= -->
-  <section class="null-hero-section relative pt-8 sm:pt-12 pb-12 sm:pb-20 overflow-hidden">
+  <section id="top" class="null-hero-section relative pt-8 sm:pt-12 pb-12 sm:pb-20 overflow-hidden">
     <div class="max-w-[1060px] mx-auto px-5 sm:px-8 relative">
       <div class="null-hero-grid grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
 
@@ -1060,7 +1236,7 @@
   <!-- ======================================================================= -->
   <!-- NULL PRODUCT LINEUP: floating tins, desktop trio and swipeable mobile -->
   <!-- ======================================================================= -->
-  <section class="null-lineup" aria-label="NULL functional pouch collection">
+  <section id="products" class="null-lineup" aria-label="NULL functional pouch collection">
     <div class="null-lineup-inner">
       <div class="null-lineup-track" id="null-lineup-track" aria-label="Swipe through NULL Focus, Energy and Sleep products" tabindex="0">
         <figure class="null-lineup-item null-lineup-item--focus" data-lineup-index="0">
@@ -1103,7 +1279,7 @@
   <!-- ======================================================================= -->
   <!-- 2. "WHAT IS NULL?" SECTION                                              -->
   <!-- ======================================================================= -->
-  <section class="pt-14 pb-7 sm:py-20 relative overflow-hidden">
+  <section id="about" class="pt-14 pb-7 sm:py-20 relative overflow-hidden">
     <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
 
@@ -1170,7 +1346,7 @@
   <!-- ======================================================================= -->
   <!-- 3. "KEY INGREDIENTS" SECTION                                            -->
   <!-- ======================================================================= -->
-  <section class="pt-8 pb-12 sm:py-16 relative">
+  <section id="ingredients" class="pt-8 pb-12 sm:py-16 relative">
     <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
 
       <!-- Section Heading -->
@@ -1351,7 +1527,7 @@
   <!-- ======================================================================= -->
   <!-- 4. FAQ SECTION                                                          -->
   <!-- ======================================================================= -->
-  <section class="pt-12 sm:pt-16 pb-24 relative">
+  <section id="faq" class="pt-12 sm:pt-16 pb-24 relative">
     <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
 
       <!-- Header Row with Right CTA Button -->
@@ -1627,6 +1803,46 @@
         const last = nodes[nodes.length - 1];
         if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+    })();
+
+    // Navigation dropdown: keyboard-friendly, click outside to close, and native smooth anchor links.
+    (() => {
+      const toggle = document.getElementById('null-nav-trigger');
+      const panel = document.getElementById('null-nav-panel');
+      const backdrop = document.getElementById('null-nav-backdrop');
+      if (!toggle || !panel || !backdrop) return;
+
+      const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+      const close = (restoreFocus = false) => {
+        if (!isOpen()) return;
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        toggle.classList.remove('is-open');
+        panel.hidden = true;
+        backdrop.hidden = true;
+        if (restoreFocus) toggle.focus();
+      };
+      const open = () => {
+        if (isOpen()) return;
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Close navigation menu');
+        toggle.classList.add('is-open');
+        panel.hidden = false;
+        backdrop.hidden = false;
+      };
+      toggle.addEventListener('click', () => isOpen() ? close() : open());
+      backdrop.addEventListener('click', () => close(true));
+      panel.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', () => close(false));
+      });
+      document.querySelector('.null-header-logo')?.addEventListener('click', () => close(false));
+      document.querySelector('.null-header-waitlist')?.addEventListener('click', () => close(false));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && isOpen()) {
+          event.preventDefault();
+          close(true);
+        }
       });
     })();
 
