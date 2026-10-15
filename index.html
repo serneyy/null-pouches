@@ -893,8 +893,23 @@
       line-height: 1;
     }
     .null-compare-mark--yes {
-      color: #a779ff;
-      text-shadow: 0 0 8px rgba(157,108,255,.43), 0 0 18px rgba(85,0,255,.24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      color: #ad7dff;
+    }
+    .null-compare-mark--yes svg {
+      display: block;
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 4px rgba(152,90,255,.65))
+              drop-shadow(0 0 10px rgba(85,0,255,.30));
     }
     .null-compare-mark--no { color: rgba(255,255,255,.56); }
     @media (max-width: 767px) {
@@ -925,6 +940,7 @@
       }
       .null-compare-brand { font-size: 10px; letter-spacing: 0; }
       .null-compare-mark { font-size: 22px; }
+      .null-compare-mark--yes svg { width: 22px; height: 22px; }
     }
     @media (max-width: 359px) {
       .null-compare-inner { padding: 0 15px; }
@@ -932,6 +948,7 @@
       .null-compare-detail { font-size: 9px; }
       .null-compare-brand { font-size: 9px; }
       .null-compare-mark { font-size: 20px; }
+      .null-compare-mark--yes svg { width: 20px; height: 20px; }
     }
 
     </style>
@@ -1293,33 +1310,33 @@
             <tbody>
             <tr>
               <td><span class="null-compare-feature">No nicotine dependence</span><span class="null-compare-detail">No nicotine inside. No nicotine habit to build.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">No chasing the next hit</span><span class="null-compare-detail">No nicotine buzz that keeps pulling you back.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">No nicotine crash</span><span class="null-compare-detail">No fading nicotine buzz. No “I need another one”.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">No nicotine overload</span><span class="null-compare-detail">No strong nicotine hit that can feel too much.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">More than just a buzz</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP for real moments.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">Still discreet</span><span class="null-compare-detail">Same easy pouch format. No smoke. No vapor.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
             </tr>
             </tbody>
           </table>
