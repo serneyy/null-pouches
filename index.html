@@ -902,31 +902,33 @@
       line-height: 1.7;
       max-width: 780px;
     }
-    .null-compare-swipe-hint { display: none; }
+    /* All three comparison columns are visible at once on mobile. */
     @media (max-width: 767px) {
       .null-compare-section { padding: 43px 0 32px; }
-      .null-compare-inner { padding: 0 20px; }
+      .null-compare-inner { padding: 0 14px; }
       .null-compare-title { font-size: 25px; }
       .null-compare-subtitle { margin-top: 13px; font-size: 12.5px; }
       .null-compare-wrap { margin-top: 20px; border-radius: 13px; }
-      .null-compare-scroll { scrollbar-width: none; }
-      .null-compare-scroll::-webkit-scrollbar { display: none; }
-      .null-compare-table { min-width: 570px; }
-      .null-compare-table thead th:first-child { width: 45%; }
+      .null-compare-scroll { overflow-x: visible; }
+      .null-compare-table { width: 100%; min-width: 0; table-layout: fixed; }
+      .null-compare-table thead th:first-child { width: 44%; }
+      .null-compare-table thead th:nth-child(2),
+      .null-compare-table thead th:nth-child(3) { width: 28%; }
       .null-compare-table th,
-      .null-compare-table td { padding: 14px 11px; }
-      .null-compare-table thead th { padding-top: 16px; padding-bottom: 16px; }
-      .null-compare-feature { font-size: 12px; }
-      .null-compare-detail { font-size: 10.5px; }
-      .null-compare-brand { min-height: 30px; padding: 7px 9px; font-size: 10px; }
-      .null-compare-mark { width: 29px; height: 29px; }
-      .null-compare-swipe-hint {
-        display: block;
-        margin: 11px 0 0;
-        color: rgba(255,255,255,.46);
-        font-size: 11px;
-        text-align: right;
-      }
+      .null-compare-table td { padding: 13px 6px; overflow-wrap: break-word; }
+      .null-compare-table thead th { padding-top: 14px; padding-bottom: 14px; font-size: 9px; }
+      .null-compare-feature { font-size: 11.5px; line-height: 1.35; }
+      .null-compare-detail { margin-top: 4px; font-size: 9.5px; line-height: 1.4; }
+      .null-compare-brand { min-height: 0; max-width: 100%; padding: 6px 4px; font-size: 9px; line-height: 1.3; white-space: normal; }
+      .null-compare-mark { width: 27px; height: 27px; font-size: 16px; }
+    }
+    @media (max-width: 359px) {
+      .null-compare-inner { padding: 0 10px; }
+      .null-compare-table th, .null-compare-table td { padding-left: 4px; padding-right: 4px; }
+      .null-compare-brand { padding: 5px 2px; font-size: 8px; letter-spacing: 0; }
+      .null-compare-feature { font-size: 11px; }
+      .null-compare-detail { font-size: 9px; }
+      .null-compare-mark { width: 25px; height: 25px; }
     }
   </style>
 </head>
@@ -1273,9 +1275,9 @@
     <div class="null-compare-inner">
       <p class="null-compare-kicker">WHY NULL?</p>
       <h2 class="null-compare-title" id="null-comparison-title">A different kind<br>of pouch.</h2>
-      <p class="null-compare-subtitle">Keep the discreet pouch format. Leave nicotine out. NULL is being developed around three functional concepts: focus, energy and sleep.</p>
+      <p class="null-compare-subtitle">Keep the discreet pouch format. Leave nicotine out. NULL comes in three functional variants: focus, energy and sleep.</p>
       <div class="null-compare-wrap">
-        <div class="null-compare-scroll" tabindex="0" role="region" aria-label="Swipeable comparison of NULL and traditional nicotine pouches">
+        <div class="null-compare-scroll">
           <table class="null-compare-table">
             <thead>
               <tr>
@@ -1291,12 +1293,12 @@
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">Three purpose-built options</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP concepts for different moments.</span></td>
+              <td><span class="null-compare-feature">Three purpose-built options</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP for different moments.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">Designed around functional ingredients</span><span class="null-compare-detail">Non-nicotine ingredient blends planned for each formula.</span></td>
+              <td><span class="null-compare-feature">Designed around functional ingredients</span><span class="null-compare-detail">Non-nicotine ingredient blends tailored to each formula.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
@@ -1319,8 +1321,7 @@
           </table>
         </div>
       </div>
-      <p class="null-compare-swipe-hint">Swipe horizontally to compare →</p>
-      <p class="null-compare-footnote">Comparison describes the planned NULL concept versus typical nicotine-only pouches. Nicotine pouch formulations vary by brand. NULL ingredients, benefits and regulatory claims remain subject to final formulation and review.</p>
+      <p class="null-compare-footnote">Comparison is based on typical nicotine pouches. Formulations may vary by brand.</p>
     </div>
   </section>
 
