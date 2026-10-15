@@ -6,7 +6,7 @@
   <title>NULL — Functional Pouches For A Better You</title>
 
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
 
   <!-- Cloudflare Turnstile: explicit, on-submit security check -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
@@ -2253,7 +2253,7 @@
     const nullTurnstilePending = new WeakMap();
 
     function nullTurnstileToken(form) {
-      if (!window.turnstile) return Promise.reject(new Error('Security check is still loading. Please try again.'));
+      if (!window.turnstile) return Promise.reject(new Error('Security check could not load. Please refresh or try another browser.'));
       let widgetId = nullTurnstileWidgetIds.get(form);
       if (widgetId === undefined) {
         const slot = form.querySelector('.null-turnstile-slot');
@@ -2312,23 +2312,37 @@
       button.setAttribute('aria-busy', 'true');
       if (label) label.textContent = 'Joining...';
       try {
-        const turnstileToken = await nullTurnstileToken(form);
-        const response = await fetch('https://null-waitlist-api.threadid.workers.dev/api/waitlist', {
-          method: 'POST', mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: email.value.trim(), consent: consent.checked,
-            marketingConsent: nullMetaReadVisitConsent() === "allowed",
-            pageUrl: window.location.href,
-            fbp: nullMetaReadVisitConsent() === "allowed" ? nullMetaCookie("_fbp") : undefined,
-            fbc: nullMetaReadVisitConsent() === "allowed" ? nullMetaCookie("_fbc") : undefined,
-            source: form.id === 'null-nav-waitlist-form' ? 'menu' : 'hero',
-            website: honeypot?.value || '',
-            turnstileToken
-          })
-        });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok || data.success !== true) throw new Error(data.error || 'Could not join the waitlist. Please try again.');
+        // A Turnstile token is single-use. If verification fails, reset the
+        // widget and obtain a fresh token once before reporting a failure.
+        let data;
+        for (let attempt = 0; attempt < 2; attempt++) {
+          const turnstileToken = await nullTurnstileToken(form);
+          const response = await fetch('https://null-waitlist-api.threadid.workers.dev/api/waitlist', {
+            method: 'POST', mode: 'cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email.value.trim(), consent: consent.checked,
+              marketingConsent: nullMetaReadVisitConsent() === "allowed",
+              pageUrl: window.location.href,
+              fbp: nullMetaReadVisitConsent() === "allowed" ? nullMetaCookie("_fbp") : undefined,
+              fbc: nullMetaReadVisitConsent() === "allowed" ? nullMetaCookie("_fbc") : undefined,
+              source: form.id === 'null-nav-waitlist-form' ? 'menu' : 'hero',
+              website: honeypot?.value || '',
+              turnstileToken
+            })
+          });
+          data = await response.json().catch(() => ({}));
+          if (response.status === 403 && data.code === 'turnstile_retry' && attempt === 0) {
+            const widgetId = nullTurnstileWidgetIds.get(form);
+            if (widgetId !== undefined && window.turnstile) window.turnstile.reset(widgetId);
+            if (label) label.textContent = 'Checking again...';
+            continue;
+          }
+          if (!response.ok || data.success !== true) {
+            throw new Error(data.error || 'Could not join the waitlist. Please try again.');
+          }
+          break;
+        }
         if (nullMetaReadVisitConsent() === "allowed" && data.isNew === true && typeof data.leadEventId === "string") {
           nullMetaPixelLead(data.leadEventId);
         }
