@@ -297,11 +297,11 @@
     /* NULL desktop cinematic hero: product image and text share one composition.
        Tablet/mobile rules below are intentionally left unchanged. */
     @media (min-width: 1024px) {
-      .null-hero-section { padding-top: 20px; padding-bottom: 36px; }
+      .null-hero-section { padding-top: 20px; padding-bottom: 10px; }
       .null-hero-section .null-hero-grid {
         position: relative;
         display: block;
-        min-height: 450px;
+        min-height: 365px;
       }
       .null-hero-section .null-hero-copy {
         position: relative;
@@ -502,9 +502,12 @@
       isolation: isolate;
     }
     .null-lineup-inner { max-width: 1060px; margin: 0 auto; }
-    /* Desktop: position the lineup lower, without leaving extra space below. */
-    @media (min-width: 768px) {
+    /* Tight spacing from the hero to the product lineup on desktop only. */
+    @media (min-width: 768px) and (max-width: 1023px) {
       .null-lineup { padding-top: 70px; padding-bottom: 16px; }
+    }
+    @media (min-width: 1024px) {
+      .null-lineup { padding-top: 12px; padding-bottom: 16px; }
     }
 
     .null-lineup-track {
