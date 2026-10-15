@@ -502,30 +502,6 @@
       isolation: isolate;
     }
     .null-lineup-inner { max-width: 1060px; margin: 0 auto; }
-    .null-lineup-head {
-      padding: 0 32px;
-      margin-bottom: 9px;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .null-lineup-heading {
-      margin: 0;
-      color: rgba(255,255,255,.89);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-      line-height: 1.4;
-      letter-spacing: -.025em;
-    }
-    .null-lineup-hint {
-      color: rgba(255,255,255,.42);
-      font-size: 11px;
-      font-weight: 500;
-      white-space: nowrap;
-      letter-spacing: .035em;
-    }
     .null-lineup-track {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -628,7 +604,6 @@
       line-height: 1.55;
       margin: 7px 0 0;
     }
-    .null-lineup-dots { display: none; }
     @keyframes nullLineupFloat {
       0%, 100% { transform: translate3d(0,3px,0) rotateX(2deg) rotateY(-3deg) rotateZ(-1.4deg); }
       50% { transform: translate3d(0,-9px,0) rotateX(-2deg) rotateY(3deg) rotateZ(1deg); }
@@ -638,58 +613,38 @@
       50% { opacity: 1; transform: scale(1.09); }
     }
     @media (max-width: 767px) {
-      .null-lineup { padding: 30px 0 32px; }
-      .null-lineup-head { padding: 0 20px; margin-bottom: 3px; }
-      .null-lineup-heading { font-size: 15px; }
-      .null-lineup-hint { font-size: 10px; }
+      .null-lineup { padding: 18px 0 35px; }
+      .null-lineup-inner { width: 100%; }
       .null-lineup-track {
         display: flex;
-        gap: 12px;
+        gap: 0;
         align-items: stretch;
-        padding: 0 12% 10px;
+        padding: 0 0 12px;
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline: 12%;
+        scroll-padding-inline: 0;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
+        touch-action: pan-x pan-y;
       }
       .null-lineup-track::-webkit-scrollbar { display: none; }
-      .null-lineup-item { flex: 0 0 76%; }
-      .null-lineup-visual { height: clamp(220px, 65vw, 285px); }
-      .null-lineup-product { width: min(92%, 260px); }
-      .null-lineup-caption { margin-top: -2px; }
-      .null-lineup-name { font-size: 14px; }
-      .null-lineup-caption p { font-size: 11px; margin-top: 6px; }
-      .null-lineup-dots {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        padding: 17px 0 0;
+      .null-lineup-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
       }
-      .null-lineup-dot {
-        width: 8px;
-        height: 8px;
-        padding: 0;
-        border: 0;
-        border-radius: 50%;
-        background: rgba(255,255,255,.22);
-        transition: background .25s ease, transform .25s ease, width .25s ease;
-        cursor: pointer;
-      }
-      .null-lineup-dot.is-active {
-        width: 21px;
-        border-radius: 6px;
-        background: #8f4bff;
-      }
-      .null-lineup-dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+      .null-lineup-visual { height: clamp(256px, 77vw, 328px); }
+      .null-lineup-product { width: min(91%, 310px); }
+      .null-lineup-caption { margin-top: 0; }
+      .null-lineup-name { font-size: 16px; }
+      .null-lineup-caption p { font-size: 12px; margin-top: 8px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .null-lineup-product, .null-lineup-visual::before { animation: none !important; }
       .null-lineup-track { scroll-behavior: auto; }
-      .null-lineup-dot { transition: none; }
     }
 
   </style>
@@ -797,13 +752,9 @@
   <!-- ======================================================================= -->
   <!-- NULL PRODUCT LINEUP: floating tins, desktop trio and swipeable mobile -->
   <!-- ======================================================================= -->
-  <section class="null-lineup" aria-labelledby="null-lineup-title">
+  <section class="null-lineup" aria-label="NULL functional pouch collection">
     <div class="null-lineup-inner">
-      <div class="null-lineup-head">
-        <h2 class="null-lineup-heading" id="null-lineup-title">Meet the lineup.</h2>
-        <span class="null-lineup-hint">FOCUS / ENERGY / SLEEP</span>
-      </div>
-      <div class="null-lineup-track" id="null-lineup-track" aria-label="NULL product lineup, swipe to view more">
+      <div class="null-lineup-track" id="null-lineup-track" aria-label="Swipe through NULL Focus, Energy and Sleep products" tabindex="0">
         <figure class="null-lineup-item null-lineup-item--focus" data-lineup-index="0">
           <div class="null-lineup-visual">
             <svg class="null-lineup-lightning" viewBox="0 0 320 280" preserveAspectRatio="none" aria-hidden="true">
@@ -843,11 +794,6 @@
             <p>Switch to evening mode.</p>
           </figcaption>
         </figure>
-      </div>
-      <div class="null-lineup-dots" aria-label="Choose a product">
-        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="0" aria-label="Show Focus" aria-pressed="true"></button>
-        <button class="null-lineup-dot" type="button" data-lineup-dot="1" aria-label="Show Energy" aria-pressed="false"></button>
-        <button class="null-lineup-dot" type="button" data-lineup-dot="2" aria-label="Show Sleep" aria-pressed="false"></button>
       </div>
     </div>
   </section>
@@ -1248,48 +1194,120 @@
       });
     })();
 
-    // Product lineup: native touch scrolling with centered snap and live pagination.
+    // Infinite centered swipe carousel on mobile. Desktop keeps the original three tins.
     (() => {
       const track = document.getElementById('null-lineup-track');
       if (!track) return;
-      const slides = Array.from(track.querySelectorAll('.null-lineup-item'));
-      const dots = Array.from(document.querySelectorAll('[data-lineup-dot]'));
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      let queued = false;
+      const originals = Array.from(track.querySelectorAll('.null-lineup-item'));
+      const mobile = window.matchMedia('(max-width: 767px)');
+      if (originals.length !== 3) return;
+      const groupSize = originals.length;
+      let loopEnabled = false;
+      let isTouching = false;
+      let settling = false;
+      let settleTimer = null;
 
-      const syncDots = () => {
-        queued = false;
-        const visibleCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
-        let active = 0;
-        let closest = Infinity;
-        slides.forEach((slide, index) => {
-          const rect = slide.getBoundingClientRect();
-          const distance = Math.abs(rect.left + rect.width / 2 - visibleCenter);
-          if (distance < closest) { closest = distance; active = index; }
-        });
-        dots.forEach((dot, index) => {
-          const selected = index === active;
-          dot.classList.toggle('is-active', selected);
-          dot.setAttribute('aria-pressed', String(selected));
+      const slideWidth = () => track.clientWidth;
+      const withoutSnap = (callback) => {
+        const oldSnap = track.style.scrollSnapType;
+        const oldBehavior = track.style.scrollBehavior;
+        track.style.scrollSnapType = 'none';
+        track.style.scrollBehavior = 'auto';
+        callback();
+        // Restore snap on the next frame, after the instant jump has rendered.
+        window.requestAnimationFrame(() => {
+          track.style.scrollSnapType = oldSnap;
+          track.style.scrollBehavior = oldBehavior;
         });
       };
+      const jump = (index) => withoutSnap(() => {
+        track.scrollLeft = slideWidth() * index;
+      });
 
-      track.addEventListener('scroll', () => {
-        if (!queued) {
-          queued = true;
-          window.requestAnimationFrame(syncDots);
-        }
-      }, { passive: true });
-
-      dots.forEach((dot, index) => dot.addEventListener('click', () => {
-        slides[index].scrollIntoView({
-          behavior: reducedMotion.matches ? 'instant' : 'smooth',
-          inline: 'center',
-          block: 'nearest'
+      const makeClones = () => {
+        const copiesBefore = document.createDocumentFragment();
+        const copiesAfter = document.createDocumentFragment();
+        originals.forEach((slide) => {
+          const before = slide.cloneNode(true);
+          const after = slide.cloneNode(true);
+          before.classList.add('null-lineup-clone');
+          after.classList.add('null-lineup-clone');
+          before.setAttribute('aria-hidden', 'true');
+          after.setAttribute('aria-hidden', 'true');
+          before.querySelector('img').loading = 'lazy';
+          after.querySelector('img').loading = 'lazy';
+          copiesBefore.appendChild(before);
+          copiesAfter.appendChild(after);
         });
-      }));
-      window.addEventListener('resize', syncDots, { passive: true });
-      syncDots();
+        track.prepend(copiesBefore);
+        track.append(copiesAfter);
+      };
+
+      const activateMobile = () => {
+        if (loopEnabled) return;
+        makeClones();
+        loopEnabled = true;
+        // Middle group index 4 = ENERGY, centered on the first mobile view.
+        jump(groupSize + 1);
+      };
+
+      const deactivateMobile = () => {
+        if (!loopEnabled) return;
+        track.querySelectorAll('.null-lineup-clone').forEach(node => node.remove());
+        loopEnabled = false;
+        track.scrollLeft = 0;
+      };
+
+      const normalizePosition = () => {
+        if (!loopEnabled || !mobile.matches || isTouching || settling) return;
+        const width = slideWidth();
+        if (!width) return;
+        const index = Math.round(track.scrollLeft / width);
+        if (index < groupSize || index >= groupSize * 2) {
+          const normalized = groupSize + ((index % groupSize) + groupSize) % groupSize;
+          settling = true;
+          jump(normalized);
+          window.requestAnimationFrame(() => { settling = false; });
+        }
+      };
+
+      const scheduleNormalize = () => {
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(normalizePosition, 150);
+      };
+
+      const syncMode = () => {
+        if (mobile.matches) {
+          activateMobile();
+        } else {
+          window.clearTimeout(settleTimer);
+          deactivateMobile();
+        }
+      };
+
+      track.addEventListener('touchstart', () => { isTouching = true; }, { passive: true });
+      track.addEventListener('touchend', () => { isTouching = false; scheduleNormalize(); }, { passive: true });
+      track.addEventListener('touchcancel', () => { isTouching = false; scheduleNormalize(); }, { passive: true });
+      track.addEventListener('scroll', scheduleNormalize, { passive: true });
+      track.addEventListener('scrollend', normalizePosition, { passive: true });
+      mobile.addEventListener('change', syncMode);
+      window.addEventListener('resize', () => {
+        if (!loopEnabled) return;
+        const width = slideWidth();
+        if (!width) return;
+        // Preserve current product when viewport width changes.
+        const slides = Array.from(track.children);
+        const viewportCenter = track.getBoundingClientRect().left + width / 2;
+        let nearest = groupSize + 1;
+        let minDistance = Infinity;
+        slides.forEach((slide, index) => {
+          const rect = slide.getBoundingClientRect();
+          const distance = Math.abs(rect.left + rect.width / 2 - viewportCenter);
+          if (distance < minDistance) { minDistance = distance; nearest = index; }
+        });
+        jump(nearest);
+      }, { passive: true });
+      syncMode();
     })();
   </script>
 </body>
