@@ -12,11 +12,18 @@
   <link rel="canonical" href="https://nullpouches.com/sk/" />
   <link rel="alternate" hreflang="en" href="https://nullpouches.com/" />
   <link rel="alternate" hreflang="sk" href="https://nullpouches.com/sk/" />
+  <link rel="alternate" hreflang="cs" href="https://nullpouches.com/cs/" />
+  <link rel="alternate" hreflang="pl" href="https://nullpouches.com/pl/" />
+  <link rel="alternate" hreflang="ro" href="https://nullpouches.com/ro/" />
   <link rel="alternate" hreflang="x-default" href="https://nullpouches.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NULL" />
   <meta property="og:locale" content="sk_SK" />
   <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="cs_CZ" />
+  <meta property="og:locale:alternate" content="pl_PL" />
+  <meta property="og:locale:alternate" content="ro_RO" />
+  
   <meta property="og:url" content="https://nullpouches.com/sk/" />
   <meta property="og:title" content="NULL | Funkčné vrecúška bez nikotínu: Focus, Energy, Sleep" />
   <meta property="og:description" content="Spoznaj NULL, funkčné vrecúška bez nikotínu a tabaku. Tri varianty FOCUS, ENERGY a SLEEP. Pridaj sa na čakaciu listinu a dozvieš sa o spustení ako prvý." />
@@ -1377,6 +1384,16 @@
       .null-nav-trigger, .null-nav-trigger-icon span, .null-nav-link { transition: none !important; }
     }
 
+
+    /* Compact language switcher; remains visible on narrow mobile screens. */
+    .null-language-select { appearance: none; -webkit-appearance: none; font: 600 11px/1 'Inter', sans-serif; color: #e9e4f5; border: 1px solid rgba(169,139,255,.38); background: #14101d; border-radius: 8px; min-width: 57px; padding: 9px 17px 9px 8px; cursor: pointer; }
+    .null-language-wrap { position: relative; flex: 0 0 auto; }
+    .null-language-wrap::after { content: '⌄'; color: #c5b7ec; position: absolute; right: 7px; top: 5px; pointer-events: none; }
+    .null-language-select:focus-visible { outline: 2px solid #a978ff; outline-offset: 3px; }
+    .null-language-select option { background: #14101d; color: white; }
+    @media (max-width: 410px) { .null-header-actions { gap: 5px; } .null-language-select { min-width: 51px; padding-left: 6px; } }
+
+    @media (max-width: 359px) { .null-header-waitlist { display: none; } }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1388,10 +1405,10 @@
   <header class="null-site-header w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
     <div class="null-header-inner max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
       <div class="null-header-left">
-        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Open navigation menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
+        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Otvoriť menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
           <span class="null-nav-trigger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
-        <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL - back to top">
+        <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL – späť na začiatok">
           <img
             src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
             alt="NULL Logo"
@@ -1401,7 +1418,8 @@
       </div>
 
       <div class="null-header-actions">
-        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Join the waitlist">
+        <label class="null-language-wrap" aria-label="Vybrať jazyk"><select id="null-language-select" class="null-language-select" aria-label="Vybrať jazyk"><option value="en">EN</option><option value="sk">SK</option><option value="cs">CZ</option><option value="pl">PL</option><option value="ro">RO</option></select></label>
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Pridať sa na čakaciu listinu">
           <span class="null-header-waitlist-full">Pridaj sa na čakaciu listinu</span>
           <span class="null-header-waitlist-short">Pridať sa</span>
           <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
@@ -1409,7 +1427,7 @@
       </div>
 
     </div>
-    <nav class="null-nav-panel" id="null-nav-panel" aria-label="Site navigation" hidden>
+    <nav class="null-nav-panel" id="null-nav-panel" aria-label="Navigácia stránky" hidden>
       <div class="null-nav-links">
         <a href="#products" class="null-nav-link">Naše vrecúška</a>
         <a href="#about" class="null-nav-link">Čo je NULL?</a>
@@ -1425,18 +1443,18 @@
             <svg class="w-4 h-4 text-white/45 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
             </svg>
-            <input type="email" id="null-nav-waitlist-email" required aria-label="Your email address" autocomplete="email" placeholder="Tvoja e-mailová adresa" class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full" />
+            <input type="email" id="null-nav-waitlist-email" required aria-label="Tvoj e-mail" autocomplete="email" placeholder="Tvoj e-mail" class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full" />
           </div>
           <button type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
-            <span>Pridaj sa na čakaciu listinu</span>
+            <span>Pridať sa</span>
             <span class="text-xs leading-none" aria-hidden="true">→</span>
           </button>
         </div>
           <div class="null-waitlist-consent-row">
-            <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>Súhlasím so zasielaním e-mailov o uvedení značky NULL a prvej várke produktov.</span></label>
+            <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>Súhlasím so zasielaním e-mailov o spustení NULL a prvej sérii produktov.</span></label>
             </div>
           <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
-          <div class="null-turnstile-slot" aria-label="Spam protection"></div>
+          <div class="null-turnstile-slot" aria-label="Ochrana proti spamu"></div>
         </form>
         <p id="null-nav-waitlist-feedback" class="text-[11px] text-white/50 pl-1" role="status" aria-live="polite" hidden></p>
       </div>
@@ -1457,13 +1475,13 @@
           <h1 class="font-display font-extrabold uppercase text-[32px] sm:text-[42px] md:text-[46px] leading-[1.06] tracking-[-0.02em] text-white mb-5">
             FUNKČNÉ<br />
             VRECÚŠKA<br />
-            PRE LEPŠIE<br />
-            TEBA.
+            PRE KAŽDÝ<br />
+            MOMENT.
           </h1>
 
           <p class="text-[14px] sm:text-[15px] leading-[1.55] text-white/75 max-w-[360px] mb-7 font-normal">
-            Vrecúška bez nikotínu navrhnuté tak, aby ti<br />
-            pomohli so sústredením, energiou a lepším spánkom.
+            Vrecúška bez nikotínu s funkčnými zložkami<br />
+            pre sústredenie, energiu a večerný oddych.
           </p>
 
           <!-- Waitlist Pill Form -->
@@ -1478,7 +1496,7 @@
                 type="email"
                 id="waitlist-email"
                 required
-                placeholder="Tvoja e-mailová adresa"
+                placeholder="Tvoj e-mail"
                 class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full"
               />
             </div>
@@ -1486,15 +1504,15 @@
               type="submit"
               class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Pridaj sa na čakaciu listinu</span>
+              <span>Pridať sa</span>
               <span class="text-xs leading-none">→</span>
             </button>
           </div>
           <div class="null-waitlist-consent-row">
-            <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>Súhlasím so zasielaním e-mailov o uvedení značky NULL a prvej várke produktov.</span></label>
+            <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>Súhlasím so zasielaním e-mailov o spustení NULL a prvej sérii produktov.</span></label>
             </div>
           <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
-          <div class="null-turnstile-slot" aria-label="Spam protection"></div>
+          <div class="null-turnstile-slot" aria-label="Ochrana proti spamu"></div>
         </form>
 
           <!-- Waitlist status appears only after the visitor submits the form. -->
@@ -1529,9 +1547,9 @@
   <!-- ======================================================================= -->
   <!-- NULL PRODUCT LINEUP: floating tins, desktop trio and swipeable mobile -->
   <!-- ======================================================================= -->
-  <section id="products" class="null-lineup" aria-label="NULL functional pouch collection">
+  <section id="products" class="null-lineup" aria-label="Kolekcia funkčných vrecúšok NULL">
     <div class="null-lineup-inner">
-      <div class="null-lineup-track" id="null-lineup-track" aria-label="Swipe through NULL Focus, Energy and Sleep products" tabindex="0">
+      <div class="null-lineup-track" id="null-lineup-track" aria-label="Prezrieť produkty NULL Focus, Energy a Sleep" tabindex="0">
         <figure class="null-lineup-item null-lineup-item--focus" data-lineup-index="0">
           <div class="null-lineup-visual">
             <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus.png?v=1792061193" alt="NULL FOCUS nicotine-free pouch tin" loading="eager" decoding="async" width="1024" height="1024" draggable="false">
@@ -1560,10 +1578,10 @@
           </figcaption>
         </figure>
       </div>
-      <div class="null-lineup-dots" role="group" aria-label="Choose a NULL product">
-        <button class="null-lineup-dot" type="button" data-lineup-dot="0" aria-label="Show Focus" aria-pressed="false"></button>
-        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="1" aria-label="Show Energy" aria-pressed="true"></button>
-        <button class="null-lineup-dot" type="button" data-lineup-dot="2" aria-label="Show Sleep" aria-pressed="false"></button>
+      <div class="null-lineup-dots" role="group" aria-label="Vybrať produkt NULL">
+        <button class="null-lineup-dot" type="button" data-lineup-dot="0" aria-label="Zobraziť Focus" aria-pressed="false"></button>
+        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="1" aria-label="Zobraziť Energy" aria-pressed="true"></button>
+        <button class="null-lineup-dot" type="button" data-lineup-dot="2" aria-label="Zobraziť Sleep" aria-pressed="false"></button>
       </div>
     </div>
   </section>
@@ -1599,7 +1617,7 @@
             href="#waitlist-form"
             class="btn-outline-dark inline-flex items-center gap-3 rounded-full px-6 py-2.5 text-[12px] font-medium text-white/90"
           >
-            <span>Pridaj sa na čakaciu listinu</span>
+            <span>Pridať sa</span>
             <span class="text-white/70 text-xs leading-none">→</span>
           </a>
         </div>
@@ -1738,7 +1756,7 @@
       <p class="null-compare-subtitle">Viac než len alternatíva k nikotínu. Spoznaj tri funkčné varianty: FOCUS, ENERGY a SLEEP.</p>
 
       <div class="null-compare-shell">
-        <table class="null-compare-table" aria-label="NULL compared with nicotine pouches">
+        <table class="null-compare-table" aria-label="Porovnanie NULL a nikotínových vrecúšok">
           <thead>
             <tr>
               <th scope="col">TEN ROZDIEL</th>
@@ -1749,33 +1767,33 @@
           <tbody>
             <tr>
               <td><span class="null-compare-feature">FUNKČNÉ ZLOŽKY</span><span class="null-compare-detail">Nootropiká, aminokyseliny a rastlinné extrakty s jasným účelom.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">BEZ NIKOTÍNOVEJ ZÁVISLOSTI</span><span class="null-compare-detail">Bez nikotínu a s ním spojenej závislosti.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Vyber si vrecúško podľa toho, čo práve potrebuješ.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">PRE TVOJE KAŽDODENNÉ MOMENTY</span><span class="null-compare-detail">Sústreď sa pri učení, doplň energiu alebo večer vypni.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">BEZ NIKOTÍNOVÉHO ÚTLMU</span><span class="null-compare-detail">Žiadny nikotínový nával ani následný útlm.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
               <td><span class="null-compare-feature">DISKRÉTNE A BEZ DYMU</span><span class="null-compare-detail">Jednoduché, čisté a dôverne známe používanie.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
           </tbody>
         </table>
@@ -1805,7 +1823,7 @@
           href="#waitlist-form"
           class="btn-outline-purple self-start sm:self-end rounded-full px-5 py-2.5 text-[12px] font-medium text-white/90 inline-flex items-center gap-2.5 mb-1"
         >
-          <span>Pridaj sa na čakaciu listinu</span>
+          <span>Pridať sa</span>
           <span class="text-white/80 text-xs leading-none">→</span>
         </a>
       </div>
@@ -1937,8 +1955,8 @@
             decoding="async"
           >
         </div>
-        <div class="null-footer-eu" aria-label="Made in the European Union">
-          <svg viewBox="0 0 80 52" width="33" height="22" role="img" aria-label="European Union flag" xmlns="http://www.w3.org/2000/svg">
+        <div class="null-footer-eu" aria-label="Vyrobené v Európskej únii">
+          <svg viewBox="0 0 80 52" width="33" height="22" role="img" aria-label="Vlajka Európskej únie" xmlns="http://www.w3.org/2000/svg">
               <rect x="0" y="0" width="80" height="52" rx="2.5" fill="#003399"/>
               <polygon points="40.00,7.30 40.66,9.09 42.57,9.17 41.07,10.35 41.59,12.18 40.00,11.12 38.41,12.18 38.93,10.35 37.43,9.17 39.34,9.09" fill="#FFCC00"/>
               <polygon points="48.00,9.44 48.66,11.24 50.57,11.31 49.07,12.49 49.59,14.33 48.00,13.26 46.41,14.33 46.93,12.49 45.43,11.31 47.34,11.24" fill="#FFCC00"/>
@@ -1972,7 +1990,7 @@
   </footer>
 
   <!-- Optional Meta visit tracking: no browser marketing scripts until user consent. -->
-  <section class="null-meta-consent-banner" id="null-meta-consent-banner" role="region" aria-label="Optional marketing cookies" hidden>
+  <section class="null-meta-consent-banner" id="null-meta-consent-banner" role="region" aria-label="Voliteľné marketingové cookies" hidden>
     <div class="null-meta-consent-copy">
       <strong>Používame cookies</strong>
       <span>Nevyhnutné cookies pomáhajú správnemu fungovaniu stránky. S tvojím súhlasom Meta Pixel meria návštevy a registrácie do čakacej listiny na zlepšenie reklamy. Voliteľné cookies môžeš odmietnuť a NULL ďalej používať. <button class="null-waitlist-privacy-link" type="button" data-null-open-privacy>Ochrana osobných údajov</button></span>
@@ -1988,7 +2006,7 @@
     <div class="null-privacy-dialog" id="null-privacy-dialog" role="dialog" aria-modal="true" aria-labelledby="null-privacy-title" aria-describedby="null-privacy-intro" tabindex="-1">
       <div class="null-privacy-head">
         <h2 class="null-privacy-title" id="null-privacy-title">Ochrana osobných údajov</h2>
-        <button type="button" class="null-privacy-close" id="null-close-privacy" aria-label="Close Privacy Policy">×</button>
+        <button type="button" class="null-privacy-close" id="null-close-privacy" aria-label="Zavrieť zásady ochrany osobných údajov">×</button>
       </div>
       <div class="null-privacy-body" id="null-privacy-content">
         <p class="null-privacy-updated">Posledná aktualizácia: 15. októbra 2026</p>
@@ -2101,7 +2119,7 @@
       const close = (restoreFocus = false) => {
         if (!isOpen()) return;
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.setAttribute('aria-label', 'Open navigation menu');
+        toggle.setAttribute('aria-label', 'Otvoriť menu');
         toggle.classList.remove('is-open');
         panel.hidden = true;
         backdrop.hidden = true;
@@ -2110,7 +2128,7 @@
       const open = () => {
         if (isOpen()) return;
         toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', 'Close navigation menu');
+        toggle.setAttribute('aria-label', 'Zavrieť menu');
         toggle.classList.add('is-open');
         panel.hidden = false;
         backdrop.hidden = false;
@@ -2357,7 +2375,7 @@
             continue;
           }
           if (!response.ok || data.success !== true) {
-            throw new Error(data.error || 'Nepodarilo sa prihlásiť. Skús to znova.');
+            throw new Error('Nepodarilo sa prihlásiť. Skús to znova.');
           }
           break;
         }
@@ -2596,6 +2614,22 @@
         jump(index);
       }, { passive: true });
       sync();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const picker = document.getElementById('null-language-select');
+      if (!picker) return;
+      const current = document.documentElement.lang.toLowerCase();
+      picker.value = current;
+      picker.addEventListener('change', function () {
+        const selected = picker.value;
+        if (!['en', 'sk', 'cs', 'pl', 'ro'].includes(selected)) return;
+        try { localStorage.setItem('null_language_preference_v1', selected); } catch (e) {}
+        const path = selected === 'en' ? '/' : '/' + selected + '/';
+        window.location.assign(path + window.location.hash);
+      });
     })();
   </script>
 </body>

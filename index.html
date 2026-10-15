@@ -12,11 +12,18 @@
   <link rel="canonical" href="https://nullpouches.com/" />
   <link rel="alternate" hreflang="en" href="https://nullpouches.com/" />
   <link rel="alternate" hreflang="sk" href="https://nullpouches.com/sk/" />
+  <link rel="alternate" hreflang="cs" href="https://nullpouches.com/cs/" />
+  <link rel="alternate" hreflang="pl" href="https://nullpouches.com/pl/" />
+  <link rel="alternate" hreflang="ro" href="https://nullpouches.com/ro/" />
   <link rel="alternate" hreflang="x-default" href="https://nullpouches.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NULL" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="sk_SK" />
+  <meta property="og:locale:alternate" content="cs_CZ" />
+  <meta property="og:locale:alternate" content="pl_PL" />
+  <meta property="og:locale:alternate" content="ro_RO" />
+  
   <meta property="og:url" content="https://nullpouches.com/" />
   <meta property="og:title" content="NULL | Nicotine-Free Functional Pouches: Focus, Energy, Sleep" />
   <meta property="og:description" content="Discover NULL nicotine-free, tobacco-free functional pouches. Three formulas for focus, energy and sleep. Join the waitlist for the first launch." />
@@ -26,6 +33,20 @@
   <meta name="twitter:title" content="NULL | Nicotine-Free Functional Pouches: Focus, Energy, Sleep" />
   <meta name="twitter:description" content="Discover NULL nicotine-free, tobacco-free functional pouches. Three formulas for focus, energy and sleep. Join the waitlist for the first launch." />
   <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" />
+
+
+  <!-- Respect explicit language choices and browser language on entry to the home page. -->
+  <script>
+    (function () {
+      if (location.pathname !== '/' && location.pathname !== '/index.html') return;
+      const allowed = ['en', 'sk', 'cs', 'pl', 'ro'];
+      let saved = null;
+      try { saved = localStorage.getItem('null_language_preference_v1'); } catch (e) {}
+      const langs = Array.isArray(navigator.languages) && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+      const preferred = allowed.includes(saved) ? saved : (langs.map(lang => String(lang).toLowerCase().split('-')[0]).find(lang => allowed.includes(lang)) || 'en');
+      if (preferred !== 'en') location.replace('/' + preferred + '/' + location.search + location.hash);
+    })();
+  </script>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com" defer></script>
@@ -1377,6 +1398,15 @@
       .null-nav-trigger, .null-nav-trigger-icon span, .null-nav-link { transition: none !important; }
     }
 
+
+    /* Compact language switcher; remains visible on narrow mobile screens. */
+    .null-language-select { appearance: none; -webkit-appearance: none; font: 600 11px/1 'Inter', sans-serif; color: #e9e4f5; border: 1px solid rgba(169,139,255,.38); background: #14101d; border-radius: 8px; min-width: 57px; padding: 9px 17px 9px 8px; cursor: pointer; }
+    .null-language-wrap { position: relative; flex: 0 0 auto; }
+    .null-language-wrap::after { content: '⌄'; color: #c5b7ec; position: absolute; right: 7px; top: 5px; pointer-events: none; }
+    .null-language-select:focus-visible { outline: 2px solid #a978ff; outline-offset: 3px; }
+    .null-language-select option { background: #14101d; color: white; }
+    @media (max-width: 410px) { .null-header-actions { gap: 5px; } .null-language-select { min-width: 51px; padding-left: 6px; } }
+
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1401,6 +1431,7 @@
       </div>
 
       <div class="null-header-actions">
+        <label class="null-language-wrap" aria-label="Choose language"><select id="null-language-select" class="null-language-select" aria-label="Choose language"><option value="en">EN</option><option value="sk">SK</option><option value="cs">CZ</option><option value="pl">PL</option><option value="ro">RO</option></select></label>
         <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Join the waitlist">
           <span class="null-header-waitlist-full">Join the waitlist</span>
           <span class="null-header-waitlist-short">Join</span>
@@ -2600,6 +2631,22 @@
         jump(index);
       }, { passive: true });
       sync();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const picker = document.getElementById('null-language-select');
+      if (!picker) return;
+      const current = document.documentElement.lang.toLowerCase();
+      picker.value = current;
+      picker.addEventListener('change', function () {
+        const selected = picker.value;
+        if (!['en', 'sk', 'cs', 'pl', 'ro'].includes(selected)) return;
+        try { localStorage.setItem('null_language_preference_v1', selected); } catch (e) {}
+        const path = selected === 'en' ? '/' : '/' + selected + '/';
+        window.location.assign(path + window.location.hash);
+      });
     })();
   </script>
 </body>
