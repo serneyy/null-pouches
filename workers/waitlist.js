@@ -70,6 +70,49 @@ export default {
     }
     if (!env.DB) return json({ error: "Waitlist temporarily unavailable." }, 503, origin);
 
+    // Require Cloudflare Turnstile siteverify before any database write.
+    // The Turnstile secret is a secret_text binding, never shipped to the browser.
+    const turnstileToken = payload?.turnstileToken;
+    const expectedHostnames = new Set(
+      (env.TURNSTILE_HOSTNAMES || "").split(",").map(host => host.trim()).filter(Boolean)
+    );
+    if (
+      typeof turnstileToken !== "string" ||
+      turnstileToken.length === 0 ||
+      turnstileToken.length > 2048
+    ) {
+      return json({ error: "Complete the security check and try again." }, 403, origin);
+    }
+    if (!env.TURNSTILE_SECRET || expectedHostnames.size === 0) {
+      return json({ error: "Waitlist temporarily unavailable." }, 503, origin);
+    }
+    let verification;
+    try {
+      const params = new URLSearchParams({
+        secret: env.TURNSTILE_SECRET,
+        response: turnstileToken
+      });
+      const ip = request.headers.get("CF-Connecting-IP");
+      if (ip) params.set("remoteip", ip);
+      const check = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params,
+        signal: AbortSignal.timeout(10000)
+      });
+      if (!check.ok) throw new Error("Turnstile service unavailable");
+      verification = await check.json();
+    } catch {
+      return json({ error: "Security verification unavailable. Please try again." }, 503, origin);
+    }
+    if (
+      verification.success !== true ||
+      verification.action !== "signup" ||
+      !expectedHostnames.has(verification.hostname)
+    ) {
+      return json({ error: "Security verification failed. Please try again." }, 403, origin);
+    }
+
     const source = payload.source === "menu" ? "menu" : "hero";
     try {
       // Idempotent registration. No public endpoint exposes saved addresses.
