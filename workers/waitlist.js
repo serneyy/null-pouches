@@ -138,14 +138,14 @@ export default {
     if (!request.headers.get("Content-Type")?.toLowerCase().startsWith("application/json")) {
       return json({ error: "Expected JSON" }, 415, origin);
     }
-    if (Number(request.headers.get("Content-Length") || 0) > 2048) {
+    if (Number(request.headers.get("Content-Length") || 0) > 8192) {
       return json({ error: "Request too large" }, 413, origin);
     }
 
     let payload;
     try {
       const body = await request.text();
-      if (body.length > 2048) return json({ error: "Request too large" }, 413, origin);
+      if (body.length > 8192) return json({ error: "Request too large" }, 413, origin);
       payload = JSON.parse(body);
     } catch {
       return json({ error: "Invalid JSON" }, 400, origin);
@@ -195,7 +195,7 @@ export default {
       turnstileToken.length === 0 ||
       turnstileToken.length > 2048
     ) {
-      return json({ error: "Complete the security check and try again." }, 403, origin);
+      return json({ error: "Complete the security check and try again.", code: "turnstile_retry" }, 403, origin);
     }
     if (!env.TURNSTILE_SECRET || expectedHostnames.size === 0) {
       return json({ error: "Waitlist temporarily unavailable." }, 503, origin);
@@ -224,7 +224,18 @@ export default {
       verification.action !== "signup" ||
       !expectedHostnames.has(verification.hostname)
     ) {
-      return json({ error: "Security verification failed. Please try again." }, 403, origin);
+      // Record only technical Turnstile diagnostics: never log email, IP, or token.
+      console.warn("NULL Turnstile rejected", JSON.stringify({
+        codes: Array.isArray(verification["error-codes"])
+          ? verification["error-codes"].slice(0, 5) : [],
+        actionValid: verification.action === "signup",
+        hostnameValid: expectedHostnames.has(verification.hostname),
+        success: verification.success === true
+      }));
+      return json({
+        error: "Security verification failed. Please try again.",
+        code: "turnstile_retry"
+      }, 403, origin);
     }
 
     const source = payload.source === "menu" ? "menu" : "hero";
