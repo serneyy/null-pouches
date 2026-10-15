@@ -294,6 +294,77 @@
        Product is intentionally behind the copy, shifted to the right
        and faded into the black backdrop. Desktop rules stay untouched.
        ============================================================== */
+    /* NULL desktop cinematic hero: product image and text share one composition.
+       Tablet/mobile rules below are intentionally left unchanged. */
+    @media (min-width: 1024px) {
+      .null-hero-section { padding-top: 20px; padding-bottom: 36px; }
+      .null-hero-section .null-hero-grid {
+        position: relative;
+        display: block;
+        min-height: 450px;
+      }
+      .null-hero-section .null-hero-copy {
+        position: relative;
+        z-index: 3;
+        width: min(54%, 565px);
+        padding-top: 16px;
+      }
+      .null-hero-section .null-hero-media {
+        position: absolute !important;
+        inset: -10px -64px 0 -64px;
+        z-index: 0;
+        display: block;
+        width: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+        pointer-events: none;
+      }
+      .null-hero-section .null-hero-art {
+        position: absolute !important;
+        inset: 0;
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .null-hero-section .null-hero-art > .null-hero-image {
+        position: absolute;
+        top: -28px;
+        right: -30px;
+        display: block;
+        width: clamp(990px, 94vw, 1290px);
+        max-width: none;
+        height: auto;
+        object-fit: contain;
+        transform: none;
+        filter: brightness(0.96) saturate(.96);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 70%, transparent 100%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 7%, #000 70%, transparent 100%);
+      }
+      .null-hero-section .null-hero-art::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg,
+            #030305 0%, rgba(3,3,5,.93) 12%, rgba(3,3,5,.76) 30%,
+            rgba(3,3,5,.36) 48%, rgba(3,3,5,.06) 72%, transparent 100%),
+          linear-gradient(180deg,
+            rgba(3,3,5,.58) 0%, rgba(3,3,5,.11) 25%,
+            rgba(3,3,5,.10) 53%, rgba(3,3,5,.53) 77%,
+            rgba(3,3,5,.92) 94%, #030305 100%);
+      }
+      .null-hero-fade-left, .null-hero-fade-right,
+      .null-hero-fade-top, .null-hero-fade-bottom {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 1023px) {
       .null-hero-section {
         padding-top: 12px;
