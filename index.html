@@ -1116,6 +1116,168 @@
         </a>
       </div>
 
+    </div>
+    <nav class="null-nav-panel" id="null-nav-panel" aria-label="Site navigation" hidden>
+      <div class="null-nav-links">
+        <a href="#products" class="null-nav-link">Our pouches</a>
+        <a href="#about" class="null-nav-link">What is NULL?</a>
+        <a href="#ingredients" class="null-nav-link">Ingredients</a>
+        <a href="#null-comparison" class="null-nav-link">Why NULL?</a>
+        <a href="#faq" class="null-nav-link">FAQ</a>
+      </div>
+    </nav>
+  </header>/* NULL navigation: simple full-width editorial menu */
+    .null-site-header { isolation: isolate; }
+    .null-header-inner { position: relative; gap: 12px; }
+    .null-header-left { display: flex; align-items: center; gap: 15px; min-width: 0; }
+    .null-header-logo { flex: 0 1 auto; min-width: 0; }
+    .null-header-logo img { display: block; max-width: 136px; }
+    .null-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex: 0 0 auto; }
+    .null-header-waitlist-short { display: none; }
+
+    /* Unframed, icon-only hamburger to the left of the NULL logo. */
+    .null-nav-trigger {
+      display: inline-flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 36px;
+      width: 36px;
+      height: 42px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #f5f4f7;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: color .2s ease;
+    }
+    .null-nav-trigger:hover, .null-nav-trigger.is-open { color: #b49aff; }
+    .null-nav-trigger-icon { position: relative; display: block; width: 23px; height: 18px; }
+    .null-nav-trigger-icon span {
+      display: block; position: absolute; left: 0; width: 23px; height: 1.7px;
+      border-radius: 2px; background: currentColor;
+      transition: top .24s ease, opacity .2s ease, transform .24s ease;
+    }
+    .null-nav-trigger-icon span:first-child { top: 2px; }
+    .null-nav-trigger-icon span:nth-child(2) { top: 8px; }
+    .null-nav-trigger-icon span:last-child { top: 14px; }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:first-child { top: 8px; transform: rotate(45deg); }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:nth-child(2) { opacity: 0; }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:last-child { top: 8px; transform: rotate(-45deg); }
+
+    .null-nav-trigger:focus-visible, .null-nav-link:focus-visible {
+      outline: 2px solid #a978ff;
+      outline-offset: 3px;
+    }
+    .null-nav-backdrop[hidden], .null-nav-panel[hidden] { display: none !important; }
+    .null-nav-backdrop {
+      position: fixed;
+      z-index: 39;
+      inset: 0;
+      background: rgba(0,0,0,.37);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    /* Flat panel across the full page, not a bordered card. */
+    .null-nav-panel {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      width: 100%;
+      max-height: calc(100vh - 68px);
+      max-height: calc(100dvh - 68px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 20px 0 42px;
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,.045);
+      border-radius: 0;
+      background: #070709;
+      box-shadow: 0 25px 44px rgba(0,0,0,.35);
+      color: #fff;
+    }
+    .null-nav-links {
+      display: flex;
+      flex-direction: column;
+      max-width: 1060px;
+      padding: 0 32px;
+      margin: 0 auto;
+    }
+    .null-nav-link {
+      display: flex;
+      align-items: center;
+      min-height: 79px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+      border-radius: 0;
+      background: transparent;
+      color: #f7f7f8;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: clamp(20px, 2.1vw, 26px);
+      line-height: 1.3;
+      letter-spacing: -.045em;
+      text-decoration: none;
+      transition: color .18s ease;
+    }
+    .null-nav-link:hover { color: #ae8cff; }
+
+    #top, #products, #about, #ingredients, #null-comparison, #faq, #waitlist-form { scroll-margin-top: 86px; }
+    @media (max-width: 639px) {
+      .null-header-inner { gap: 8px; }
+      .null-header-left { gap: 8px; }
+      .null-header-logo img { max-width: 110px; }
+      .null-header-actions { gap: 8px; }
+      .null-nav-trigger { width: 32px; flex-basis: 32px; height: 42px; }
+      .null-nav-panel { padding: 15px 0 38px; }
+      .null-nav-links { padding: 0 20px; }
+      .null-nav-link { min-height: 67px; font-size: 21px; padding: 18px 0; }
+    }
+    @media (max-width: 410px) {
+      .null-header-waitlist-full { display: none; }
+      .null-header-waitlist-short { display: inline; }
+      .null-header-logo img { max-width: 105px; }
+      .null-header-waitlist { padding-left: 12px; padding-right: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .null-nav-trigger, .null-nav-trigger-icon span, .null-nav-link { transition: none !important; }
+    }
+
+  </style>
+</head>
+<body class="selection:bg-purple-600 selection:text-white">
+
+  <!-- ======================================================================= -->
+  <!-- TOP NAVIGATION BAR                                                      -->
+  <!-- ======================================================================= -->
+  <header class="null-site-header w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
+    <div class="null-header-inner max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
+      <div class="null-header-left">
+        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Open navigation menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
+          <span class="null-nav-trigger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL - back to top">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
+            alt="NULL Logo"
+            class="h-8 sm:h-9 w-auto object-contain"
+          />
+        </a>
+      </div>
+
+      <div class="null-header-actions">
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Join the waitlist">
+          <span class="null-header-waitlist-full">Join the waitlist</span>
+          <span class="null-header-waitlist-short">Join</span>
+          <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
+        </a>
+      </div>
+
       <nav class="null-nav-panel" id="null-nav-panel" aria-label="Site navigation" hidden>
         <div class="null-nav-panel-top">EXPLORE NULL</div>
         <div class="null-nav-links">
