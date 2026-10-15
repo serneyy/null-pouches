@@ -664,6 +664,81 @@
       .null-lineup-track { scroll-behavior: auto; }
     }
 
+
+    /* NULL: minimal legal footer and accessible policy modal */
+    .null-site-footer {
+      background: #030305;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      padding: 34px 0 26px;
+    }
+    .null-footer-inner { max-width: 1060px; padding: 0 32px; margin: 0 auto; }
+    .null-footer-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .null-footer-brand { font-family: 'Unbounded', sans-serif; font-size: 19px; font-weight: 800; letter-spacing: -.03em; }
+    .null-footer-eu { display: inline-flex; align-items: center; gap: 11px; color: rgba(255,255,255,.80); font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+    .null-footer-eu svg { width: 32px; height: 21px; flex-shrink: 0; border: 1px solid rgba(255,255,255,.20); border-radius: 3px; }
+    .null-footer-rule { border: 0; border-top: 1px solid rgba(255,255,255,.09); margin: 28px 0 20px; }
+    .null-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .null-footer-legal { font-size: 11px; line-height: 1.8; color: rgba(255,255,255,.48); }
+    .null-footer-legal strong { font-weight: 500; color: rgba(255,255,255,.72); }
+    .null-footer-link { border: 0; padding: 9px 0; background: none; color: rgba(255,255,255,.70); font-family: inherit; font-size: 12px; cursor: pointer; transition: color .2s ease; }
+    .null-footer-link:hover, .null-footer-link:focus-visible { color: #bb93ff; }
+    .null-footer-link:focus-visible, .null-privacy-close:focus-visible { outline: 2px solid #a67bff; outline-offset: 4px; }
+    .null-privacy-overlay[hidden] { display: none !important; }
+    .null-privacy-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,.79);
+      backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+    }
+    .null-privacy-dialog {
+      display: flex; flex-direction: column;
+      width: min(100%, 650px);
+      max-height: min(87dvh, 800px);
+      max-height: min(87vh, 800px);
+      background: #0d0d11;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 16px;
+      box-shadow: 0 28px 100px rgba(0,0,0,.70);
+      overflow: hidden;
+    }
+    .null-privacy-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      padding: 22px 26px;
+      border-bottom: 1px solid rgba(255,255,255,.11);
+    }
+    .null-privacy-title { font-family: 'Unbounded', sans-serif; font-size: clamp(16px,2vw,20px); font-weight: 700; line-height: 1.3; margin: 0; letter-spacing: -.03em; }
+    .null-privacy-close {
+      display: inline-flex; justify-content: center; align-items: center;
+      flex: 0 0 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      color: #fff; background: rgba(255,255,255,.05);
+      cursor: pointer; font-family: inherit; font-size: 21px; line-height: 1;
+    }
+    .null-privacy-close:hover { background: rgba(255,255,255,.12); }
+    .null-privacy-body { overflow-y: auto; overscroll-behavior: contain; padding: 18px 26px 28px; font-size: 13px; line-height: 1.8; color: rgba(255,255,255,.75); }
+    .null-privacy-updated { font-size: 11px; color: rgba(255,255,255,.48); margin: 0 0 18px; }
+    .null-privacy-body section { margin: 0 0 22px; }
+    .null-privacy-body h3 { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: #f7f7f8; }
+    .null-privacy-body p { margin: 0 0 10px; }
+    .null-privacy-body a { color: #bc96ff; text-decoration: underline; text-underline-offset: 3px; }
+    .null-privacy-body a:hover { color: #d7c4ff; }
+    body.null-privacy-open { overflow: hidden; }
+    @media (max-width: 639px) {
+      .null-site-footer { padding: 28px 0 24px; }
+      .null-footer-inner { padding: 0 20px; }
+      .null-footer-top { align-items: flex-start; }
+      .null-footer-brand { font-size: 17px; }
+      .null-footer-eu { gap: 8px; font-size: 11px; }
+      .null-footer-rule { margin: 22px 0 14px; }
+      .null-footer-bottom { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .null-privacy-overlay { padding: 12px; align-items: center; }
+      .null-privacy-head { padding: 16px 17px; }
+      .null-privacy-body { padding: 15px 18px 21px; }
+    }
   </style>
 </head>
 <body class="selection:bg-purple-600 selection:text-white">
@@ -1119,10 +1194,142 @@
     </div>
   </section>
 
+
+  <!-- ======================================================================= -->
+  <!-- NULL / FOOTER -->
+  <!-- ======================================================================= -->
+  <footer class="null-site-footer">
+    <div class="null-footer-inner">
+      <div class="null-footer-top">
+        <div class="null-footer-brand" aria-label="NULL">NULL</div>
+        <div class="null-footer-eu" aria-label="Made in the European Union">
+          <svg viewBox="0 0 80 52" width="33" height="22" role="img" aria-label="European Union flag" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="80" height="52" rx="2.5" fill="#003399"/>
+              <polygon points="40.00,7.30 40.66,9.09 42.57,9.17 41.07,10.35 41.59,12.18 40.00,11.12 38.41,12.18 38.93,10.35 37.43,9.17 39.34,9.09" fill="#FFCC00"/>
+              <polygon points="48.00,9.44 48.66,11.24 50.57,11.31 49.07,12.49 49.59,14.33 48.00,13.26 46.41,14.33 46.93,12.49 45.43,11.31 47.34,11.24" fill="#FFCC00"/>
+              <polygon points="53.86,15.30 54.51,17.09 56.42,17.17 54.92,18.35 55.44,20.18 53.86,19.12 52.27,20.18 52.79,18.35 51.29,17.17 53.20,17.09" fill="#FFCC00"/>
+              <polygon points="56.00,23.30 56.66,25.09 58.57,25.17 57.07,26.35 57.59,28.18 56.00,27.12 54.41,28.18 54.93,26.35 53.43,25.17 55.34,25.09" fill="#FFCC00"/>
+              <polygon points="53.86,31.30 54.51,33.09 56.42,33.17 54.92,34.35 55.44,36.18 53.86,35.12 52.27,36.18 52.79,34.35 51.29,33.17 53.20,33.09" fill="#FFCC00"/>
+              <polygon points="48.00,37.16 48.66,38.95 50.57,39.02 49.07,40.20 49.59,42.04 48.00,40.98 46.41,42.04 46.93,40.20 45.43,39.02 47.34,38.95" fill="#FFCC00"/>
+              <polygon points="40.00,39.30 40.66,41.09 42.57,41.17 41.07,42.35 41.59,44.18 40.00,43.12 38.41,44.18 38.93,42.35 37.43,41.17 39.34,41.09" fill="#FFCC00"/>
+              <polygon points="32.00,37.16 32.66,38.95 34.57,39.02 33.07,40.20 33.59,42.04 32.00,40.98 30.41,42.04 30.93,40.20 29.43,39.02 31.34,38.95" fill="#FFCC00"/>
+              <polygon points="26.14,31.30 26.80,33.09 28.71,33.17 27.21,34.35 27.73,36.18 26.14,35.12 24.56,36.18 25.08,34.35 23.58,33.17 25.49,33.09" fill="#FFCC00"/>
+              <polygon points="24.00,23.30 24.66,25.09 26.57,25.17 25.07,26.35 25.59,28.18 24.00,27.12 22.41,28.18 22.93,26.35 21.43,25.17 23.34,25.09" fill="#FFCC00"/>
+              <polygon points="26.14,15.30 26.80,17.09 28.71,17.17 27.21,18.35 27.73,20.18 26.14,19.12 24.56,20.18 25.08,18.35 23.58,17.17 25.49,17.09" fill="#FFCC00"/>
+              <polygon points="32.00,9.44 32.66,11.24 34.57,11.31 33.07,12.49 33.59,14.33 32.00,13.26 30.41,14.33 30.93,12.49 29.43,11.31 31.34,11.24" fill="#FFCC00"/>
+            </svg>
+          <span>Made in EU</span>
+        </div>
+      </div>
+      <hr class="null-footer-rule">
+      <div class="null-footer-bottom">
+        <div class="null-footer-legal">
+          <strong>Operated by ENORDA s.r.o.</strong><br>
+          © 2026 NULL. All rights reserved.
+        </div>
+        <button type="button" class="null-footer-link" id="null-open-privacy" aria-haspopup="dialog" aria-controls="null-privacy-dialog">Privacy Policy</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Privacy Policy opens inside this page, with keyboard and touch support -->
+  <div class="null-privacy-overlay" id="null-privacy-overlay" hidden>
+    <div class="null-privacy-dialog" id="null-privacy-dialog" role="dialog" aria-modal="true" aria-labelledby="null-privacy-title" aria-describedby="null-privacy-intro" tabindex="-1">
+      <div class="null-privacy-head">
+        <h2 class="null-privacy-title" id="null-privacy-title">Privacy Policy</h2>
+        <button type="button" class="null-privacy-close" id="null-close-privacy" aria-label="Close Privacy Policy">×</button>
+      </div>
+      <div class="null-privacy-body" id="null-privacy-content">
+        <p class="null-privacy-updated">Last updated: 15 October 2026</p>
+        <p id="null-privacy-intro">This notice explains how personal information is handled when you visit the NULL pre-launch website, operated by ENORDA s.r.o.</p>
+
+        <section>
+          <h3>1. Who operates this website?</h3>
+          <p>The data controller is <strong>ENORDA s.r.o.</strong>, Rastislavova 2093/12, 911 05 Trenčín, Slovakia. Company ID (IČO): 46280839. Commercial Register of the District Court Trenčín, Section Sro, Insert 24856/R.</p>
+          <p>For privacy requests, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>.</p>
+        </section>
+        <section>
+          <h3>2. What information is processed?</h3>
+          <p>When you browse this website, infrastructure and content-delivery providers may receive technical connection information, such as your IP address, browser information and access times, needed to deliver the page, maintain security and handle operational logs.</p>
+          <p><strong>Waitlist status:</strong> The current email form is not yet connected to a subscriber database. Submitting it does not register you or send us your email address. If email registration is activated, this notice will be updated before collection begins.</p>
+        </section>
+        <section>
+          <h3>3. Why is this information processed?</h3>
+          <p>Technical data may be processed to deliver the website, detect abuse, investigate faults and maintain security, based on legitimate interests in secure website operation (GDPR Article 6(1)(f)).</p>
+          <p>If the waitlist is enabled in future, email addresses will be used to send requested NULL launch news only with the applicable consent (GDPR Article 6(1)(a)). You will be able to unsubscribe or withdraw consent at any time.</p>
+        </section>
+        <section>
+          <h3>4. Service providers and international transfers</h3>
+          <p>The website uses third-party infrastructure and content services, including website hosting, Shopify CDN for imagery, Google Fonts and Tailwind CSS CDN. These providers may handle technical connection data according to their applicable terms. Some may operate outside the European Economic Area; where personal data is transferred internationally, the relevant GDPR transfer safeguards must apply.</p>
+        </section>
+        <section>
+          <h3>5. How long is data kept?</h3>
+          <p>NULL does not currently maintain a subscriber list through this page. Technical access logs, where generated by hosting or CDN providers, are kept according to those providers’ configurations and applicable retention rules. We aim to retain personal data only for as long as necessary for the relevant purpose.</p>
+        </section>
+        <section>
+          <h3>6. Cookies and tracking</h3>
+          <p>The current landing-page code does not include advertising or analytics tracking scripts of its own. External hosting and content providers may use technical mechanisms required to deliver their services. Any future optional analytics or marketing technologies will require the appropriate information and, where applicable, consent.</p>
+        </section>
+        <section>
+          <h3>7. Your privacy rights</h3>
+          <p>Subject to the GDPR, you may request access, correction, erasure, restriction, portability or object to processing. Where processing is based on consent, you may withdraw it at any time. You also have the right to lodge a complaint with a supervisory authority, including the Slovak Data Protection Office (<a href="https://dataprotection.gov.sk/" target="_blank" rel="noopener noreferrer">dataprotection.gov.sk</a>).</p>
+        </section>
+        <section>
+          <h3>8. Contact and updates</h3>
+          <p>For questions or privacy requests, write to <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. This notice may be updated if the website’s functions or service providers change. The date above shows the latest revision.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <!-- ======================================================================= -->
   <!-- JAVASCRIPT: FAQ ACCORDION, WAITLIST & POUCHES BACKGROUND CLEANUP        -->
   <!-- ======================================================================= -->
   <script>
+
+    // Privacy Policy modal: focus restoration, Escape, outside click and focus trap.
+    (() => {
+      const trigger = document.getElementById('null-open-privacy');
+      const overlay = document.getElementById('null-privacy-overlay');
+      const dialog = document.getElementById('null-privacy-dialog');
+      const closeBtn = document.getElementById('null-close-privacy');
+      if (!trigger || !overlay || !dialog || !closeBtn) return;
+      let focusBeforeOpen = null;
+
+      const open = () => {
+        focusBeforeOpen = document.activeElement;
+        overlay.hidden = false;
+        document.body.classList.add('null-privacy-open');
+        closeBtn.focus();
+      };
+
+      const close = () => {
+        overlay.hidden = true;
+        document.body.classList.remove('null-privacy-open');
+        if (focusBeforeOpen && typeof focusBeforeOpen.focus === 'function') focusBeforeOpen.focus();
+      };
+
+      trigger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) close();
+      });
+      overlay.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          close();
+          return;
+        }
+        if (event.key !== 'Tab') return;
+        const nodes = Array.from(dialog.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+        if (!nodes.length) { event.preventDefault(); dialog.focus(); return; }
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+    })();
+
     // 1. FAQ Accordion Toggle
     function toggleFaq(buttonEl) {
       const item = buttonEl.closest('.faq-item');
