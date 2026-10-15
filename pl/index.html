@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NULL | Saszetki funkcjonalne bez nikotyny: Focus, Energy, Sleep</title>
-  <meta name="description" content="Poznaj NULL, saszetki funkcjonalne bez nikotyny i tytoniu. FOCUS, ENERGY i SLEEP. Zapisz się po informacje o premierze." />
+  <meta name="description" content="Poznaj NULL, funkcjonalne saszetki bez nikotyny i tytoniu. Trzy warianty FOCUS, ENERGY i SLEEP na koncentrację, energię i sen. Dołącz do listy oczekujących i dowiedz się o premierze jako jedna z pierwszych osób." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#030305" />
   <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284" />
@@ -25,12 +25,12 @@
   
   <meta property="og:url" content="https://nullpouches.com/pl/" />
   <meta property="og:title" content="NULL | Saszetki funkcjonalne bez nikotyny: Focus, Energy, Sleep" />
-  <meta property="og:description" content="Poznaj NULL, saszetki funkcjonalne bez nikotyny i tytoniu. FOCUS, ENERGY i SLEEP. Zapisz się po informacje o premierze." />
+  <meta property="og:description" content="Poznaj NULL, funkcjonalne saszetki bez nikotyny i tytoniu. Trzy warianty FOCUS, ENERGY i SLEEP na koncentrację, energię i sen. Dołącz do listy oczekujących i dowiedz się o premierze jako jedna z pierwszych osób." />
   <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" />
   <meta property="og:image:alt" content="NULL PL" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NULL | Saszetki funkcjonalne bez nikotyny: Focus, Energy, Sleep" />
-  <meta name="twitter:description" content="Poznaj NULL, saszetki funkcjonalne bez nikotyny i tytoniu. FOCUS, ENERGY i SLEEP. Zapisz się po informacje o premierze." />
+  <meta name="twitter:description" content="Poznaj NULL, funkcjonalne saszetki bez nikotyny i tytoniu. Trzy warianty FOCUS, ENERGY i SLEEP na koncentrację, energię i sen. Dołącz do listy oczekujących i dowiedz się o premierze jako jedna z pierwszych osób." />
   <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" />
 
 
@@ -1403,6 +1403,13 @@
     .null-language-trigger:focus-visible, .null-language-option:focus-visible { outline: 2px solid #a978ff; outline-offset: 2px; }
     @media (max-width: 880px) { .null-footer-bottom { flex-direction: column; align-items: flex-start; } .null-footer-controls { justify-content: flex-start; } }
     @media (max-width: 380px) { .null-footer-controls { gap: 7px 16px; } .null-language-menu { right: auto; left: 0; } }
+    /* Keep the explicit waitlist label readable within compact signup pills. */
+    @media (max-width: 410px) {
+      .null-header-waitlist { padding-left: 9px; padding-right: 9px; font-size: 10px; }
+      .null-header-logo img { max-width: 87px; }
+      .null-hero-copy .null-waitlist-form button[type="submit"],
+      .null-nav-signup .null-waitlist-form button[type="submit"] { padding-left: 8px; padding-right: 8px; font-size: 10px; gap: 3px; }
+    }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1428,9 +1435,9 @@
 
       <div class="null-header-actions">
 
-        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Dołącz">
-          <span class="null-header-waitlist-full">Dołącz</span>
-          <span class="null-header-waitlist-short">Dołącz</span>
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Zapisz się na listę oczekujących">
+          <span class="null-header-waitlist-full">Lista oczekujących</span>
+          <span class="null-header-waitlist-short">Lista oczekujących</span>
           <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
         </a>
       </div>
@@ -1454,8 +1461,8 @@
             </svg>
             <input type="email" id="null-nav-waitlist-email" required aria-label="Twój e-mail" autocomplete="email" placeholder="Twój e-mail" class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full" />
           </div>
-          <button type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
-            <span>Dołącz</span>
+          <button aria-label="Zapisz się na listę oczekujących" type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
+            <span>Lista oczekujących</span>
             <span class="text-xs leading-none" aria-hidden="true">→</span>
           </button>
         </div>
@@ -1489,8 +1496,7 @@
           </h1>
 
           <p class="text-[14px] sm:text-[15px] leading-[1.55] text-white/75 max-w-[360px] mb-7 font-normal">
-            Saszetki bez nikotyny ze składnikami funkcjonalnymi<br />
-            na koncentrację, energię i wieczorny relaks.
+            Saszetki bez nikotyny stworzone po to, by pomóc Ci się skupić, dodać energii i lepiej spać.
           </p>
 
           <!-- Waitlist Pill Form -->
@@ -1510,10 +1516,10 @@
               />
             </div>
             <button
-              type="submit"
+              aria-label="Zapisz się na listę oczekujących" type="submit"
               class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Dołącz</span>
+              <span>Lista oczekujących</span>
               <span class="text-xs leading-none">→</span>
             </button>
           </div>
@@ -1615,18 +1621,18 @@
           </h2>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-5">
-            Saszetki NULL nie zawierają nikotyny ani tytoniu. Zawierają składniki funkcjonalne przeznaczone do wsparcia koncentracji, energii i wieczornego odprężenia.
+            NULL to funkcjonalne saszetki bez nikotyny i tytoniu. Dzięki starannie dobranym składnikom zostały stworzone, by wspierać koncentrację, dodawać energii i pomagać Ci lepiej spać.
           </p>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-8">
-            Nowoczesna alternatywa dla tych, którzy chcą więcej od swojego dnia. Bez nikotyny, dymu i kompromisów.
+            Nowoczesna alternatywa dla każdego, kto chce wycisnąć ze swojego dnia więcej. Bez nikotyny, bez dymu i bez kompromisów.
           </p>
 
           <a
             href="#waitlist-form"
             class="btn-outline-dark inline-flex items-center gap-3 rounded-full px-6 py-2.5 text-[12px] font-medium text-white/90"
           >
-            <span>Dołącz</span>
+            <span>Lista oczekujących</span>
             <span class="text-white/70 text-xs leading-none">→</span>
           </a>
         </div>
@@ -1762,7 +1768,7 @@
     <div class="null-compare-inner">
       <p class="null-compare-kicker">DLACZEGO NULL?</p>
       <h2 class="null-compare-title" id="null-comparison-title">W jednej saszetce.<br>Zero nikotyny.</h2>
-      <p class="null-compare-subtitle">Trzy warianty na różne momenty dnia: FOCUS, ENERGY i SLEEP. Bez nikotyny.</p>
+      <p class="null-compare-subtitle">To coś więcej niż alternatywa dla nikotyny. Poznaj trzy funkcjonalne warianty: FOCUS, ENERGY i SLEEP.</p>
 
       <div class="null-compare-shell">
         <table class="null-compare-table" aria-label="Porównanie NULL z saszetkami nikotynowymi">
@@ -1775,32 +1781,32 @@
           </thead>
           <tbody>
             <tr>
-              <td><span class="null-compare-feature">SKŁADNIKI FUNKCJONALNE</span><span class="null-compare-detail">Nootropy, aminokwasy i ekstrakty roślinne.</span></td>
+              <td><span class="null-compare-feature">SKŁADNIKI FUNKCJONALNE</span><span class="null-compare-detail">Nootropy, aminokwasy i ekstrakty roślinne, każdy z konkretnym zadaniem.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">BEZ UZALEŻNIENIA OD NIKOTYNY</span><span class="null-compare-detail">Bez nikotyny i uzależnienia od niej.</span></td>
+              <td><span class="null-compare-feature">BEZ UZALEŻNIENIA OD NIKOTYNY</span><span class="null-compare-detail">Bez nikotyny nie wchodzisz w błędne koło uzależnienia od nikotyny.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Wybierz saszetkę na dany moment.</span></td>
+              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Wybierz saszetkę dopasowaną do tego, czego potrzebujesz w danej chwili.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">NA RÓŻNE MOMENTY DNIA</span><span class="null-compare-detail">Skupienie podczas nauki, energia w ciągu dnia i wieczorny relaks.</span></td>
+              <td><span class="null-compare-feature">NA RÓŻNE MOMENTY DNIA</span><span class="null-compare-detail">Skup się na nauce, złap tempo albo łatwiej wycisz się wieczorem.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">BEZ SPADKU PO NIKOTYNIE</span><span class="null-compare-detail">Bez nikotynowego pobudzenia i późniejszego spadku.</span></td>
+              <td><span class="null-compare-feature">BEZ SPADKU PO NIKOTYNIE</span><span class="null-compare-detail">Bez nikotynowego pobudzenia i późniejszego spadku energii.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">DYSKRETNIE I BEZ DYMU</span><span class="null-compare-detail">Proste i dyskretne w użyciu.</span></td>
+              <td><span class="null-compare-feature">DYSKRETNIE I BEZ DYMU</span><span class="null-compare-detail">Proste, czyste i dyskretne używanie, bez dymu.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Tak"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
@@ -1832,7 +1838,7 @@
           href="#waitlist-form"
           class="btn-outline-purple self-start sm:self-end rounded-full px-5 py-2.5 text-[12px] font-medium text-white/90 inline-flex items-center gap-2.5 mb-1"
         >
-          <span>Dołącz</span>
+          <span>Lista oczekujących</span>
           <span class="text-white/80 text-xs leading-none">→</span>
         </a>
       </div>
@@ -1852,8 +1858,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Nie. Saszetki NULL nie zawierają nikotyny ani tytoniu. Ich formuły opierają się na składnikach funkcjonalnych.
-            </p>
+            Nie. Wszystkie saszetki NULL są w 100% wolne od nikotyny i tytoniu. Zawierają składniki funkcjonalne oparte na badaniach naukowych, takie jak nootropy, naturalna kofeina, adaptogeny i składniki wspierające sen.
+          </p>
           </div>
         </div>
 
@@ -1869,8 +1875,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Saszetki NULL wykorzystują włókna roślinne przeznaczone do zastosowań spożywczych. Zawsze przestrzegaj informacji i zalecanego dawkowania na opakowaniu.
-            </p>
+            Tak. Saszetki NULL powstają z włókien roślinnych przeznaczonych do zastosowań spożywczych. Zawierają dokładnie przebadane funkcjonalne witaminy, aminokwasy i ekstrakty roślinne w bezpiecznych i skutecznych dawkach.
+          </p>
           </div>
         </div>
 
@@ -1886,8 +1892,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Umieść saszetkę między górną wargą a dziąsłem. Składniki uwalniają się w jamie ustnej. Bez dymu i cukru.
-            </p>
+            To proste: umieść jedną saszetkę między górną wargą a dziąsłem. Składniki aktywne szybko wchłaniają się przez błonę śluzową jamy ustnej, wspierając koncentrację, energię lub odprężenie. Bez dymu i bez cukru.
+          </p>
           </div>
         </div>
 
@@ -1903,8 +1909,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Przygotowujemy pierwszą limitowaną serię. Zostaw e-mail, aby jako jedna z pierwszych osób otrzymać informacje o premierze.
-            </p>
+            Właśnie przygotowujemy naszą pierwszą limitowaną serię produkcyjną. Zostaw swój e-mail na liście oczekujących, aby zyskać wcześniejszy dostęp i poznać specjalne ceny premierowe przed innymi.
+          </p>
           </div>
         </div>
 
@@ -1920,8 +1926,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              To zależy od wariantu i zalecanego dawkowania. Zawsze postępuj zgodnie ze wskazówkami na opakowaniu.
-            </p>
+            Oczywiście. Saszetki NULL zaprojektowano jako prosty, codzienny rytuał bez nikotyny. Wybierz FOCUS, kiedy potrzebujesz pełnej koncentracji w pracy lub podczas nauki, ENERGY przed treningiem czy w trakcie intensywnego popołudnia, a SLEEP, kiedy wieczorem chcesz się naturalnie wyciszyć.
+          </p>
           </div>
         </div>
 
@@ -1937,8 +1943,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Saszetki NULL produkowane są w Estonii w certyfikowanym zakładzie na terenie Unii Europejskiej.
-            </p>
+            Saszetki NULL powstają w Estonii, w certyfikowanym zakładzie produkcyjnym w Europie. Jesteśmy dumni z tego, że produkujemy je w Unii Europejskiej.
+          </p>
           </div>
         </div>
 
@@ -1989,7 +1995,7 @@
           <strong>Operator: ENORDA s.r.o.</strong><br>
           © 2026 NULL. Wszelkie prawa zastrzeżone.
           <p class="null-footer-prelaunch-note">
-            NULL jest jeszcze w fazie rozwoju. Zapisz się, aby otrzymać e-mail o pierwszej serii produktów.
+            NULL wciąż jest w fazie rozwoju. Dołącz do listy oczekujących, aby pokazać nam, że interesuje Cię pierwsza seria produkcyjna. Gdy zbierze się odpowiednia liczba chętnych, poinformujemy zapisane osoby e-mailem o pierwszej partii.
           </p>
         </div>
         <div class="null-footer-controls">

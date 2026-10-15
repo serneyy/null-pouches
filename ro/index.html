@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NULL | Pliculețe funcționale fără nicotină: Focus, Energy, Sleep</title>
-  <meta name="description" content="Descoperă NULL, pliculețe funcționale fără nicotină sau tutun. FOCUS, ENERGY și SLEEP. Înscrie-te pentru noutăți despre lansare." />
+  <meta name="description" content="Descoperă NULL, pliculețe funcționale fără nicotină și tutun. Trei formule FOCUS, ENERGY și SLEEP pentru concentrare, energie și somn. Înscrie-te pe lista de așteptare și află primul despre lansare." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#030305" />
   <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284" />
@@ -25,12 +25,12 @@
   
   <meta property="og:url" content="https://nullpouches.com/ro/" />
   <meta property="og:title" content="NULL | Pliculețe funcționale fără nicotină: Focus, Energy, Sleep" />
-  <meta property="og:description" content="Descoperă NULL, pliculețe funcționale fără nicotină sau tutun. FOCUS, ENERGY și SLEEP. Înscrie-te pentru noutăți despre lansare." />
+  <meta property="og:description" content="Descoperă NULL, pliculețe funcționale fără nicotină și tutun. Trei formule FOCUS, ENERGY și SLEEP pentru concentrare, energie și somn. Înscrie-te pe lista de așteptare și află primul despre lansare." />
   <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" />
   <meta property="og:image:alt" content="NULL RO" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NULL | Pliculețe funcționale fără nicotină: Focus, Energy, Sleep" />
-  <meta name="twitter:description" content="Descoperă NULL, pliculețe funcționale fără nicotină sau tutun. FOCUS, ENERGY și SLEEP. Înscrie-te pentru noutăți despre lansare." />
+  <meta name="twitter:description" content="Descoperă NULL, pliculețe funcționale fără nicotină și tutun. Trei formule FOCUS, ENERGY și SLEEP pentru concentrare, energie și somn. Înscrie-te pe lista de așteptare și află primul despre lansare." />
   <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" />
 
 
@@ -1403,6 +1403,13 @@
     .null-language-trigger:focus-visible, .null-language-option:focus-visible { outline: 2px solid #a978ff; outline-offset: 2px; }
     @media (max-width: 880px) { .null-footer-bottom { flex-direction: column; align-items: flex-start; } .null-footer-controls { justify-content: flex-start; } }
     @media (max-width: 380px) { .null-footer-controls { gap: 7px 16px; } .null-language-menu { right: auto; left: 0; } }
+    /* Keep the explicit waitlist label readable within compact signup pills. */
+    @media (max-width: 410px) {
+      .null-header-waitlist { padding-left: 9px; padding-right: 9px; font-size: 10px; }
+      .null-header-logo img { max-width: 87px; }
+      .null-hero-copy .null-waitlist-form button[type="submit"],
+      .null-nav-signup .null-waitlist-form button[type="submit"] { padding-left: 8px; padding-right: 8px; font-size: 10px; gap: 3px; }
+    }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1428,9 +1435,9 @@
 
       <div class="null-header-actions">
 
-        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Înscrie-te">
-          <span class="null-header-waitlist-full">Înscrie-te</span>
-          <span class="null-header-waitlist-short">Înscrie-te</span>
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Înscrie-te pe lista de așteptare">
+          <span class="null-header-waitlist-full">Lista de așteptare</span>
+          <span class="null-header-waitlist-short">Lista de așteptare</span>
           <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
         </a>
       </div>
@@ -1454,8 +1461,8 @@
             </svg>
             <input type="email" id="null-nav-waitlist-email" required aria-label="E-mailul tău" autocomplete="email" placeholder="E-mailul tău" class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full" />
           </div>
-          <button type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
-            <span>Înscrie-te</span>
+          <button aria-label="Înscrie-te pe lista de așteptare" type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
+            <span>Lista de așteptare</span>
             <span class="text-xs leading-none" aria-hidden="true">→</span>
           </button>
         </div>
@@ -1489,8 +1496,7 @@
           </h1>
 
           <p class="text-[14px] sm:text-[15px] leading-[1.55] text-white/75 max-w-[360px] mb-7 font-normal">
-            Pliculețe fără nicotină, cu ingrediente funcționale,<br />
-            pentru concentrare, energie și relaxare seara.
+            Pliculețe fără nicotină, create să te ajute să te concentrezi mai bine, să ai mai multă energie și să dormi mai bine.
           </p>
 
           <!-- Waitlist Pill Form -->
@@ -1510,10 +1516,10 @@
               />
             </div>
             <button
-              type="submit"
+              aria-label="Înscrie-te pe lista de așteptare" type="submit"
               class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Înscrie-te</span>
+              <span>Lista de așteptare</span>
               <span class="text-xs leading-none">→</span>
             </button>
           </div>
@@ -1615,18 +1621,18 @@
           </h2>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-5">
-            Pliculețele NULL nu conțin nicotină sau tutun. Au ingrediente funcționale pentru concentrare, energie și relaxare seara.
+            NULL înseamnă pliculețe funcționale fără nicotină și tutun. Cu ingrediente funcționale atent alese, sunt concepute să te ajute să te concentrezi mai bine, să ai energie și să te bucuri de un somn mai bun.
           </p>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-8">
-            O alternativă modernă pentru cei care vor mai mult de la ziua lor. Fără nicotină, fum sau compromisuri.
+            O alternativă modernă pentru oricine vrea să profite mai mult de fiecare zi. Fără nicotină, fără fum și fără compromisuri.
           </p>
 
           <a
             href="#waitlist-form"
             class="btn-outline-dark inline-flex items-center gap-3 rounded-full px-6 py-2.5 text-[12px] font-medium text-white/90"
           >
-            <span>Înscrie-te</span>
+            <span>Lista de așteptare</span>
             <span class="text-white/70 text-xs leading-none">→</span>
           </a>
         </div>
@@ -1762,7 +1768,7 @@
     <div class="null-compare-inner">
       <p class="null-compare-kicker">DE CE NULL?</p>
       <h2 class="null-compare-title" id="null-comparison-title">Totul într-un pliculeț.<br>Zero nicotină.</h2>
-      <p class="null-compare-subtitle">Trei formule pentru momente diferite: FOCUS, ENERGY și SLEEP. Fără nicotină.</p>
+      <p class="null-compare-subtitle">Mai mult decât o alternativă la nicotină. Descoperă trei formule funcționale: FOCUS, ENERGY și SLEEP.</p>
 
       <div class="null-compare-shell">
         <table class="null-compare-table" aria-label="Comparație între NULL și pliculețele cu nicotină">
@@ -1770,37 +1776,37 @@
             <tr>
               <th scope="col">DIFERENȚA</th>
               <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL</span></th>
-              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">CU NICOTINĂ<br>FUNCȚIONALE</span></th>
+              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">PLICULEȚE<br>CU NICOTINĂ</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><span class="null-compare-feature">INGREDIENTE FUNCȚIONALE</span><span class="null-compare-detail">Nootropice, aminoacizi și extracte din plante.</span></td>
+              <td><span class="null-compare-feature">INGREDIENTE FUNCȚIONALE</span><span class="null-compare-detail">Nootropice, aminoacizi și extracte din plante, fiecare cu un scop clar.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nu"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">FĂRĂ DEPENDENȚĂ DE NICOTINĂ</span><span class="null-compare-detail">Fără nicotină și dependența asociată ei.</span></td>
+              <td><span class="null-compare-feature">FĂRĂ DEPENDENȚĂ DE NICOTINĂ</span><span class="null-compare-detail">Fără nicotină, fără ciclul dependenței de nicotină.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nu"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Alege varianta potrivită momentului.</span></td>
+              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Alege pliculețul potrivit pentru ceea ce ai nevoie în acel moment.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nu"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">PENTRU FIECARE MOMENT</span><span class="null-compare-detail">Concentrare la studiu, energie în timpul zilei și relaxare seara.</span></td>
+              <td><span class="null-compare-feature">PENTRU FIECARE MOMENT</span><span class="null-compare-detail">Concentrează-te la studiu, ține pasul cu ziua sau relaxează-te mai ușor seara.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nu"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">FĂRĂ EFECTUL DE SCĂDERE DUPĂ NICOTINĂ</span><span class="null-compare-detail">Fără impulsul nicotinei și scăderea care urmează.</span></td>
+              <td><span class="null-compare-feature">FĂRĂ EFECTUL DE SCĂDERE DUPĂ NICOTINĂ</span><span class="null-compare-detail">Fără senzația intensă provocată de nicotină și fără căderea de după.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nu"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">DISCRET ȘI FĂRĂ FUM</span><span class="null-compare-detail">Simplu și discret de utilizat.</span></td>
+              <td><span class="null-compare-feature">DISCRET ȘI FĂRĂ FUM</span><span class="null-compare-detail">Utilizare simplă, curată și discretă, fără fum.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Da"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
@@ -1832,7 +1838,7 @@
           href="#waitlist-form"
           class="btn-outline-purple self-start sm:self-end rounded-full px-5 py-2.5 text-[12px] font-medium text-white/90 inline-flex items-center gap-2.5 mb-1"
         >
-          <span>Înscrie-te</span>
+          <span>Lista de așteptare</span>
           <span class="text-white/80 text-xs leading-none">→</span>
         </a>
       </div>
@@ -1852,8 +1858,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Nu. Pliculețele NULL nu conțin nicotină sau tutun. Sunt formulate cu ingrediente funcționale.
-            </p>
+            Nu. Toate pliculețele NULL sunt 100% fără nicotină și fără tutun. Sunt formulate cu ingrediente funcționale susținute de cercetări științifice, precum nootropice, cafeină naturală, adaptogeni și substanțe care susțin somnul.
+          </p>
           </div>
         </div>
 
@@ -1869,8 +1875,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Pliculețele NULL sunt fabricate cu fibre vegetale adecvate utilizării alimentare. Respectă întotdeauna instrucțiunile și dozele recomandate de producător.
-            </p>
+            Da. Pliculețele NULL sunt fabricate din fibre vegetale adecvate utilizării alimentare. Conțin vitamine funcționale, aminoacizi și extracte botanice testate riguros, în doze sigure și eficiente.
+          </p>
           </div>
         </div>
 
@@ -1886,8 +1892,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Pune un pliculeț între buza superioară și gingie. Ingredientele se eliberează în cavitatea bucală. Fără fum sau zahăr.
-            </p>
+            E simplu: pune un pliculeț între buza superioară și gingie. Ingredientele active se absorb rapid prin mucoasa bucală și sunt concepute să susțină concentrarea, energia sau relaxarea. Totul fără fum și fără zahăr.
+          </p>
           </div>
         </div>
 
@@ -1903,8 +1909,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Pregătim primul lot limitat. Lasă-ne adresa ta de e-mail pentru a primi noutăți despre lansare.
-            </p>
+            Pregătim primul nostru lot de producție, în ediție limitată. Lasă-ne adresa ta de e-mail pe lista de așteptare pentru acces anticipat și prețuri speciale de lansare, înaintea celorlalți.
+          </p>
           </div>
         </div>
 
@@ -1920,8 +1926,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Depinde de variantă și de doza recomandată. Respectă întotdeauna instrucțiunile de pe ambalaj.
-            </p>
+            Absolut. Pliculețele NULL sunt concepute ca un ritual zilnic simplu, fără nicotină. Alege FOCUS pentru momentele în care ai nevoie să te concentrezi la lucru sau la studiu, ENERGY înainte de antrenament ori în după-amiezile aglomerate și SLEEP când vrei să te relaxezi natural seara.
+          </p>
           </div>
         </div>
 
@@ -1937,8 +1943,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Pliculețele NULL sunt fabricate în Estonia, într-o unitate certificată din Uniunea Europeană.
-            </p>
+            Pliculețele NULL sunt fabricate în Estonia, într-o unitate de producție certificată din Europa. Ne mândrim că sunt produse în Uniunea Europeană.
+          </p>
           </div>
         </div>
 
@@ -1989,7 +1995,7 @@
           <strong>Operat de ENORDA s.r.o.</strong><br>
           © 2026 NULL. Toate drepturile rezervate.
           <p class="null-footer-prelaunch-note">
-            NULL este încă în dezvoltare. Înscrie-te pentru a primi noutăți prin e-mail despre primul lot.
+            NULL este încă în dezvoltare. Înscrie-te pe lista de așteptare pentru a ne arăta că ești interesat de primul lot de producție. Când se adună suficiente persoane interesate, vom anunța primul lot prin e-mail tuturor celor înscriși.
           </p>
         </div>
         <div class="null-footer-controls">
