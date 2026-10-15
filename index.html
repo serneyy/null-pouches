@@ -844,6 +844,55 @@
     .null-turnstile-slot { margin: 8px 4px 0; max-width: 300px; }
     .null-turnstile-slot iframe { max-width: 100%; }
 
+    /* Small, accessible consent notice for optional Meta Pixel visits. */
+    #null-meta-consent-banner[hidden] { display: none !important; }
+    .null-meta-consent-banner {
+      position: fixed;
+      z-index: 10010;
+      left: max(16px, env(safe-area-inset-left));
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(14px, env(safe-area-inset-bottom));
+      max-width: 850px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px 20px;
+      padding: 17px 20px;
+      color: #fff;
+      background: rgba(15, 13, 22, .98);
+      border: 1px solid rgba(165, 134, 240, .34);
+      border-radius: 14px;
+      box-shadow: 0 12px 50px rgba(0,0,0,.42);
+      font-family: 'Inter', sans-serif;
+    }
+    .null-meta-consent-copy {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: rgba(255,255,255,.73);
+    }
+    .null-meta-consent-copy strong { color: #fff; font-size: 13px; font-weight: 600; }
+    .null-meta-consent-actions { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    .null-meta-consent-actions button {
+      border-radius: 999px; padding: 10px 16px;
+      font: 600 12px/1 'Inter', sans-serif;
+      cursor: pointer;
+    }
+    .null-meta-consent-decline { background: transparent; color: #ddd; border: 1px solid rgba(255,255,255,.27); }
+    .null-meta-consent-accept { background: #8b5cf6; color: #fff; border: 1px solid #8b5cf6; }
+    .null-meta-consent-actions button:focus-visible { outline: 2px solid #d7c5ff; outline-offset: 3px; }
+    @media (max-width: 640px) {
+      .null-meta-consent-banner { padding: 15px; }
+      .null-meta-consent-copy { flex-basis: 100%; }
+      .null-meta-consent-actions { width: 100%; }
+      .null-meta-consent-actions button { flex: 1 1 45%; }
+    }
+
     /* Launch waitlist opt-in */
     .null-waitlist-form { width: 100%; }
     .null-waitlist-consent-row {
@@ -1904,9 +1953,22 @@
           </p>
         </div>
         <button type="button" class="null-footer-link" id="null-open-privacy" aria-haspopup="dialog" aria-controls="null-privacy-dialog">Privacy Policy</button>
+        <button type="button" class="null-footer-link" id="null-meta-cookie-settings">Cookie settings</button>
       </div>
     </div>
   </footer>
+
+  <!-- Optional Meta visit tracking: no browser marketing scripts until user consent. -->
+  <section class="null-meta-consent-banner" id="null-meta-consent-banner" role="region" aria-label="Optional marketing cookies" hidden>
+    <div class="null-meta-consent-copy">
+      <strong>Optional advertising analytics</strong>
+      <span>Allow Meta Pixel to measure visits to NULL. You can browse and join the waitlist without accepting.</span>
+    </div>
+    <div class="null-meta-consent-actions">
+      <button type="button" id="null-meta-consent-reject" class="null-meta-consent-decline">No thanks</button>
+      <button type="button" id="null-meta-consent-allow" class="null-meta-consent-accept">Allow tracking</button>
+    </div>
+  </section>
 
   <!-- Privacy Policy opens inside this page, with keyboard and touch support -->
   <div class="null-privacy-overlay" id="null-privacy-overlay" hidden>
@@ -1951,8 +2013,8 @@
         </section>
         <section>
           <h3>7. Cookies, analytics and automated decisions</h3>
-          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only for visitors who separately opt in to advertising measurement when joining the waitlist. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. The browser Pixel loads only after an opted-in new registration and tracks PageView and Lead at that time.</p>
-          <p>Marketing measurement consent is optional and separate from consent to receive launch emails. Refusing measurement does not prevent joining the waitlist. We record an advertising consent timestamp for new registrations that opt in. To withdraw consent for future processing, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Data already transmitted to Meta may also be subject to Meta's own retention and privacy controls.</p>
+          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only for visitors who separately opt in to advertising measurement when joining the waitlist. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. The browser Pixel can track PageView after a separate optional visit-tracking choice in the cookie banner; it can also track Lead after a new registration with explicit, optional registration-measurement consent.</p>
+          <p>Meta Pixel may create browser identifiers such as _fbp and _fbc after consent. The visit-tracking choice is saved in local storage and can be changed with Cookie settings in the footer; refusing or revoking consent does not prevent waitlist registration. Marketing measurement consent is optional and separate from consent to receive launch emails. Refusing measurement does not prevent joining the waitlist. We record an advertising consent timestamp for new registrations that opt in. To withdraw consent for future processing, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Data already transmitted to Meta may also be subject to Meta's own retention and privacy controls.</p>
           <p>We do not currently use automated decision-making that produces legal or similarly significant effects based on data collected through this website.</p>
         </section>
         <section>
@@ -2069,9 +2131,28 @@
       }
     }
 
-    // Meta Pixel only loads after an opted-in, successfully stored NEW registration.
+    // Browser Pixel: no Meta request is made until explicit, optional consent.
+    // General visit tracking and per-registration measurement are separate choices.
     const NULL_META_PIXEL_ID = "1782758953034642";
+    const NULL_META_VISIT_CONSENT_KEY = "null_meta_visit_consent_v1";
     let nullMetaLoaded = false;
+    let nullMetaPageViewSent = false;
+    let nullMetaConsentFallback = null;
+
+    function nullMetaReadVisitConsent() {
+      try {
+        return localStorage.getItem(NULL_META_VISIT_CONSENT_KEY);
+      } catch {
+        return nullMetaConsentFallback;
+      }
+    }
+
+    function nullMetaSaveVisitConsent(value) {
+      nullMetaConsentFallback = value;
+      try {
+        localStorage.setItem(NULL_META_VISIT_CONSENT_KEY, value);
+      } catch {}
+    }
 
     function nullMetaCookie(name) {
       const parts = document.cookie.split("; ");
@@ -2079,22 +2160,77 @@
       return row ? decodeURIComponent(row.slice(name.length + 1)) : undefined;
     }
 
+    function nullMetaLoadPixel() {
+      if (nullMetaLoaded) {
+        window.fbq("consent", "grant");
+        return;
+      }
+      (function(f,b,e,v,n,t,el) {
+        if (f.fbq) return;
+        n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+        n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+        el=b.getElementsByTagName(e)[0];el.parentNode.insertBefore(t,el);
+      })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+      nullMetaLoaded = true;
+      window.fbq("init", NULL_META_PIXEL_ID);
+    }
+
+    function nullMetaPageView() {
+      if (nullMetaReadVisitConsent() !== "allowed" || nullMetaPageViewSent) return;
+      nullMetaLoadPixel();
+      window.fbq("track", "PageView");
+      nullMetaPageViewSent = true;
+    }
+
     function nullMetaPixelLead(eventId) {
       if (!/^null_lead_[a-f0-9-]{36}$/i.test(eventId)) return;
-      if (!nullMetaLoaded) {
-        (function(f,b,e,v,n,t,el) {
-          if (f.fbq) return;
-          n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
-          n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
-          el=b.getElementsByTagName(e)[0];el.parentNode.insertBefore(t,el);
-        })(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
-        nullMetaLoaded=true;
-        window.fbq("init",NULL_META_PIXEL_ID);
-        window.fbq("track","PageView");
-      }
-      window.fbq("track","Lead",{}, {eventID:eventId});
+      // An explicit checkbox for measuring THIS registration is required by
+      // handleWaitlistSubmit, independently from optional visit tracking.
+      nullMetaLoadPixel();
+      window.fbq("track", "Lead", { content_name: "NULL Waitlist" }, { eventID: eventId });
     }
+
+    function nullMetaClearCookie(name) {
+      const secure = location.protocol === "https:" ? "; Secure" : "";
+      const rootDomain = location.hostname.endsWith("nullpouches.com")
+        ? "; Domain=.nullpouches.com" : "";
+      document.cookie = name + "=; Path=/; Max-Age=0; SameSite=Lax" + secure;
+      if (rootDomain) document.cookie = name + "=; Path=/; Max-Age=0; SameSite=Lax" + secure + rootDomain;
+    }
+
+    (function setupNullMetaVisitConsent() {
+      const banner = document.getElementById("null-meta-consent-banner");
+      const allow = document.getElementById("null-meta-consent-allow");
+      const reject = document.getElementById("null-meta-consent-reject");
+      const settings = document.getElementById("null-meta-cookie-settings");
+      if (!banner || !allow || !reject || !settings) return;
+
+      function refreshBanner() {
+        banner.hidden = nullMetaReadVisitConsent() === "allowed" ||
+          nullMetaReadVisitConsent() === "rejected";
+      }
+      allow.addEventListener("click", () => {
+        nullMetaSaveVisitConsent("allowed");
+        refreshBanner();
+        nullMetaPageView();
+      });
+      reject.addEventListener("click", () => {
+        nullMetaSaveVisitConsent("rejected");
+        if (nullMetaLoaded && typeof window.fbq === "function") {
+          window.fbq("consent", "revoke");
+        }
+        nullMetaClearCookie("_fbp");
+        nullMetaClearCookie("_fbc");
+        refreshBanner();
+      });
+      settings.addEventListener("click", () => {
+        banner.hidden = false;
+        allow.focus();
+      });
+      refreshBanner();
+      if (nullMetaReadVisitConsent() === "allowed") nullMetaPageView();
+    })();
 
     // Render per-form Turnstile only when the visitor submits.
     const nullTurnstileWidgetIds = new WeakMap();
