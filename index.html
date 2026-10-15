@@ -755,17 +755,16 @@
       .null-privacy-body { padding: 15px 18px 21px; }
     }
 
-    /* NULL / NICOTINE: editorial product comparison */
+    /* NULL comparison: restrained, editorial layout without card effects */
     .null-compare-section {
-      position: relative;
       background: #030305;
       padding: 58px 0 52px;
-      isolation: isolate;
     }
     .null-compare-inner {
+      width: 100%;
       max-width: 1060px;
-      padding: 0 32px;
       margin: 0 auto;
+      padding: 0 32px;
     }
     .null-compare-kicker {
       margin: 0 0 13px;
@@ -792,77 +791,76 @@
       line-height: 1.7;
     }
     .null-compare-wrap {
-      margin-top: 31px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.11);
-      border-radius: 16px;
-      background: #0c0c12;
+      margin-top: 36px;
+      background: transparent;
+      border: 0;
+      border-top: 1px solid rgba(255,255,255,.28);
+      border-bottom: 1px solid rgba(255,255,255,.20);
     }
     .null-compare-scroll {
-      overflow-x: auto;
       max-width: 100%;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: #5500ff transparent;
+      overflow: visible;
     }
     .null-compare-table {
       width: 100%;
-      min-width: 680px;
-      border-collapse: separate;
-      border-spacing: 0;
+      min-width: 0;
       table-layout: fixed;
+      border-collapse: collapse;
+      border-spacing: 0;
     }
     .null-compare-table th,
     .null-compare-table td {
-      padding: 18px 23px;
-      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 20px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .null-compare-table tbody tr:last-child td { border-bottom: 0; }
+    .null-compare-table tr:last-child td { border-bottom: 0; }
     .null-compare-table thead th {
-      padding-top: 22px;
-      padding-bottom: 22px;
-      background: #101016;
-      color: rgba(255,255,255,.56);
+      padding-top: 17px;
+      padding-bottom: 16px;
+      color: rgba(255,255,255,.55);
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .045em;
+      font-weight: 600;
+      letter-spacing: .055em;
       text-align: center;
+      vertical-align: bottom;
+      background: transparent;
     }
     .null-compare-table thead th:first-child {
+      width: 54%;
+      padding-left: 0;
       text-align: left;
-      width: 56%;
     }
     .null-compare-table thead th:nth-child(2),
-    .null-compare-table tbody td:nth-child(2) {
-      background: rgba(85,0,255,.075);
+    .null-compare-table thead th:nth-child(3) {
+      width: 23%;
     }
+    .null-compare-table thead th:nth-child(2) {
+      border-bottom: 2px solid #8650ff;
+    }
+    .null-compare-table tbody td:first-child { padding-left: 0; }
     .null-compare-brand {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 33px;
-      padding: 7px 12px;
-      color: #fff;
-      font-size: 11px;
-      line-height: 1.3;
-      letter-spacing: .045em;
-      font-weight: 800;
+      display: inline;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      color: inherit;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .015em;
+      line-height: 1.35;
       text-transform: uppercase;
     }
-    .null-compare-brand--null {
-      border: 1px solid rgba(151,102,255,.35);
-      background: rgba(85,0,255,.17);
-      border-radius: 100px;
-    }
-    .null-compare-brand--nicotine {
-      color: rgba(255,255,255,.74);
-      font-weight: 600;
-    }
+    .null-compare-brand--null { color: #fff; }
+    .null-compare-brand--nicotine { color: rgba(255,255,255,.60); }
     .null-compare-feature {
-      color: #f1f1f4;
-      font-size: 13.5px;
+      display: block;
+      color: #f0f0f2;
+      font-size: 14px;
       font-weight: 600;
-      line-height: 1.45;
+      line-height: 1.4;
     }
     .null-compare-detail {
       display: block;
@@ -873,64 +871,64 @@
       font-weight: 400;
       line-height: 1.5;
     }
-    .null-compare-choice { text-align: center; vertical-align: middle; }
+    .null-compare-choice {
+      text-align: center;
+      vertical-align: middle;
+    }
     .null-compare-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 31px;
-      height: 31px;
-      border-radius: 50%;
-      font-size: 17px;
-      font-weight: 700;
+      display: inline-block;
+      width: auto;
+      height: auto;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 400;
       line-height: 1;
     }
-    .null-compare-mark--yes {
-      color: #fff;
-      background: #5500ff;
-      box-shadow: 0 0 13px rgba(85,0,255,.28);
-    }
-    .null-compare-mark--no {
-      color: #fff;
-      background: rgba(255,255,255,.055);
-      border: 1px solid rgba(255,255,255,.13);
-    }
+    .null-compare-mark--yes { color: #a478ff; }
+    .null-compare-mark--no { color: rgba(255,255,255,.56); }
     .null-compare-footnote {
-      margin: 16px 0 0;
-      color: rgba(255,255,255,.40);
+      margin: 14px 0 0;
+      max-width: 780px;
+      color: rgba(255,255,255,.39);
       font-size: 11px;
       line-height: 1.7;
-      max-width: 780px;
     }
-    /* All three comparison columns are visible at once on mobile. */
     @media (max-width: 767px) {
       .null-compare-section { padding: 43px 0 32px; }
-      .null-compare-inner { padding: 0 14px; }
+      .null-compare-inner { padding: 0 20px; }
       .null-compare-title { font-size: 25px; }
       .null-compare-subtitle { margin-top: 13px; font-size: 12.5px; }
-      .null-compare-wrap { margin-top: 20px; border-radius: 13px; }
-      .null-compare-scroll { overflow-x: visible; }
+      .null-compare-wrap { margin-top: 25px; }
       .null-compare-table { width: 100%; min-width: 0; table-layout: fixed; }
-      .null-compare-table thead th:first-child { width: 44%; }
+      .null-compare-table thead th:first-child { width: 50%; }
       .null-compare-table thead th:nth-child(2),
-      .null-compare-table thead th:nth-child(3) { width: 28%; }
+      .null-compare-table thead th:nth-child(3) { width: 25%; }
       .null-compare-table th,
-      .null-compare-table td { padding: 13px 6px; overflow-wrap: break-word; }
-      .null-compare-table thead th { padding-top: 14px; padding-bottom: 14px; font-size: 9px; }
-      .null-compare-feature { font-size: 11.5px; line-height: 1.35; }
-      .null-compare-detail { margin-top: 4px; font-size: 9.5px; line-height: 1.4; }
-      .null-compare-brand { min-height: 0; max-width: 100%; padding: 6px 4px; font-size: 9px; line-height: 1.3; white-space: normal; }
-      .null-compare-mark { width: 27px; height: 27px; font-size: 16px; }
+      .null-compare-table td { padding: 16px 5px; overflow-wrap: anywhere; }
+      .null-compare-table thead th {
+        padding-top: 15px;
+        padding-bottom: 14px;
+        font-size: 9px;
+      }
+      .null-compare-table tbody td:first-child,
+      .null-compare-table thead th:first-child { padding-left: 0; }
+      .null-compare-feature { font-size: 12px; line-height: 1.4; }
+      .null-compare-detail { display: none; }
+      .null-compare-brand { font-size: 10px; letter-spacing: 0; }
+      .null-compare-mark { font-size: 22px; }
     }
     @media (max-width: 359px) {
-      .null-compare-inner { padding: 0 10px; }
-      .null-compare-table th, .null-compare-table td { padding-left: 4px; padding-right: 4px; }
-      .null-compare-brand { padding: 5px 2px; font-size: 8px; letter-spacing: 0; }
+      .null-compare-inner { padding: 0 15px; }
       .null-compare-feature { font-size: 11px; }
-      .null-compare-detail { font-size: 9px; }
-      .null-compare-mark { width: 25px; height: 25px; }
+      .null-compare-brand { font-size: 9px; }
+      .null-compare-mark { font-size: 20px; }
     }
-  </style>
+
+    </style>
 </head>
 <body class="selection:bg-purple-600 selection:text-white">
 
@@ -1281,9 +1279,9 @@
           <table class="null-compare-table">
             <thead>
               <tr>
-                <th scope="col">Comparison</th>
-                <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL Pouches</span></th>
-                <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">Nicotine Pouches</span></th>
+                <th scope="col">WHAT MATTERS</th>
+                <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL</span></th>
+                <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">NICOTINE</span></th>
               </tr>
             </thead>
             <tbody>
