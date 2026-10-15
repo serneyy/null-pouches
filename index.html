@@ -2008,7 +2008,7 @@
         </section>
         <section>
           <h3>7. Cookies, analytics and automated decisions</h3>
-          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only when visitors explicitly accept optional advertising cookies in our cookie banner. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. The browser Pixel can track PageView after a separate optional visit-tracking choice in the cookie banner; it can also track Lead when a new waitlist registration succeeds while optional advertising consent remains active.</p>
+          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only when visitors explicitly accept optional advertising cookies in our cookie banner. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. After optional advertising consent is accepted in the cookie banner, both Meta Pixel and Conversions API can measure PageView with a matching event identifier. Lead is measured by both methods after a new waitlist registration succeeds while the same consent remains active.</p>
           <p>Meta Pixel may create browser identifiers such as _fbp and _fbc after consent. The visit-tracking choice is saved in local storage and can be changed with Cookie settings in the footer; refusing or revoking consent does not prevent waitlist registration. Cookie-based advertising consent is optional and separate from consent to receive launch emails. Refusing measurement does not prevent joining the waitlist. For new registrations made with advertising consent, we record the consent timestamp. To withdraw consent for future processing, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Data already transmitted to Meta may also be subject to Meta's own retention and privacy controls.</p>
           <p>We do not currently use automated decision-making that produces legal or similarly significant effects based on data collected through this website.</p>
         </section>
@@ -2173,9 +2173,31 @@
 
     function nullMetaPageView() {
       if (nullMetaReadVisitConsent() !== "allowed" || nullMetaPageViewSent) return;
-      nullMetaLoadPixel();
-      window.fbq("track", "PageView");
+      if (!window.crypto || typeof window.crypto.randomUUID !== "function") {
+        console.warn("Secure browser random identifiers are unavailable.");
+        return;
+      }
+      const eventId = "null_view_" + window.crypto.randomUUID();
       nullMetaPageViewSent = true;
+      nullMetaLoadPixel();
+      // Meta deduplicates only if browser eventID === CAPI event_id.
+      window.fbq("track", "PageView", {}, { eventID: eventId });
+      // This request does not block rendering or any other website functionality.
+      fetch("https://null-waitlist-api.threadid.workers.dev/api/pageview", {
+        method: "POST",
+        mode: "cors",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventId,
+          marketingConsent: true,
+          pageUrl: window.location.href,
+          fbp: nullMetaCookie("_fbp"),
+          fbc: nullMetaCookie("_fbc")
+        })
+      }).catch(() => {
+        console.warn("NULL CAPI PageView request was not delivered.");
+      });
     }
 
     function nullMetaPixelLead(eventId) {
