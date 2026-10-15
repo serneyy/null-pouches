@@ -755,200 +755,201 @@
       .null-privacy-body { padding: 15px 18px 21px; }
     }
 
-    /* NULL comparison: restrained, editorial layout without card effects */
+    /* NULL comparison: clean product comparison inspired by classic editorial tables */
     .null-compare-section {
+      padding: 55px 0 48px;
       background: #030305;
-      padding: 58px 0 52px;
     }
     .null-compare-inner {
-      width: 100%;
       max-width: 1060px;
       margin: 0 auto;
       padding: 0 32px;
     }
     .null-compare-kicker {
-      margin: 0 0 13px;
-      color: #9870ff;
+      margin: 0 0 11px;
       font-size: 11px;
+      line-height: 1.4;
+      color: #a078ff;
       font-weight: 700;
-      letter-spacing: .08em;
+      letter-spacing: .09em;
       text-transform: uppercase;
     }
     .null-compare-title {
       margin: 0;
-      color: #fff;
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(26px, 3.1vw, 36px);
-      line-height: 1.15;
-      letter-spacing: -.036em;
+      font-size: clamp(25px, 3vw, 35px);
       font-weight: 700;
+      letter-spacing: -.04em;
+      line-height: 1.15;
+      color: #fff;
     }
     .null-compare-subtitle {
-      max-width: 660px;
-      margin: 17px 0 0;
-      color: rgba(255,255,255,.67);
-      font-size: 14px;
-      line-height: 1.7;
+      max-width: 610px;
+      margin: 15px 0 0;
+      color: rgba(255,255,255,.63);
+      font-size: 13.5px;
+      line-height: 1.65;
     }
-    .null-compare-wrap {
+    .null-compare-shell {
       margin-top: 36px;
-      background: transparent;
-      border: 0;
-      border-top: 1px solid rgba(255,255,255,.28);
-      border-bottom: 1px solid rgba(255,255,255,.20);
-    }
-    .null-compare-scroll {
-      max-width: 100%;
-      overflow: visible;
     }
     .null-compare-table {
+      border-collapse: separate;
+      border-spacing: 0;
       width: 100%;
       min-width: 0;
       table-layout: fixed;
-      border-collapse: collapse;
-      border-spacing: 0;
+      background: transparent;
     }
     .null-compare-table th,
     .null-compare-table td {
-      padding: 20px 14px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      vertical-align: middle;
+      border-bottom: 1px dotted rgba(255,255,255,.19);
     }
-    .null-compare-table tr:last-child td { border-bottom: 0; }
     .null-compare-table thead th {
-      padding-top: 17px;
-      padding-bottom: 16px;
-      color: rgba(255,255,255,.55);
+      height: 73px;
+      padding: 17px 12px 18px;
+      color: rgba(255,255,255,.58);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .055em;
+      font-weight: 700;
+      letter-spacing: .025em;
+      line-height: 1.45;
       text-align: center;
-      vertical-align: bottom;
-      background: transparent;
     }
     .null-compare-table thead th:first-child {
-      width: 54%;
+      width: 55%;
       padding-left: 0;
       text-align: left;
+      color: rgba(255,255,255,.40);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
     }
     .null-compare-table thead th:nth-child(2),
-    .null-compare-table thead th:nth-child(3) {
+    .null-compare-table tbody td:nth-child(2) {
       width: 23%;
+      background: rgba(116,76,186,.105);
     }
     .null-compare-table thead th:nth-child(2) {
-      border-bottom: 2px solid rgba(138,92,255,.95);
-      background: rgba(85,0,255,.06);
+      border-top: 1px solid rgba(177,139,255,.17);
+      border-radius: 15px 15px 0 0;
     }
-    .null-compare-table tbody td:nth-child(2) {
-      background: rgba(85,0,255,.05);
+    .null-compare-table thead th:nth-child(3) {
+      width: 22%;
+    }
+    .null-compare-table tbody tr:last-child td { border-bottom: 0; }
+    .null-compare-table tbody tr:last-child td:nth-child(2) {
+      border-bottom: 1px solid rgba(177,139,255,.17);
+      border-radius: 0 0 15px 15px;
+    }
+    .null-compare-table tbody td {
+      padding: 16px 15px;
+      height: 79px;
     }
     .null-compare-table tbody td:first-child { padding-left: 0; }
     .null-compare-brand {
-      display: inline;
-      padding: 0;
-      border: 0;
-      border-radius: 0;
-      background: none;
-      box-shadow: none;
-      color: inherit;
-      font-family: 'Unbounded', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .015em;
-      line-height: 1.35;
+      display: inline-block;
       text-transform: uppercase;
+      line-height: 1.4;
+      font-weight: 700;
     }
-    .null-compare-brand--null { color: #fff; }
-    .null-compare-brand--nicotine { color: rgba(255,255,255,.60); }
+    .null-compare-brand--null {
+      color: #fff;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      letter-spacing: -.04em;
+    }
+    .null-compare-brand--nicotine {
+      color: rgba(255,255,255,.75);
+      font-size: 11px;
+      letter-spacing: .005em;
+    }
     .null-compare-feature {
       display: block;
-      color: #f0f0f2;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.4;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      line-height: 1.3;
+      text-transform: uppercase;
+      color: #f7f7f9;
     }
     .null-compare-detail {
       display: block;
       margin-top: 5px;
-      max-width: 400px;
-      color: rgba(255,255,255,.49);
-      font-size: 12px;
-      font-weight: 400;
+      font-size: 11.5px;
       line-height: 1.5;
-    }
-    .null-compare-choice {
-      text-align: center;
-      vertical-align: middle;
-    }
-    .null-compare-mark {
-      display: inline-block;
-      width: auto;
-      height: auto;
-      border: 0;
-      border-radius: 0;
-      background: none;
-      box-shadow: none;
-      font-family: Arial, sans-serif;
-      font-size: 24px;
+      color: rgba(255,255,255,.47);
       font-weight: 400;
-      line-height: 1;
     }
-    .null-compare-mark--yes {
+    .null-compare-choice { text-align: center; }
+    .null-compare-mark {
       display: inline-flex;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      vertical-align: middle;
       align-items: center;
       justify-content: center;
-      vertical-align: middle;
-      color: #ad7dff;
+    }
+    .null-compare-mark--yes {
+      background: #7537ea;
+      box-shadow: 0 0 9px rgba(120,57,240,.28);
+      border: 1px solid rgba(210,188,255,.33);
+      color: #fff;
     }
     .null-compare-mark--yes svg {
       display: block;
-      width: 24px;
-      height: 24px;
+      width: 16px;
+      height: 16px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 2.7;
+      stroke-width: 3.1;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: drop-shadow(0 0 4px rgba(152,90,255,.65))
-              drop-shadow(0 0 10px rgba(85,0,255,.30));
     }
-    .null-compare-mark--no { color: rgba(255,255,255,.56); }
+    .null-compare-table tbody td:nth-child(3) .null-compare-mark--yes {
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.2);
+      box-shadow: none;
+    }
+    .null-compare-mark--no {
+      border: 1.6px solid rgba(255,255,255,.34);
+      background: transparent;
+    }
     @media (max-width: 767px) {
-      .null-compare-section { padding: 43px 0 32px; }
-      .null-compare-inner { padding: 0 20px; }
+      .null-compare-section { padding: 40px 0 39px; }
+      .null-compare-inner { padding: 0 18px; }
       .null-compare-title { font-size: 25px; }
-      .null-compare-subtitle { margin-top: 13px; font-size: 12.5px; }
-      .null-compare-wrap { margin-top: 25px; }
+      .null-compare-subtitle { font-size: 12.5px; }
+      .null-compare-shell { margin-top: 23px; }
       .null-compare-table { width: 100%; min-width: 0; table-layout: fixed; }
-      .null-compare-table thead th:first-child { width: 50%; }
-      .null-compare-table thead th:nth-child(2),
+      .null-compare-table thead th:first-child { width: 48%; }
+      .null-compare-table thead th:nth-child(2) { width: 27%; }
       .null-compare-table thead th:nth-child(3) { width: 25%; }
-      .null-compare-table th,
-      .null-compare-table td { padding: 16px 5px; overflow-wrap: anywhere; }
       .null-compare-table thead th {
-        padding-top: 15px;
-        padding-bottom: 14px;
+        height: 62px;
+        padding: 10px 4px 11px;
         font-size: 9px;
       }
-      .null-compare-table tbody td:first-child,
-      .null-compare-table thead th:first-child { padding-left: 0; }
-      .null-compare-feature { font-size: 12px; line-height: 1.4; }
-      .null-compare-detail {
-        display: block;
-        margin-top: 4px;
-        font-size: 9.5px;
-        line-height: 1.35;
+      .null-compare-table tbody td {
+        height: 70px;
+        padding: 12px 5px;
       }
-      .null-compare-brand { font-size: 10px; letter-spacing: 0; }
-      .null-compare-mark { font-size: 22px; }
-      .null-compare-mark--yes svg { width: 22px; height: 22px; }
+      .null-compare-table tbody td:first-child { padding-left: 0; }
+      .null-compare-feature { font-size: 10.6px; line-height: 1.35; }
+      .null-compare-detail { font-size: 9.5px; line-height: 1.45; margin-top: 4px; }
+      .null-compare-brand--null { font-size: 13px; }
+      .null-compare-brand--nicotine { font-size: 9px; }
+      .null-compare-mark { width: 24px; height: 24px; }
+      .null-compare-mark--yes svg { width: 15px; height: 15px; }
     }
     @media (max-width: 359px) {
-      .null-compare-inner { padding: 0 15px; }
-      .null-compare-feature { font-size: 11px; }
+      .null-compare-inner { padding: 0 12px; }
+      .null-compare-feature { font-size: 10px; }
       .null-compare-detail { font-size: 9px; }
-      .null-compare-brand { font-size: 9px; }
-      .null-compare-mark { font-size: 20px; }
-      .null-compare-mark--yes svg { width: 20px; height: 20px; }
+      .null-compare-brand--null { font-size: 12px; }
+      .null-compare-brand--nicotine { font-size: 8.5px; }
+      .null-compare-mark { width: 22px; height: 22px; }
     }
 
     </style>
@@ -1295,52 +1296,51 @@
   <section class="null-compare-section" id="null-comparison" aria-labelledby="null-comparison-title">
     <div class="null-compare-inner">
       <p class="null-compare-kicker">WHY NULL?</p>
-      <h2 class="null-compare-title" id="null-comparison-title">Keep the pouch.<br>Lose the nicotine cycle.</h2>
-      <p class="null-compare-subtitle">The cravings. The fading buzz. The &ldquo;just one more.&rdquo; Nicotine can turn a quick pouch into a habit. NULL keeps the format, not the nicotine.</p>
-      <div class="null-compare-wrap">
-        <div class="null-compare-scroll">
-          <table class="null-compare-table">
-            <thead>
-              <tr>
-                <th scope="col">WHAT MATTERS</th>
-                <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL</span></th>
-                <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">NICOTINE</span></th>
-              </tr>
-            </thead>
-            <tbody>
+      <h2 class="null-compare-title" id="null-comparison-title">All pouch.<br>Zero nicotine.</h2>
+      <p class="null-compare-subtitle">Made for more than a nicotine hit. Meet three functional formulas: FOCUS, ENERGY and SLEEP.</p>
+
+      <div class="null-compare-shell">
+        <table class="null-compare-table" aria-label="NULL compared with nicotine pouches">
+          <thead>
             <tr>
-              <td><span class="null-compare-feature">No nicotine dependence</span><span class="null-compare-detail">No nicotine inside. No nicotine habit to build.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+              <th scope="col">THE DIFFERENCE</th>
+              <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL</span></th>
+              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">NICOTINE<br>POUCHES</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="null-compare-feature">ZERO NICOTINE</span><span class="null-compare-detail">The pouch experience. Without nicotine.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">No chasing the next hit</span><span class="null-compare-detail">No nicotine buzz that keeps pulling you back.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+              <td><span class="null-compare-feature">NO NICOTINE HABIT</span><span class="null-compare-detail">No nicotine to get hooked on.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">No nicotine crash</span><span class="null-compare-detail">No fading nicotine buzz. No “I need another one”.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+              <td><span class="null-compare-feature">NO NICOTINE CRASH</span><span class="null-compare-detail">No nicotine buzz to wear off.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">No nicotine overload</span><span class="null-compare-detail">No strong nicotine hit that can feel too much.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+              <td><span class="null-compare-feature">CAFFEINE, NOT NICOTINE</span><span class="null-compare-detail">ENERGY with caffeine.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">More than just a buzz</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP for real moments.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Three formulas. Pick your moment.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">Still discreet</span><span class="null-compare-detail">Same easy pouch format. No smoke. No vapor.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 12.5l5.1 5.1L20 6.9"/></svg></span></td>
+              <td><span class="null-compare-feature">DISCREET & SMOKE-FREE</span><span class="null-compare-detail">The familiar, easy-to-use format.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
-            </tbody>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -1456,6 +1456,23 @@
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
               Absolutely. NULL pouches are designed as a clean daily ritual—use FOCUS for deep work, ENERGY before workouts or busy afternoons, and SLEEP to wind down naturally at night.
+            </p>
+          </div>
+        </div>
+
+        <!-- Question 6: Manufacturing -->
+        <div class="faq-item">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Where are NULL pouches made?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">
+              NULL pouches are made in Estonia, Europe, at a certified manufacturing facility. Proudly made in the EU.
             </p>
           </div>
         </div>
