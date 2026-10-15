@@ -1404,7 +1404,7 @@
   <header class="null-site-header w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
     <div class="null-header-inner max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
       <div class="null-header-left">
-        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Open navigation menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
+        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Otwórz menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
           <span class="null-nav-trigger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
         </button>
         <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL - back to top">
@@ -2012,7 +2012,7 @@
         <button type="button" class="null-privacy-close" id="null-close-privacy" aria-label="Close Privacy Policy">×</button>
       </div>
       <div class="null-privacy-body" id="null-privacy-content">
-        <p class="null-privacy-updated"><strong>English legal notice / PL translation pending review.</strong> Last updated: 15 October 2026</p>
+        <p class="null-privacy-updated"><strong>Informacje prawne poniżej są obecnie dostępne po angielsku. Przed publikacją należy przygotować zweryfikowane tłumaczenie.</strong> Last updated: 15 October 2026</p>
         <p id="null-privacy-intro">This Privacy Policy explains how ENORDA s.r.o. handles personal data collected through the NULL pre-launch website and its email waitlist.</p>
 
         <section>
@@ -2309,7 +2309,7 @@
           },
           'error-callback': () => {
             const pending = nullTurnstilePending.get(form);
-            if (pending) { nullTurnstilePending.delete(form); pending.reject(new Error('Security check failed. Please try again.')); }
+            if (pending) { nullTurnstilePending.delete(form); pending.reject(new Error('Weryfikacja nie powiodła się. Spróbuj ponownie.')); }
           },
           'expired-callback': () => {
             const pending = nullTurnstilePending.get(form);
@@ -2374,11 +2374,11 @@
           if (response.status === 403 && data.code === 'turnstile_retry' && attempt === 0) {
             const widgetId = nullTurnstileWidgetIds.get(form);
             if (widgetId !== undefined && window.turnstile) window.turnstile.reset(widgetId);
-            if (label) label.textContent = 'Checking again...';
+            if (label) label.textContent = 'Ponowna weryfikacja...';
             continue;
           }
           if (!response.ok || data.success !== true) {
-            throw new Error(data.error || 'Could not join the waitlist. Please try again.');
+            throw new Error(data.error || 'Nie udało się zapisać. Spróbuj ponownie.');
           }
           break;
         }
@@ -2391,7 +2391,7 @@
         feedback.classList.remove('text-white/50');
         form.reset();
       } catch (error) {
-        feedback.textContent = error instanceof Error ? error.message : 'Could not join the waitlist. Please try again.';
+        feedback.textContent = error instanceof Error ? error.message : 'Nie udało się zapisać. Spróbuj ponownie.';
         feedback.hidden = false;
         feedback.classList.remove('text-purple-300');
         feedback.classList.add('text-white/50');
