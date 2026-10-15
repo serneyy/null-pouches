@@ -1385,15 +1385,24 @@
     }
 
 
-    /* Compact language switcher; remains visible on narrow mobile screens. */
-    .null-language-select { appearance: none; -webkit-appearance: none; font: 600 11px/1 'Inter', sans-serif; color: #e9e4f5; border: 1px solid rgba(169,139,255,.38); background: #14101d; border-radius: 8px; min-width: 57px; padding: 9px 17px 9px 8px; cursor: pointer; }
-    .null-language-wrap { position: relative; flex: 0 0 auto; }
-    .null-language-wrap::after { content: '⌄'; color: #c5b7ec; position: absolute; right: 7px; top: 5px; pointer-events: none; }
-    .null-language-select:focus-visible { outline: 2px solid #a978ff; outline-offset: 3px; }
-    .null-language-select option { background: #14101d; color: white; }
-    @media (max-width: 410px) { .null-header-actions { gap: 5px; } .null-language-select { min-width: 51px; padding-left: 6px; } }
-
-    @media (max-width: 359px) { .null-header-waitlist { display: none; } }
+    /* Footer language selector with crisp inline SVG flags. */
+    .null-footer-legal { flex: 1 1 auto; min-width: 0; }
+    .null-footer-controls { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px clamp(17px, 2.1vw, 31px); flex: 0 0 auto; }
+    .null-language-switcher { position: relative; flex: 0 0 auto; }
+    .null-language-trigger { display: inline-flex; align-items: center; gap: 9px; min-height: 37px; padding: 7px 11px; border: 1px solid rgba(255,255,255,.15); border-radius: 8px; background: rgba(255,255,255,.035); color: rgba(255,255,255,.8); font: 500 12px/1.4 'Inter', sans-serif; cursor: pointer; transition: border-color .18s ease, background .18s ease; }
+    .null-language-trigger:hover, .null-language-trigger[aria-expanded="true"] { border-color: rgba(168,133,255,.55); background: rgba(139,92,246,.09); color: white; }
+    .null-language-flag { display: block; width: 25px; height: 16px; aspect-ratio: 8/5; flex: 0 0 25px; border: 1px solid rgba(255,255,255,.18); border-radius: 2px; overflow: hidden; }
+    .null-language-current-label { min-width: 56px; text-align: left; }
+    .null-language-chevron { width: 12px; height: 12px; opacity: .6; transition: transform .18s ease; }
+    .null-language-trigger[aria-expanded="true"] .null-language-chevron { transform: rotate(180deg); }
+    .null-language-menu[hidden] { display: none !important; }
+    .null-language-menu { position: absolute; right: 0; bottom: calc(100% + 9px); z-index: 80; min-width: 195px; max-height: min(340px, 70vh); overflow-y: auto; padding: 5px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; background: #101014; box-shadow: 0 14px 36px rgba(0,0,0,.65); }
+    .null-language-option { display: flex; align-items: center; gap: 12px; min-height: 43px; padding: 9px 11px; border-radius: 7px; font: 500 12px/1.5 'Inter', sans-serif; color: rgba(255,255,255,.75); text-decoration: none; }
+    .null-language-option:hover, .null-language-option:focus-visible { background: rgba(255,255,255,.09); color: #fff; }
+    .null-language-option[aria-current="page"] { background: rgba(139,92,246,.18); color: #e8dcff; }
+    .null-language-trigger:focus-visible, .null-language-option:focus-visible { outline: 2px solid #a978ff; outline-offset: 2px; }
+    @media (max-width: 880px) { .null-footer-bottom { flex-direction: column; align-items: flex-start; } .null-footer-controls { justify-content: flex-start; } }
+    @media (max-width: 380px) { .null-footer-controls { gap: 7px 16px; } .null-language-menu { right: auto; left: 0; } }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1418,7 +1427,7 @@
       </div>
 
       <div class="null-header-actions">
-        <label class="null-language-wrap" aria-label="Vybrať jazyk"><select id="null-language-select" class="null-language-select" aria-label="Vybrať jazyk"><option value="en">EN</option><option value="sk">SK</option><option value="cs">CZ</option><option value="pl">PL</option><option value="ro">RO</option></select></label>
+
         <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Pridať sa na čakaciu listinu">
           <span class="null-header-waitlist-full">Pridaj sa na čakaciu listinu</span>
           <span class="null-header-waitlist-short">Pridať sa</span>
@@ -1983,8 +1992,24 @@
             NULL je stále vo vývoji. Pridaj sa na čakaciu listinu a prejav záujem o prvú výrobnú várku. Keď sa prihlási dostatok ľudí, odberateľov informujeme e-mailom.
           </p>
         </div>
-        <button type="button" class="null-footer-link" id="null-open-privacy" aria-haspopup="dialog" aria-controls="null-privacy-dialog">Ochrana osobných údajov</button>
-        <button type="button" class="null-footer-link" id="null-meta-cookie-settings">Nastavenia cookies</button>
+        <div class="null-footer-controls">
+  <button type="button" class="null-footer-link" id="null-open-privacy" aria-haspopup="dialog" aria-controls="null-privacy-dialog">Ochrana osobných údajov</button>
+  <button type="button" class="null-footer-link" id="null-meta-cookie-settings">Nastavenia cookies</button>
+          <div class="null-language-switcher" id="null-language-switcher" role="group" aria-label="Výber krajiny alebo jazyka">
+            <button class="null-language-trigger" id="null-language-trigger" type="button" aria-expanded="false" aria-controls="null-language-menu">
+              <svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h32v20H0z"/><path fill="#0B4EA2" d="M0 6.667h32V20H0z"/><path fill="#EE1C25" d="M0 13.333h32V20H0z"/><path d="M8.7 4.6h10.6v8.1c0 3.1-2.5 5.3-5.3 6.3-2.8-1-5.3-3.2-5.3-6.3z" fill="#fff"/><path d="M9.5 5.4h9v7.3c0 2.7-2.1 4.6-4.5 5.5-2.4-.9-4.5-2.8-4.5-5.5z" fill="#EE1C25"/><path d="M9.8 14c1.3-2 2.3-1.8 4.2-.4 1.6-1.7 3.1-1.6 4.2.1v1.2c-.8 1.3-2.4 2.4-4.2 3.1-1.8-.7-3.4-1.8-4.2-3.1z" fill="#0B4EA2"/><path fill="#fff" d="M13.2 7.1h1.6v2.1h2v1.4h-2v3.8h-1.6v-3.8h-2V9.2h2z"/></svg>
+              <span class="null-language-current-label">Slovakia</span>
+              <svg class="null-language-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m3 6 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="null-language-menu" id="null-language-menu" hidden>
+            <a class="null-language-option" href="/" hreflang="en" lang="en" data-null-language="en"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><rect width="32" height="20" fill="#012169"/><path d="M0 0L32 20M32 0L0 20" stroke="#fff" stroke-width="6"/><path d="M0 0L32 20M32 0L0 20" stroke="#C8102E" stroke-width="2.5"/><path d="M16 0V20M0 10H32" stroke="#fff" stroke-width="7"/><path d="M16 0V20M0 10H32" stroke="#C8102E" stroke-width="3.8"/></svg><span>English</span></a>
+            <a class="null-language-option" href="/sk/" hreflang="sk" lang="sk" data-null-language="sk" aria-current="page"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h32v20H0z"/><path fill="#0B4EA2" d="M0 6.667h32V20H0z"/><path fill="#EE1C25" d="M0 13.333h32V20H0z"/><path d="M8.7 4.6h10.6v8.1c0 3.1-2.5 5.3-5.3 6.3-2.8-1-5.3-3.2-5.3-6.3z" fill="#fff"/><path d="M9.5 5.4h9v7.3c0 2.7-2.1 4.6-4.5 5.5-2.4-.9-4.5-2.8-4.5-5.5z" fill="#EE1C25"/><path d="M9.8 14c1.3-2 2.3-1.8 4.2-.4 1.6-1.7 3.1-1.6 4.2.1v1.2c-.8 1.3-2.4 2.4-4.2 3.1-1.8-.7-3.4-1.8-4.2-3.1z" fill="#0B4EA2"/><path fill="#fff" d="M13.2 7.1h1.6v2.1h2v1.4h-2v3.8h-1.6v-3.8h-2V9.2h2z"/></svg><span>Slovakia</span></a>
+            <a class="null-language-option" href="/cs/" hreflang="cs" lang="cs" data-null-language="cs"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h32v20H0z"/><path fill="#D7141A" d="M0 10h32v10H0z"/><path fill="#11457E" d="M0 0l14.3 10L0 20z"/></svg><span>Czechia</span></a>
+            <a class="null-language-option" href="/pl/" hreflang="pl" lang="pl" data-null-language="pl"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h32v20H0z"/><path fill="#DC143C" d="M0 10h32v10H0z"/></svg><span>Poland</span></a>
+            <a class="null-language-option" href="/ro/" hreflang="ro" lang="ro" data-null-language="ro"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#002B7F" d="M0 0h11v20H0z"/><path fill="#FCD116" d="M11 0h10v20H11z"/><path fill="#CE1126" d="M21 0h11v20H21z"/></svg><span>Romania</span></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
@@ -2616,19 +2641,54 @@
       sync();
     })();
   </script>
-
   <script>
+    /* Country/language picker: native links stay usable even when JavaScript is unavailable. */
     (function () {
-      const picker = document.getElementById('null-language-select');
-      if (!picker) return;
-      const current = document.documentElement.lang.toLowerCase();
-      picker.value = current;
-      picker.addEventListener('change', function () {
-        const selected = picker.value;
-        if (!['en', 'sk', 'cs', 'pl', 'ro'].includes(selected)) return;
-        try { localStorage.setItem('null_language_preference_v1', selected); } catch (e) {}
-        const path = selected === 'en' ? '/' : '/' + selected + '/';
-        window.location.assign(path + window.location.hash);
+      const switcher = document.getElementById('null-language-switcher');
+      const trigger = document.getElementById('null-language-trigger');
+      const menu = document.getElementById('null-language-menu');
+      if (!switcher || !trigger || !menu) return;
+      const options = Array.from(menu.querySelectorAll('a[data-null-language]'));
+      const close = (restoreFocus) => {
+        if (menu.hidden) return;
+        menu.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+        if (restoreFocus) trigger.focus();
+      };
+      const open = () => {
+        menu.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+      };
+      trigger.addEventListener('click', () => menu.hidden ? open() : close(false));
+      options.forEach((option) => {
+        option.addEventListener('click', () => {
+          const code = option.getAttribute('data-null-language');
+          if (['en', 'sk', 'cs', 'pl', 'ro'].includes(code)) {
+            try { localStorage.setItem('null_language_preference_v1', code); } catch (error) {}
+          }
+        });
+      });
+      switcher.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !menu.hidden) {
+          event.preventDefault();
+          close(true);
+          return;
+        }
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+        if (menu.hidden) open();
+        const current = options.indexOf(document.activeElement);
+        let next = event.key === 'Home' ? 0 :
+          event.key === 'End' ? options.length - 1 :
+          event.key === 'ArrowDown' ? (current + 1) % options.length :
+          (current < 0 ? options.length - 1 : (current - 1 + options.length) % options.length);
+        event.preventDefault();
+        options[next]?.focus();
+      });
+      document.addEventListener('pointerdown', (event) => {
+        if (!switcher.contains(event.target)) close(false);
+      });
+      switcher.addEventListener('focusout', (event) => {
+        if (!event.relatedTarget || !switcher.contains(event.relatedTarget)) close(false);
       });
     })();
   </script>
