@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NULL — Functional Pouches For A Better You</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Unbounded & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-black: #030305;
+      --purple-main: #8b5cf6;
+      --purple-bright: #a855f7;
+      --purple-glow: #7c3aed;
+      --blue-bright: #60a5fa;
+      --card-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-black);
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Wide Extended Display Font matching NULL headers */
+    .font-display {
+      font-family: 'Unbounded', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* Top & FAQ Waitlist Button with purple border */
+    .btn-outline-purple {
+      background: rgba(18, 14, 32, 0.75);
+      border: 1px solid rgba(139, 92, 246, 0.48);
+      box-shadow: 0 0 18px rgba(124, 58, 237, 0.18), inset 0 0 12px rgba(139, 92, 246, 0.12);
+      transition: all 0.25s ease;
+    }
+    .btn-outline-purple:hover {
+      border-color: rgba(168, 85, 247, 0.85);
+      box-shadow: 0 0 25px rgba(139, 92, 246, 0.4), inset 0 0 14px rgba(139, 92, 246, 0.22);
+      transform: translateY(-1px);
+    }
+
+    /* Secondary Dark Outline Pill Button ("What is NULL?" section) */
+    .btn-outline-dark {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      transition: all 0.25s ease;
+    }
+    .btn-outline-dark:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.32);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Email Form Container */
+    .waitlist-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .waitlist-pill:focus-within {
+      border-color: rgba(168, 85, 247, 0.55);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+    }
+
+    /* Vibrant Purple CTA Button inside Hero Pill */
+    .btn-purple-glow {
+      background: linear-gradient(90deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+      box-shadow: 0 0 28px rgba(124, 58, 237, 0.75), 0 0 10px rgba(168, 85, 247, 0.5);
+      transition: all 0.25s ease;
+    }
+    .btn-purple-glow:hover {
+      background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+      box-shadow: 0 0 36px rgba(139, 92, 246, 0.95), 0 0 14px rgba(168, 85, 247, 0.7);
+      transform: scale(1.02);
+    }
+
+    /* Ingredient Cards */
+    .ingredient-card {
+      background: linear-gradient(180deg, rgba(14, 14, 20, 0.7) 0%, rgba(7, 7, 10, 0.9) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+    }
+
+    /* FAQ Accordion */
+    .faq-container {
+      background: rgba(8, 8, 12, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      opacity: 0;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 240px;
+      opacity: 1;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+      color: #a855f7;
+    }
+
+
+    /* ======================================================================
+       NULL / Floating pouches - layered product stage
+       Background particles and glow are HTML/CSS: no flattened background.
+       ====================================================================== */
+    .null-pouch-stage {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 420px);
+      aspect-ratio: 1 / 1;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* A deep purple light source behind the two pouch silhouettes. */
+    .null-pouch-glow {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      inset: 13% 9% 11%;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 49% 48%,
+          rgba(133, 71, 255, 0.67) 0%,
+          rgba(85, 0, 255, 0.42) 24%,
+          rgba(85, 0, 255, 0.16) 48%,
+          transparent 74%);
+      filter: blur(30px);
+      transform: translateZ(-50px);
+      animation: nullGlowBreath 7.2s ease-in-out infinite;
+    }
+
+    .null-pouch-glow::after {
+      content: "";
+      position: absolute;
+      inset: 22% 18%;
+      border-radius: 50%;
+      background: rgba(85, 0, 255, 0.46);
+      filter: blur(34px);
+    }
+
+    /* Fine edge lighting, subtle rather than a distracting neon ring. */
+    .null-pouch-halo {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      width: 74%;
+      height: 57%;
+      top: 23%;
+      left: 13%;
+      border: 1px solid rgba(163, 120, 255, 0.18);
+      box-shadow: 0 0 28px rgba(85, 0, 255, 0.13), inset 0 0 25px rgba(85, 0, 255, 0.08);
+      border-radius: 50%;
+      transform: rotate(-22deg);
+      filter: blur(0.4px);
+      animation: nullHaloBreath 8.2s ease-in-out infinite;
+    }
+
+    .null-pouch-sparks {
+      position: absolute;
+      z-index: 1;
+      inset: -2%;
+      overflow: hidden;
+      border-radius: 50%;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #000 51%, transparent 76%);
+      mask-image: radial-gradient(ellipse at center, #000 0%, #000 51%, transparent 76%);
+    }
+
+    .null-pouch-spark {
+      position: absolute;
+      left: var(--spark-x);
+      top: var(--spark-y);
+      width: var(--spark-size);
+      height: var(--spark-size);
+      border-radius: 50%;
+      background: rgba(197, 171, 255, var(--spark-alpha));
+      box-shadow: 0 0 5px 1px rgba(138, 81, 255, 0.46), 0 0 14px rgba(85, 0, 255, 0.24);
+      animation: nullSparkFloat var(--spark-duration) ease-in-out var(--spark-delay) infinite;
+      will-change: transform, opacity;
+    }
+
+    /* Separate movement layers keep the printed pouch photo sharp. */
+    .null-pouch-tilt {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform: rotateX(-2deg) rotateY(4deg);
+      animation: nullAutoTilt 9s ease-in-out infinite;
+    }
+
+    .null-pouch-float {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: nullPouchFloat 7.5s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    #img-pouches {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+      transform: translateZ(18px);
+      filter: drop-shadow(0 22px 22px rgba(4, 0, 18, 0.48)) drop-shadow(0 13px 30px rgba(97, 32, 235, 0.22));
+    }
+
+    @keyframes nullPouchFloat {
+      0%, 100% { transform: translate3d(0, 1px, 0) rotateZ(-1.4deg); }
+      50%      { transform: translate3d(0, -11px, 0) rotateZ(1.3deg); }
+    }
+
+    @keyframes nullAutoTilt {
+      0%, 100% { transform: rotateX(-2deg) rotateY(4deg); }
+      50%      { transform: rotateX(3deg) rotateY(-4deg); }
+    }
+
+    @keyframes nullGlowBreath {
+      0%, 100% { opacity: .72; transform: scale(.92); }
+      50%      { opacity: 1; transform: scale(1.14); }
+    }
+
+    @keyframes nullHaloBreath {
+      0%, 100% { opacity: .28; transform: rotate(-22deg) scale(.96); }
+      50%      { opacity: .56; transform: rotate(-18deg) scale(1.05); }
+    }
+
+    @keyframes nullSparkFloat {
+      0%, 100% { opacity: .08; transform: translate3d(-2px, 9px, 0) scale(.65); }
+      40%, 65% { opacity: .8; transform: translate3d(5px, -7px, 0) scale(1.1); }
+    }
+
+    /* Mouse movement adds an optional extra layer of real-time depth. */
+    @media (hover: hover) and (pointer: fine) {
+      .null-pouch-tilt {
+        animation: none;
+        transform: rotateX(var(--null-rotate-x, -2deg)) rotateY(var(--null-rotate-y, 4deg));
+        transition: transform 540ms cubic-bezier(.2,.8,.2,1);
+      }
+    }
+
+    @media (max-width: 639px) {
+      .null-pouch-stage { width: min(100%, 350px); }
+      .null-pouch-glow { inset: 16% 10% 14%; filter: blur(25px); }
+      #img-pouches { filter: drop-shadow(0 17px 20px rgba(2,0,13,.45)) drop-shadow(0 8px 22px rgba(85,0,255,.23)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .null-pouch-glow, .null-pouch-halo, .null-pouch-spark,
+      .null-pouch-float, .null-pouch-tilt { animation: none !important; transition: none !important; }
+      .null-pouch-tilt { transform: none !important; }
+      .null-pouch-spark { opacity: .35; }
+    }
+
+
+    /* ==============================================================
+       NULL / MOBILE HERO V10 - cinematic depth, not an image block.
+       Product is intentionally behind the copy, shifted to the right
+       and faded into the black backdrop. Desktop rules stay untouched.
+       ============================================================== */
+    @media (max-width: 1023px) {
+      .null-hero-section {
+        padding-top: 12px;
+        padding-bottom: 0;
+        isolation: isolate;
+      }
+      .null-hero-section .null-hero-grid {
+        position: relative;
+        display: block;
+        min-height: 350px;
+      }
+      .null-hero-section .null-hero-copy {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        padding-top: 8px;
+      }
+      .null-hero-copy h1 {
+        text-shadow: 0 2px 18px rgba(0,0,0,.65);
+      }
+      .null-hero-copy .waitlist-pill {
+        background: rgba(9,8,15,.93);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+      }
+      .null-hero-section .null-hero-media {
+        position: absolute !important;
+        z-index: 0;
+        inset: 0 -20px 0 -20px;
+        width: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+        display: block;
+        pointer-events: none;
+      }
+      .null-hero-section .null-hero-art {
+        position: absolute !important;
+        inset: 0;
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .null-hero-section .null-hero-art > .null-hero-image {
+        position: absolute;
+        inset: auto;
+        top: 55px;
+        right: -84px;
+        width: clamp(465px, 121vw, 585px);
+        height: auto;
+        max-width: none;
+        display: block;
+        object-fit: contain;
+        object-position: center;
+        transform: none;
+        filter: brightness(1.05) saturate(.99);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 54%, rgba(0,0,0,.84) 67%, transparent 98%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 54%, rgba(0,0,0,.84) 67%, transparent 98%);
+      }
+      /* Gentle scrim at copy level; stronger seam-free bottom fade. */
+      .null-hero-section .null-hero-art::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg,
+            #030305 0%,
+            rgba(3,3,5,.85) 9%,
+            rgba(3,3,5,.73) 24%,
+            rgba(3,3,5,.53) 45%,
+            rgba(3,3,5,.36) 58%,
+            rgba(3,3,5,.49) 69%,
+            rgba(3,3,5,.75) 82%,
+            rgba(3,3,5,.94) 94%,
+            #030305 100%),
+          linear-gradient(90deg,
+            rgba(3,3,5,.82) 0%,
+            rgba(3,3,5,.53) 35%,
+            rgba(3,3,5,.16) 72%,
+            transparent 100%);
+      }
+      .null-hero-section + section { padding-top: 20px; }
+      .null-hero-fade-left,
+      .null-hero-fade-right,
+      .null-hero-fade-top,
+      .null-hero-fade-bottom { display: none !important; }
+    }
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .null-hero-section { padding-top: 24px; }
+      .null-hero-section .null-hero-grid { min-height: 455px; }
+      .null-hero-section .null-hero-copy { width: min(64%, 520px); padding-top: 12px; }
+      .null-hero-section .null-hero-media { left: -32px; right: -32px; }
+      .null-hero-section .null-hero-art > .null-hero-image {
+        top: 6px;
+        right: -78px;
+        width: clamp(630px, 85vw, 790px);
+      }
+      .null-hero-section .null-hero-art::after {
+        background:
+          linear-gradient(180deg,
+            rgba(3,3,5,.83) 0%,
+            rgba(3,3,5,.48) 30%,
+            rgba(3,3,5,.39) 67%,
+            rgba(3,3,5,.76) 86%,
+            #030305 100%),
+          linear-gradient(90deg,
+            #030305 0%,
+            rgba(3,3,5,.84) 25%,
+            rgba(3,3,5,.26) 64%,
+            transparent 100%);
+      }
+    }
+    @media (max-width: 359px) {
+      .null-hero-section .null-hero-grid { min-height: 365px; }
+      .null-hero-section .null-hero-copy h1 { font-size: 29px; }
+      .null-hero-section .null-hero-art > .null-hero-image {
+        top: 55px;
+        right: -98px;
+        width: 458px;
+      }
+    }
+
+  </style>
+</head>
+<body class="selection:bg-purple-600 selection:text-white">
+
+  <!-- ======================================================================= -->
+  <!-- TOP NAVIGATION BAR                                                      -->
+  <!-- ======================================================================= -->
+  <header class="w-full border-b border-white/[0.07] bg-[#030305]/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
+      <!-- Brand Logo (White logo without background) -->
+      <a href="#" class="flex items-center select-none">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
+          alt="NULL Logo"
+          class="h-8 sm:h-9 w-auto object-contain"
+        />
+      </a>
+
+      <!-- Right CTA Pill -->
+      <a href="#waitlist-form" class="btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2">
+        <span>Join the waitlist</span>
+        <span class="text-white/80 text-xs leading-none">→</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ======================================================================= -->
+  <!-- 1. HERO SECTION                                                         -->
+  <!-- ======================================================================= -->
+  <section class="null-hero-section relative pt-8 sm:pt-12 pb-12 sm:pb-20 overflow-hidden">
+    <div class="max-w-[1060px] mx-auto px-5 sm:px-8 relative">
+      <div class="null-hero-grid grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+
+        <!-- Left Column: Hero Copy & Waitlist Input -->
+        <div class="null-hero-copy lg:col-span-6 z-20 pt-2 sm:pt-6">
+          <h1 class="font-display font-extrabold uppercase text-[32px] sm:text-[42px] md:text-[46px] leading-[1.06] tracking-[-0.02em] text-white mb-5">
+            FUNCTIONAL<br />
+            POUCHES<br />
+            FOR A BETTER<br />
+            YOU.
+          </h1>
+
+          <p class="text-[14px] sm:text-[15px] leading-[1.55] text-white/75 max-w-[360px] mb-7 font-normal">
+            Nicotine-free pouches designed to<br />
+            help you focus, get energy and sleep better.
+          </p>
+
+          <!-- Waitlist Pill Form -->
+          <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="waitlist-pill rounded-full p-1.5 pl-4 flex items-center justify-between max-w-[435px] mb-3">
+            <div class="flex items-center gap-2.5 flex-1 min-w-0 pr-2">
+              <!-- Envelope Icon -->
+              <svg class="w-4 h-4 text-white/45 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+              <input
+                type="email"
+                id="waitlist-email"
+                required
+                placeholder="Your email address"
+                class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Join the waitlist</span>
+              <span class="text-xs leading-none">→</span>
+            </button>
+          </form>
+
+          <!-- Sub-caption / Confirmation message -->
+          <p id="waitlist-feedback" class="text-[11px] text-white/50 pl-1">
+            Be the first to know when NULL launches.
+          </p>
+        </div>
+
+        <!-- On PC: image alongside the text. On mobile: behind the text and form with a cinematic black fade. -->
+        <div class="null-hero-media lg:col-span-6 relative flex items-center justify-center lg:justify-end">
+          <div class="null-hero-art relative w-full max-w-[540px] lg:max-w-none lg:w-[125%] lg:-ml-[25%]">
+
+            <!-- SAME desktop-format image on both. On mobile this entire media layer is absolutely positioned behind the copy. -->
+            <img
+              src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217"
+              alt="NULL FOCUS, SLEEP and ENERGY functional pouch containers"
+              class="null-hero-image w-full h-auto object-cover select-none"
+              fetchpriority="high"
+              decoding="async"
+            />
+
+            <!-- Smooth edge vignette gradients so the photo blends seamlessly into #030305 -->
+            <div class="null-hero-fade-left pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#030305] via-[#030305]/60 to-transparent"></div>
+            <div class="null-hero-fade-right pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 bg-gradient-to-l from-[#030305] to-transparent"></div>
+            <div class="null-hero-fade-top pointer-events-none absolute inset-x-0 top-0 h-12 sm:h-16 bg-gradient-to-b from-[#030305] to-transparent"></div>
+            <div class="null-hero-fade-bottom pointer-events-none absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-t from-[#030305] via-[#030305]/80 to-transparent"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= -->
+  <!-- 2. "WHAT IS NULL?" SECTION                                              -->
+  <!-- ======================================================================= -->
+  <section class="py-14 sm:py-20 relative overflow-hidden">
+    <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
+
+        <!-- Left Column: Explanation Copy -->
+        <div class="lg:col-span-6">
+          <span class="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#8b5cf6] mb-3">
+            WHAT IS NULL?
+          </span>
+
+          <h2 class="font-display font-bold text-[26px] sm:text-[33px] leading-[1.15] text-white mb-6">
+            Functional pouches<br />
+            without nicotine.
+          </h2>
+
+          <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-5">
+            NULL pouches are nicotine-free, tobacco-free
+            pouches designed to support focus, energy
+            and better sleep using functional ingredients.
+          </p>
+
+          <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-8">
+            A modern alternative for anyone who wants
+            more from their day — without nicotine,
+            without smoke, without compromise.
+          </p>
+
+          <a
+            href="#waitlist-form"
+            class="btn-outline-dark inline-flex items-center gap-3 rounded-full px-6 py-2.5 text-[12px] font-medium text-white/90"
+          >
+            <span>Join the waitlist</span>
+            <span class="text-white/70 text-xs leading-none">→</span>
+          </a>
+        </div>
+
+        <!-- Right Column: real transparent pouches, floating in 3D above an animated purple spark field -->
+        <div class="lg:col-span-6 relative flex items-center justify-center min-h-[300px] sm:min-h-[360px]">
+          <div class="null-pouch-stage" id="null-pouch-stage">
+            <!-- All decorative effects sit BEHIND the product and can be styled separately. -->
+            <div class="null-pouch-glow" aria-hidden="true"></div>
+            <div class="null-pouch-halo" aria-hidden="true"></div>
+            <div class="null-pouch-sparks" id="null-pouch-sparks" aria-hidden="true"></div>
+
+            <div class="null-pouch-tilt" id="null-pouch-tilt">
+              <div class="null-pouch-float">
+                <img
+                  id="img-pouches"
+                  src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/vrecuska.png?v=1792017219"
+                  alt="Two floating white NULL functional pouches"
+                  width="1254"
+                  height="1254"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= -->
+  <!-- 3. "KEY INGREDIENTS" SECTION                                            -->
+  <!-- ======================================================================= -->
+  <section class="py-12 sm:py-16 relative">
+    <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
+
+      <!-- Section Heading -->
+      <div class="mb-9">
+        <span class="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#8b5cf6] mb-3">
+          KEY INGREDIENTS
+        </span>
+        <h2 class="font-display font-bold text-[26px] sm:text-[33px] leading-[1.15] text-white">
+          Backed by ingredients<br />
+          that work.
+        </h2>
+      </div>
+
+      <!-- 3 Columns Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <!-- INGREDIENT CARD 1: FOCUS -->
+        <div class="ingredient-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <!-- Icon + Title -->
+            <div class="flex items-center gap-3 mb-6">
+              <!-- Brain Outline SVG Icon -->
+              <svg class="w-6 h-6 text-[#a855f7] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/>
+              </svg>
+              <h3 class="font-display font-bold uppercase text-[15px] tracking-wide text-[#a855f7]">
+                FOCUS
+              </h3>
+            </div>
+
+            <!-- Ingredient List -->
+            <ul class="space-y-2 text-[13.5px] text-white/80 mb-7">
+              <li>L-Theanine</li>
+              <li>Bacopa Monnieri</li>
+              <li>Alpha-GPC</li>
+              <li>B Vitamins</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="border-t border-white/[0.08] my-5"></div>
+            <p class="text-[13px] leading-[1.5] text-white/75">
+              Supports concentration,<br />
+              mental clarity and<br />
+              cognitive performance.
+            </p>
+          </div>
+        </div>
+
+        <!-- INGREDIENT CARD 2: ENERGY -->
+        <div class="ingredient-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <!-- Icon + Title -->
+            <div class="flex items-center gap-3 mb-6">
+              <!-- Lightning Bolt Outline SVG Icon -->
+              <svg class="w-6 h-6 text-[#a855f7] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+              <h3 class="font-display font-bold uppercase text-[15px] tracking-wide text-[#a855f7]">
+                ENERGY
+              </h3>
+            </div>
+
+            <!-- Ingredient List -->
+            <ul class="space-y-2 text-[13.5px] text-white/80 mb-7">
+              <li>Caffeine (natural)</li>
+              <li>L-Tyrosine</li>
+              <li>B Vitamins</li>
+              <li>Guarana Extract</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="border-t border-white/[0.08] my-5"></div>
+            <p class="text-[13px] leading-[1.5] text-white/75">
+              Helps increase alertness,<br />
+              energy and physical<br />
+              performance.
+            </p>
+          </div>
+        </div>
+
+        <!-- INGREDIENT CARD 3: SLEEP -->
+        <div class="ingredient-card p-6 sm:p-7 flex flex-col justify-between">
+          <div>
+            <!-- Icon + Title -->
+            <div class="flex items-center gap-3 mb-6">
+              <!-- Crescent Moon Outline SVG Icon -->
+              <svg class="w-6 h-6 text-[#60a5fa] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+              </svg>
+              <h3 class="font-display font-bold uppercase text-[15px] tracking-wide text-[#60a5fa]">
+                SLEEP
+              </h3>
+            </div>
+
+            <!-- Ingredient List -->
+            <ul class="space-y-2 text-[13.5px] text-white/80 mb-7">
+              <li>Melatonin</li>
+              <li>L-Theanine</li>
+              <li>Valerian Root</li>
+              <li>Magnesium</li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="border-t border-white/[0.08] my-5"></div>
+            <p class="text-[13px] leading-[1.5] text-white/75">
+              Supports faster<br />
+              falling asleep and<br />
+              better sleep quality.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= -->
+  <!-- 4. FAQ SECTION                                                          -->
+  <!-- ======================================================================= -->
+  <section class="pt-12 sm:pt-16 pb-24 relative">
+    <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
+
+      <!-- Header Row with Right CTA Button -->
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#8b5cf6] mb-2.5">
+            FAQ
+          </span>
+          <h2 class="font-display font-bold text-[26px] sm:text-[33px] leading-[1.15] text-white">
+            Frequently asked<br />
+            questions.
+          </h2>
+        </div>
+
+        <a
+          href="#waitlist-form"
+          class="btn-outline-purple self-start sm:self-end rounded-full px-5 py-2.5 text-[12px] font-medium text-white/90 inline-flex items-center gap-2.5 mb-1"
+        >
+          <span>Join the waitlist</span>
+          <span class="text-white/80 text-xs leading-none">→</span>
+        </a>
+      </div>
+
+      <!-- Accordion Box -->
+      <div class="faq-container overflow-hidden">
+
+        <!-- Question 1 -->
+        <div class="faq-item">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Do NULL pouches contain nicotine?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">
+              No. All NULL pouches are 100% nicotine-free and tobacco-free. They are formulated purely with science-backed functional ingredients like nootropics, natural caffeine, adaptogens, and sleep supporters.
+            </p>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="faq-item">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Are NULL pouches safe?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">
+              Yes. NULL pouches are made with food-grade plant fibers and rigorously tested functional vitamins, amino acids, and botanical extracts in safe, effective dosages.
+            </p>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="faq-item">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>How do they work?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">
+              Simply place one pouch between your upper lip and gum. The active ingredients are absorbed cleanly and rapidly through the oral mucosa for fast-acting focus, energy, or relaxation—without smoke or sugar.
+            </p>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="faq-item">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>When will NULL launch?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">
+              We are preparing our first limited production drop soon. Join the waitlist above with your email address to get early access and exclusive launch pricing before anyone else.
+            </p>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="faq-item">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Can I use them every day?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">
+              Absolutely. NULL pouches are designed as a clean daily ritual—use FOCUS for deep work, ENERGY before workouts or busy afternoons, and SLEEP to wind down naturally at night.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= -->
+  <!-- JAVASCRIPT: FAQ ACCORDION, WAITLIST & POUCHES BACKGROUND CLEANUP        -->
+  <!-- ======================================================================= -->
+  <script>
+    // 1. FAQ Accordion Toggle
+    function toggleFaq(buttonEl) {
+      const item = buttonEl.closest('.faq-item');
+      const isOpen = item.classList.contains('active');
+
+      document.querySelectorAll('.faq-item.active').forEach((el) => {
+        el.classList.remove('active');
+      });
+
+      if (!isOpen) {
+        item.classList.add('active');
+      }
+    }
+
+    // 2. Waitlist Form Submission Handler
+    function handleWaitlistSubmit(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('waitlist-email');
+      const feedback = document.getElementById('waitlist-feedback');
+      if (emailInput && emailInput.value.trim()) {
+        feedback.textContent = "Waitlist signup is not connected yet. Please check back soon.";
+        feedback.classList.remove('text-white/50');
+        feedback.classList.add('text-purple-300', 'font-medium');
+        // Keep their input so it is not lost before an email provider is connected.
+      }
+    }
+
+    // 3. Pouch atmosphere: tiny animated sparks, placed behind the transparent pouch image.
+    //    Deterministic positions avoid layout jumps; all motion is CSS-driven.
+    (() => {
+      const stage = document.getElementById('null-pouch-stage');
+      const field = document.getElementById('null-pouch-sparks');
+      const tilt = document.getElementById('null-pouch-tilt');
+      if (!stage || !field || !tilt) return;
+
+      let seed = 72034;
+      const random = () => {
+        seed = (1664525 * seed + 1013904223) >>> 0;
+        return seed / 4294967296;
+      };
+
+      const sparkCount = 46;
+      const sparksFragment = document.createDocumentFragment();
+      for (let i = 0; i < sparkCount; i++) {
+        const spark = document.createElement('span');
+        spark.className = 'null-pouch-spark';
+
+        // Distribute the sparks in a natural loose cloud around the glowing center.
+        const angle = random() * Math.PI * 2;
+        const radius = Math.sqrt(random()) * 37;
+        const x = 50 + Math.cos(angle) * radius;
+        const y = 50 + Math.sin(angle) * radius;
+        spark.style.setProperty('--spark-x', x.toFixed(2) + '%');
+        spark.style.setProperty('--spark-y', y.toFixed(2) + '%');
+        spark.style.setProperty('--spark-size', (1.1 + random() * 2.4).toFixed(2) + 'px');
+        spark.style.setProperty('--spark-alpha', (0.52 + random() * 0.42).toFixed(2));
+        spark.style.setProperty('--spark-duration', (4.2 + random() * 6.2).toFixed(2) + 's');
+        spark.style.setProperty('--spark-delay', (-random() * 10).toFixed(2) + 's');
+        sparksFragment.appendChild(spark);
+      }
+      field.appendChild(sparksFragment);
+
+      // Micro parallax on desktop only. Mobile retains the smooth autonomous 3D float.
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      stage.addEventListener('pointermove', (event) => {
+        if (!finePointer.matches || reducedMotion.matches) return;
+        const rect = stage.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+        tilt.style.setProperty('--null-rotate-x', (-2 - y * 7).toFixed(2) + 'deg');
+        tilt.style.setProperty('--null-rotate-y', (4 + x * 9).toFixed(2) + 'deg');
+      }, { passive: true });
+
+      stage.addEventListener('pointerleave', () => {
+        tilt.style.removeProperty('--null-rotate-x');
+        tilt.style.removeProperty('--null-rotate-y');
+      });
+    })();
+  </script>
+</body>
+</html>
