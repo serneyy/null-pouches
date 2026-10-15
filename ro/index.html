@@ -1410,6 +1410,113 @@
       .null-hero-copy .null-waitlist-form button[type="submit"],
       .null-nav-signup .null-waitlist-form button[type="submit"] { padding-left: 8px; padding-right: 8px; font-size: 10px; gap: 3px; }
     }
+
+    /* Waitlist confirmation: borderless, friendly, keyboard-accessible popup. */
+    .null-success-overlay[hidden] { display: none !important; }
+    .null-success-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: grid;
+      place-items: center;
+      overflow-y: auto;
+      padding: 20px;
+      background: rgba(0,0,0,.79);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .null-success-dialog {
+      position: relative;
+      width: min(100%, 480px);
+      max-height: calc(100dvh - 40px);
+      overflow-y: auto;
+      border: none;
+      outline: none;
+      border-radius: 22px;
+      color: white;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% -28%, rgba(116,61,234,.21), transparent 62%), #101014;
+      box-shadow: 0 30px 100px rgba(0,0,0,.75), 0 10px 40px rgba(75,35,132,.14);
+      padding: 43px 28px 31px;
+    }
+    .null-success-close {
+      position: absolute;
+      right: 16px;
+      top: 15px;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,.055);
+      color: rgba(255,255,255,.73);
+      cursor: pointer;
+      transition: background .18s ease, color .18s ease;
+    }
+    .null-success-close:hover { background: rgba(255,255,255,.13); color: white; }
+    .null-success-check {
+      display: grid;
+      place-items: center;
+      width: 65px;
+      height: 65px;
+      margin: 1px auto 25px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(140deg,#8b5cf6,#6d28d9);
+      box-shadow: 0 0 38px rgba(139,92,246,.34);
+    }
+    .null-success-check svg { width: 30px; height: 30px; }
+    .null-success-title {
+      margin: 0 0 16px;
+      font-family: 'Unbounded', 'Inter', sans-serif;
+      font-size: clamp(20px, 4vw, 27px);
+      line-height: 1.27;
+      letter-spacing: -.04em;
+      font-weight: 800;
+      text-wrap: balance;
+    }
+    .null-success-detail { margin: 0 auto 13px; max-width: 370px; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.87); }
+    .null-success-follow { margin: 0 auto 22px; max-width: 370px; font-size: 13px; line-height: 1.6; color: rgba(255,255,255,.57); }
+    .null-success-instagram {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 11px;
+      min-height: 46px;
+      padding: 12px 23px;
+      border: none;
+      border-radius: 999px;
+      background: #8b5cf6;
+      color: white;
+      font: 700 13px/1.2 'Inter',sans-serif;
+      text-decoration: none;
+      box-shadow: 0 9px 27px rgba(139,92,246,.25);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .null-success-instagram:hover { background: #9f76ff; transform: translateY(-2px); }
+    .null-success-instagram svg { width: 19px; height: 19px; flex: none; }
+    .null-success-continue {
+      display: block;
+      margin: 20px auto 0;
+      padding: 7px 10px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,.52);
+      font: 500 12px/1.4 'Inter', sans-serif;
+      cursor: pointer;
+    }
+    .null-success-continue:hover { color: white; }
+    .null-success-close:focus-visible, .null-success-instagram:focus-visible, .null-success-continue:focus-visible { outline: 2px solid #c6a7ff; outline-offset: 3px; }
+    body.null-success-open { overflow: hidden; }
+    @media (max-width: 420px) {
+      .null-success-overlay { padding: 14px; }
+      .null-success-dialog { max-height: calc(100dvh - 28px); padding: 43px 20px 27px; }
+      .null-success-title { font-size: 21px; }
+      .null-success-detail { font-size: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .null-success-instagram, .null-success-close { transition: none; } }
+
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -2091,6 +2198,27 @@
     </div>
   </div>
 
+
+  <!-- Shown only after a successful waitlist API response (hero or menu form). -->
+  <div class="null-success-overlay" id="null-success-overlay" hidden>
+    <div class="null-success-dialog" id="null-success-dialog" role="dialog" aria-modal="true" aria-labelledby="null-success-title" aria-describedby="null-success-detail" tabindex="-1">
+      <button type="button" class="null-success-close" data-null-success-close aria-label="Închide confirmarea">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <div class="null-success-check" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none"><path d="m7 16.3 6.5 6.2L25 10" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="null-success-title" id="null-success-title">URA! EȘTI PE LISTĂ</h2>
+      <p class="null-success-detail" id="null-success-detail">Îți dăm de veste pe e-mail când NULL se lansează.</p>
+      <p class="null-success-follow">Până atunci, urmărește-ne pe Instagram.</p>
+      <a class="null-success-instagram" href="https://www.instagram.com/nullpouches/" target="_blank" rel="noopener noreferrer" aria-label="Urmărește NULL Pouches pe Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.7" cy="6.4" r="1" fill="currentColor" stroke="none"/></svg>
+        <span>@nullpouches</span>
+      </a>
+      <button type="button" class="null-success-continue" data-null-success-close>Înapoi la site</button>
+    </div>
+  </div>
+
   <!-- ======================================================================= -->
   <!-- JAVASCRIPT: FAQ ACCORDION, WAITLIST & POUCHES BACKGROUND CLEANUP        -->
   <!-- ======================================================================= -->
@@ -2364,6 +2492,40 @@
       });
     }
 
+
+    // Open confirmation only when the waitlist API explicitly reports success.
+    const nullSuccessOverlay = document.getElementById('null-success-overlay');
+    const nullSuccessDialog = document.getElementById('null-success-dialog');
+    let nullSuccessPreviousFocus = null;
+    function nullOpenWaitlistSuccessModal() {
+      if (!nullSuccessOverlay || !nullSuccessDialog) return;
+      nullSuccessPreviousFocus = document.activeElement;
+      nullSuccessOverlay.hidden = false;
+      document.body.classList.add('null-success-open');
+      nullSuccessOverlay.querySelector('.null-success-close')?.focus();
+    }
+    function nullCloseWaitlistSuccessModal() {
+      if (!nullSuccessOverlay || nullSuccessOverlay.hidden) return;
+      nullSuccessOverlay.hidden = true;
+      document.body.classList.remove('null-success-open');
+      if (nullSuccessPreviousFocus?.isConnected && typeof nullSuccessPreviousFocus.focus === 'function') nullSuccessPreviousFocus.focus();
+    }
+    if (nullSuccessOverlay && nullSuccessDialog) {
+      nullSuccessOverlay.querySelectorAll('[data-null-success-close]').forEach(button => button.addEventListener('click', nullCloseWaitlistSuccessModal));
+      nullSuccessOverlay.addEventListener('click', event => {
+        if (event.target === nullSuccessOverlay) nullCloseWaitlistSuccessModal();
+      });
+      nullSuccessOverlay.addEventListener('keydown', event => {
+        if (event.key === 'Escape') { event.preventDefault(); nullCloseWaitlistSuccessModal(); return; }
+        if (event.key !== 'Tab') return;
+        const focusable = Array.from(nullSuccessDialog.querySelectorAll('button:not([disabled]), a[href]'));
+        if (!focusable.length) { event.preventDefault(); nullSuccessDialog.focus(); return; }
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+    }
+
     // 2. Waitlist Form Submission Handler
     async function handleWaitlistSubmit(e) {
       e.preventDefault();
@@ -2413,11 +2575,12 @@
         if (nullMetaReadVisitConsent() === "allowed" && data.isNew === true && typeof data.leadEventId === "string") {
           nullMetaPixelLead(data.leadEventId);
         }
-        feedback.textContent = "Te-ai înscris. Te anunțăm prin e-mail la lansarea NULL.";
-        feedback.hidden = false;
-        feedback.classList.add('text-purple-300', 'font-medium');
-        feedback.classList.remove('text-white/50');
+        // Keep failures visible in the form, but show successful signups in the modal.
+        feedback.textContent = '';
+        feedback.hidden = true;
+        feedback.classList.remove('text-purple-300', 'font-medium');
         form.reset();
+        nullOpenWaitlistSuccessModal();
       } catch (error) {
         feedback.textContent = error instanceof Error ? error.message : 'Înscrierea a eșuat. Încearcă din nou.';
         feedback.hidden = false;
