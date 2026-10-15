@@ -1056,6 +1056,21 @@
     }
     .null-nav-link:hover { color: #ae8cff; }
 
+    .null-nav-signup {
+      max-width: 1060px;
+      padding: 0 32px;
+      margin: 27px auto 0;
+    }
+    .null-nav-signup .waitlist-pill { width: 100%; }
+    .null-nav-signup [hidden] { display: none !important; }
+    @media (max-width: 639px) {
+      .null-nav-signup { padding: 0 20px; margin-top: 27px; }
+    }
+    @media (max-width: 359px) {
+      .null-nav-signup .btn-purple-glow { padding-left: 12px; padding-right: 12px; font-size: 10.5px; }
+    }
+
+
     #top, #products, #about, #ingredients, #null-comparison, #faq, #waitlist-form { scroll-margin-top: 86px; }
     @media (max-width: 639px) {
       .null-header-inner { gap: 8px; }
@@ -1116,6 +1131,22 @@
         <a href="#ingredients" class="null-nav-link">Ingredients</a>
         <a href="#null-comparison" class="null-nav-link">Why NULL?</a>
         <a href="#faq" class="null-nav-link">FAQ</a>
+      </div>
+      <!-- Same waitlist pill as the hero, embedded below the menu links. -->
+      <div class="null-nav-signup">
+        <form id="null-nav-waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="waitlist-pill rounded-full p-1.5 pl-4 flex items-center justify-between max-w-[435px] mb-3">
+          <div class="flex items-center gap-2.5 flex-1 min-w-0 pr-2">
+            <svg class="w-4 h-4 text-white/45 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            <input type="email" id="null-nav-waitlist-email" required aria-label="Your email address" autocomplete="email" placeholder="Your email address" class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full" />
+          </div>
+          <button type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
+            <span>Join the waitlist</span>
+            <span class="text-xs leading-none" aria-hidden="true">→</span>
+          </button>
+        </form>
+        <p id="null-nav-waitlist-feedback" class="text-[11px] text-white/50 pl-1" role="status" aria-live="polite" hidden></p>
       </div>
     </nav>
   </header>
@@ -1828,13 +1859,16 @@
     // 2. Waitlist Form Submission Handler
     function handleWaitlistSubmit(e) {
       e.preventDefault();
-      const emailInput = document.getElementById('waitlist-email');
-      const feedback = document.getElementById('waitlist-feedback');
-      if (emailInput && emailInput.value.trim()) {
+      const form = e.currentTarget;
+      const emailInput = form.querySelector('input[type="email"]');
+      const feedbackId = form.id === 'null-nav-waitlist-form' ? 'null-nav-waitlist-feedback' : 'waitlist-feedback';
+      const feedback = document.getElementById(feedbackId);
+      if (emailInput && emailInput.value.trim() && feedback) {
+        feedback.hidden = false;
         feedback.textContent = "Waitlist signup is not connected yet. Please check back soon.";
         feedback.classList.remove('text-white/50');
         feedback.classList.add('text-purple-300', 'font-medium');
-        // Keep their input so it is not lost before an email provider is connected.
+        // Keep the email entered in this form until signup is actually connected.
       }
     }
 
