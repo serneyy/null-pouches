@@ -754,6 +754,180 @@
       .null-privacy-head { padding: 16px 17px; }
       .null-privacy-body { padding: 15px 18px 21px; }
     }
+
+    /* NULL / NICOTINE: editorial product comparison */
+    .null-compare-section {
+      position: relative;
+      background: #030305;
+      padding: 58px 0 52px;
+      isolation: isolate;
+    }
+    .null-compare-inner {
+      max-width: 1060px;
+      padding: 0 32px;
+      margin: 0 auto;
+    }
+    .null-compare-kicker {
+      margin: 0 0 13px;
+      color: #9870ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .null-compare-title {
+      margin: 0;
+      color: #fff;
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(26px, 3.1vw, 36px);
+      line-height: 1.15;
+      letter-spacing: -.036em;
+      font-weight: 700;
+    }
+    .null-compare-subtitle {
+      max-width: 660px;
+      margin: 17px 0 0;
+      color: rgba(255,255,255,.67);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .null-compare-wrap {
+      margin-top: 31px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 16px;
+      background: #0c0c12;
+    }
+    .null-compare-scroll {
+      overflow-x: auto;
+      max-width: 100%;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #5500ff transparent;
+    }
+    .null-compare-table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+    }
+    .null-compare-table th,
+    .null-compare-table td {
+      padding: 18px 23px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .null-compare-table tbody tr:last-child td { border-bottom: 0; }
+    .null-compare-table thead th {
+      padding-top: 22px;
+      padding-bottom: 22px;
+      background: #101016;
+      color: rgba(255,255,255,.56);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .045em;
+      text-align: center;
+    }
+    .null-compare-table thead th:first-child {
+      text-align: left;
+      width: 56%;
+    }
+    .null-compare-table thead th:nth-child(2),
+    .null-compare-table tbody td:nth-child(2) {
+      background: rgba(85,0,255,.075);
+    }
+    .null-compare-brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 33px;
+      padding: 7px 12px;
+      color: #fff;
+      font-size: 11px;
+      line-height: 1.3;
+      letter-spacing: .045em;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .null-compare-brand--null {
+      border: 1px solid rgba(151,102,255,.35);
+      background: rgba(85,0,255,.17);
+      border-radius: 100px;
+    }
+    .null-compare-brand--nicotine {
+      color: rgba(255,255,255,.74);
+      font-weight: 600;
+    }
+    .null-compare-feature {
+      color: #f1f1f4;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .null-compare-detail {
+      display: block;
+      margin-top: 5px;
+      max-width: 400px;
+      color: rgba(255,255,255,.49);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .null-compare-choice { text-align: center; vertical-align: middle; }
+    .null-compare-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 31px;
+      height: 31px;
+      border-radius: 50%;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .null-compare-mark--yes {
+      color: #fff;
+      background: #5500ff;
+      box-shadow: 0 0 13px rgba(85,0,255,.28);
+    }
+    .null-compare-mark--no {
+      color: #fff;
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.13);
+    }
+    .null-compare-footnote {
+      margin: 16px 0 0;
+      color: rgba(255,255,255,.40);
+      font-size: 11px;
+      line-height: 1.7;
+      max-width: 780px;
+    }
+    .null-compare-swipe-hint { display: none; }
+    @media (max-width: 767px) {
+      .null-compare-section { padding: 43px 0 32px; }
+      .null-compare-inner { padding: 0 20px; }
+      .null-compare-title { font-size: 25px; }
+      .null-compare-subtitle { margin-top: 13px; font-size: 12.5px; }
+      .null-compare-wrap { margin-top: 20px; border-radius: 13px; }
+      .null-compare-scroll { scrollbar-width: none; }
+      .null-compare-scroll::-webkit-scrollbar { display: none; }
+      .null-compare-table { min-width: 570px; }
+      .null-compare-table thead th:first-child { width: 45%; }
+      .null-compare-table th,
+      .null-compare-table td { padding: 14px 11px; }
+      .null-compare-table thead th { padding-top: 16px; padding-bottom: 16px; }
+      .null-compare-feature { font-size: 12px; }
+      .null-compare-detail { font-size: 10.5px; }
+      .null-compare-brand { min-height: 30px; padding: 7px 9px; font-size: 10px; }
+      .null-compare-mark { width: 29px; height: 29px; }
+      .null-compare-swipe-hint {
+        display: block;
+        margin: 11px 0 0;
+        color: rgba(255,255,255,.46);
+        font-size: 11px;
+        text-align: right;
+      }
+    }
   </style>
 </head>
 <body class="selection:bg-purple-600 selection:text-white">
@@ -1087,6 +1261,66 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= -->
+
+  <!-- ======================================================================= -->
+  <!-- NULL / NICOTINE POUCHES COMPARISON -->
+  <!-- ======================================================================= -->
+  <section class="null-compare-section" id="null-comparison" aria-labelledby="null-comparison-title">
+    <div class="null-compare-inner">
+      <p class="null-compare-kicker">WHY NULL?</p>
+      <h2 class="null-compare-title" id="null-comparison-title">A different kind<br>of pouch.</h2>
+      <p class="null-compare-subtitle">Keep the discreet pouch format. Leave nicotine out. NULL is being developed around three functional concepts: focus, energy and sleep.</p>
+      <div class="null-compare-wrap">
+        <div class="null-compare-scroll" tabindex="0" role="region" aria-label="Swipeable comparison of NULL and traditional nicotine pouches">
+          <table class="null-compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Comparison</th>
+                <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL Pouches</span></th>
+                <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">Nicotine Pouches</span></th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><span class="null-compare-feature">Nicotine-free</span><span class="null-compare-detail">The pouch format without added nicotine.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">Three purpose-built options</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP concepts for different moments.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">Designed around functional ingredients</span><span class="null-compare-detail">Non-nicotine ingredient blends planned for each formula.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">No nicotine delivery</span><span class="null-compare-detail">No nicotine hit from the pouch.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">Smoke-free and discreet</span><span class="null-compare-detail">A convenient format without smoke or vapor.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">Available in nicotine strengths</span><span class="null-compare-detail">Nicotine pouch products are typically sold by nicotine content.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="null-compare-swipe-hint">Swipe horizontally to compare →</p>
+      <p class="null-compare-footnote">Comparison describes the planned NULL concept versus typical nicotine-only pouches. Nicotine pouch formulations vary by brand. NULL ingredients, benefits and regulatory claims remain subject to final formulation and review.</p>
     </div>
   </section>
 
