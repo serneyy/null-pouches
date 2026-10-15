@@ -604,6 +604,7 @@
       line-height: 1.55;
       margin: 7px 0 0;
     }
+    .null-lineup-dots { display: none; }
     @keyframes nullLineupFloat {
       0%, 100% { transform: translate3d(0,3px,0) rotateX(2deg) rotateY(-3deg) rotateZ(-1.4deg); }
       50% { transform: translate3d(0,-9px,0) rotateX(-2deg) rotateY(3deg) rotateZ(1deg); }
@@ -637,8 +638,16 @@
         max-width: var(--null-slide-width);
         scroll-snap-align: center;
         scroll-snap-stop: always;
+        z-index: 1;
       }
-      .null-lineup-visual { height: clamp(240px, 65vw, 320px); }
+      .null-lineup-item.is-centered { z-index: 3; }
+      .null-lineup-visual {
+        height: clamp(240px, 65vw, 320px);
+        transform: scale(.82);
+        transform-origin: center center;
+        transition: transform .35s cubic-bezier(.2,.76,.2,1);
+      }
+      .null-lineup-item.is-centered .null-lineup-visual { transform: scale(1.10); }
       .null-lineup-product { width: min(100%, 285px); }
       /* Only the currently centered tin displays its title and description. */
       .null-lineup-caption {
@@ -649,9 +658,36 @@
       .null-lineup-item.is-centered .null-lineup-caption { opacity: 1; }
       .null-lineup-name { font-size: 16px; }
       .null-lineup-caption p { font-size: 12px; margin-top: 8px; }
+      .null-lineup-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 0 3px;
+      }
+      .null-lineup-dot {
+        width: 9px;
+        height: 9px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,.25);
+        cursor: pointer;
+        transition: width .25s ease, background-color .25s ease, border-radius .25s ease;
+      }
+      .null-lineup-dot.is-active {
+        width: 23px;
+        border-radius: 6px;
+        background: #8c49ff;
+      }
+      .null-lineup-dot:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 4px;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .null-lineup-product, .null-lineup-visual::before { animation: none !important; }
+      .null-lineup-visual, .null-lineup-dot { transition: none !important; }
       .null-lineup-track { scroll-behavior: auto; }
     }
 
@@ -802,6 +838,11 @@
             <p>Switch to evening mode.</p>
           </figcaption>
         </figure>
+      </div>
+      <div class="null-lineup-dots" role="group" aria-label="Choose a NULL product">
+        <button class="null-lineup-dot" type="button" data-lineup-dot="0" aria-label="Show Focus" aria-pressed="false"></button>
+        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="1" aria-label="Show Energy" aria-pressed="true"></button>
+        <button class="null-lineup-dot" type="button" data-lineup-dot="2" aria-label="Show Sleep" aria-pressed="false"></button>
       </div>
     </div>
   </section>
@@ -1207,7 +1248,9 @@
       const track = document.getElementById('null-lineup-track');
       if (!track) return;
       const originals = Array.from(track.querySelectorAll('.null-lineup-item'));
+      const dots = Array.from(document.querySelectorAll('[data-lineup-dot]'));
       const mobile = window.matchMedia('(max-width: 767px)');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (originals.length !== 3) return;
       const groupSize = originals.length;
       let loopEnabled = false;
@@ -1230,9 +1273,16 @@
       };
       const paintCenter = () => {
         if (!loopEnabled) return;
+        const slides = allSlides();
         const selected = nearestIndex();
-        allSlides().forEach((slide, index) => {
+        slides.forEach((slide, index) => {
           slide.classList.toggle('is-centered', index === selected);
+        });
+        const activeProduct = Number(slides[selected]?.dataset.lineupIndex ?? 1);
+        dots.forEach((dot, index) => {
+          const active = index === activeProduct;
+          dot.classList.toggle('is-active', active);
+          dot.setAttribute('aria-pressed', String(active));
         });
       };
       // Center by the element's actual position; each mobile slide is narrower than the viewport.
@@ -1306,6 +1356,29 @@
         if (mobile.matches) activate();
         else deactivate();
       };
+
+      dots.forEach((dot, productIndex) => {
+        dot.addEventListener('click', () => {
+          if (!loopEnabled || !mobile.matches) return;
+          const slides = allSlides();
+          const center = track.getBoundingClientRect().left + track.clientWidth / 2;
+          // Choose the nearest instance (including clones) for a short smooth movement.
+          const matches = slides.filter(slide => Number(slide.dataset.lineupIndex) === productIndex);
+          let chosen = null;
+          let distance = Infinity;
+          matches.forEach(slide => {
+            const rect = slide.getBoundingClientRect();
+            const delta = Math.abs(rect.left + rect.width / 2 - center);
+            if (delta < distance) { distance = delta; chosen = slide; }
+          });
+          if (!chosen) return;
+          const slideRect = chosen.getBoundingClientRect();
+          track.scrollTo({
+            left: track.scrollLeft + slideRect.left + slideRect.width / 2 - center,
+            behavior: reducedMotion.matches ? 'instant' : 'smooth'
+          });
+        });
+      });
 
       track.addEventListener('touchstart', () => { touching = true; }, { passive: true });
       track.addEventListener('touchend', () => { touching = false; schedule(); }, { passive: true });
