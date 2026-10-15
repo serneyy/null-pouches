@@ -1401,8 +1401,20 @@
     .null-language-option:hover, .null-language-option:focus-visible { background: rgba(255,255,255,.09); color: #fff; }
     .null-language-option[aria-current="page"] { background: rgba(139,92,246,.18); color: #e8dcff; }
     .null-language-trigger:focus-visible, .null-language-option:focus-visible { outline: 2px solid #a978ff; outline-offset: 2px; }
-    @media (max-width: 880px) { .null-footer-bottom { flex-direction: column; align-items: flex-start; } .null-footer-controls { justify-content: flex-start; } }
-    @media (max-width: 380px) { .null-footer-controls { gap: 7px 16px; } .null-language-menu { right: auto; left: 0; } }
+    @media (max-width: 880px) {
+      .null-footer-bottom { flex-direction: column; align-items: flex-start; }
+      .null-footer-controls { justify-content: flex-start; max-width: 100%; }
+      /* Always anchor the list to its trigger on phones, rather than pushing its flags off-screen. */
+      .null-language-menu {
+        left: 0;
+        right: auto;
+        width: min(220px, calc(100vw - 40px));
+        min-width: 0;
+        max-width: calc(100vw - 40px);
+        box-sizing: border-box;
+      }
+    }
+    @media (max-width: 380px) { .null-footer-controls { gap: 7px 16px; } }
     /* Compact but explicit waitlist labels on smaller screens. */
     @media (max-width: 410px) {
       .null-header-waitlist { padding-left: 9px; padding-right: 9px; font-size: 10px; }
