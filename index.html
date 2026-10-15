@@ -955,51 +955,34 @@
       .null-compare-mark { width: 22px; height: 22px; }
     }
 
-      /* Site menu: compact editorial dropdown alongside the header CTA */
+      /* NULL navigation: simple hamburger to the left of the logo */
     .null-site-header { isolation: isolate; }
-    .null-header-inner { position: relative; gap: 16px; }
+    .null-header-inner { position: relative; gap: 12px; }
+    .null-header-left { display: flex; align-items: center; gap: 15px; min-width: 0; }
     .null-header-logo { flex: 0 1 auto; min-width: 0; }
     .null-header-logo img { display: block; max-width: 136px; }
     .null-header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex: 0 0 auto; }
     .null-header-waitlist-short { display: none; }
     .null-nav-trigger {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 11px;
-      height: 40px;
-      min-width: 88px;
-      padding: 0 14px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      color: #f8f7ff;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background .22s ease, border-color .22s ease;
+      display: inline-flex; position: relative; align-items: center; justify-content: center;
+      flex: 0 0 36px; width: 36px; height: 42px; padding: 0; border: 0;
+      background: transparent; color: #f5f4f7; cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      transition: color .2s ease;
     }
-    .null-nav-trigger:hover,
-    .null-nav-trigger.is-open {
-      background: rgba(116,75,205,.13);
-      border-color: rgba(165,119,255,.60);
-    }
-    .null-nav-trigger-label { font-size: 12px; font-weight: 600; line-height: 1; }
-    .null-nav-trigger-icon { position: relative; width: 16px; height: 16px; flex-shrink: 0; }
+    .null-nav-trigger:hover, .null-nav-trigger.is-open { color: #bc98ff; }
+    .null-nav-trigger-icon { position: relative; display: block; width: 23px; height: 18px; }
     .null-nav-trigger-icon span {
-      position: absolute;
-      left: 0;
-      width: 16px;
-      height: 1.5px;
-      border-radius: 2px;
-      background: currentColor;
-      transition: top .23s ease, transform .23s ease;
+      display: block; position: absolute; left: 0; width: 23px; height: 1.7px;
+      border-radius: 2px; background: currentColor;
+      transition: top .24s ease, opacity .2s ease, transform .24s ease;
     }
-    .null-nav-trigger-icon span:first-child { top: 5px; }
-    .null-nav-trigger-icon span:last-child { top: 10px; }
-    .null-nav-trigger.is-open .null-nav-trigger-icon span:first-child { top: 7.5px; transform: rotate(45deg); }
-    .null-nav-trigger.is-open .null-nav-trigger-icon span:last-child { top: 7.5px; transform: rotate(-45deg); }
+    .null-nav-trigger-icon span:first-child { top: 2px; }
+    .null-nav-trigger-icon span:nth-child(2) { top: 8px; }
+    .null-nav-trigger-icon span:last-child { top: 14px; }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:first-child { top: 8px; transform: rotate(45deg); }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:nth-child(2) { opacity: 0; }
+    .null-nav-trigger.is-open .null-nav-trigger-icon span:last-child { top: 8px; transform: rotate(-45deg); }
     .null-nav-trigger:focus-visible,
     .null-nav-link:focus-visible,
     .null-nav-cta:focus-visible {
@@ -1019,7 +1002,7 @@
     .null-nav-panel {
       position: absolute;
       top: calc(100% + 11px);
-      right: 32px;
+      left: 32px;
       z-index: 50;
       width: min(328px, calc(100vw - 32px));
       padding: 19px 18px 17px;
@@ -1030,9 +1013,7 @@
       color: #fff;
     }
     .null-nav-panel-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: relative;
       margin: 0 0 12px;
       padding: 0 5px;
       color: rgba(255,255,255,.48);
@@ -1040,15 +1021,16 @@
       font-weight: 700;
       letter-spacing: .12em;
     }
-    .null-nav-panel-symbol { color: #a57dff; font-size: 16px; line-height: 1; }
+    .null-nav-panel-top::after { content: ""; position: absolute; top: 50%; right: 5px; width: 18px; height: 2px; background: #8650ff; transform: translateY(-50%); }
     .null-nav-links { display: flex; flex-direction: column; }
     .null-nav-link {
       display: grid;
-      grid-template-columns: 26px minmax(0,1fr) 20px;
+      position: relative;
+      grid-template-columns: 26px minmax(0,1fr);
       align-items: center;
       gap: 8px;
       min-height: 49px;
-      padding: 8px 8px;
+      padding: 8px 27px 8px 8px;
       border-top: 1px solid rgba(255,255,255,.08);
       border-radius: 4px;
       color: #f3f1f6;
@@ -1059,14 +1041,15 @@
     }
     .null-nav-link:hover { background: rgba(255,255,255,.045); color: #c3a4ff; }
     .null-nav-index { font-size: 10px; font-weight: 500; color: rgba(255,255,255,.38); }
-    .null-nav-arrow { justify-self: end; color: rgba(255,255,255,.42); font-size: 16px; line-height: 1; }
-    .null-nav-link:hover .null-nav-arrow { color: #b38cff; }
+    .null-nav-link::after { content: ""; position: absolute; right: 12px; top: 50%; width: 6px; height: 6px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: translateY(-50%) rotate(45deg); opacity: .52; }
+    .null-nav-link:hover::after { opacity: 1; }
     .null-nav-cta {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 14px;
-      padding: 14px 15px;
+      padding: 14px 36px 14px 15px;
       border-radius: 9px;
       background: #6322db;
       color: #fff;
@@ -1076,7 +1059,7 @@
       transition: background .2s ease;
     }
     .null-nav-cta:hover { background: #7b39eb; }
-    .null-nav-cta span:last-child { font-size: 18px; font-weight: 400; }
+    .null-nav-cta::after { content: ""; position: absolute; right: 18px; top: 50%; width: 7px; height: 7px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: translateY(-50%) rotate(45deg); }
     .null-nav-panel-foot {
       padding: 15px 4px 0;
       font-size: 9px;
@@ -1087,11 +1070,11 @@
     #top, #products, #about, #ingredients, #null-comparison, #faq, #waitlist-form { scroll-margin-top: 86px; }
     @media (max-width: 639px) {
       .null-header-inner { gap: 8px; }
+      .null-header-left { gap: 8px; }
       .null-header-logo img { max-width: 110px; }
       .null-header-actions { gap: 8px; }
-      .null-nav-trigger { width: 40px; min-width: 40px; height: 40px; padding: 0; border-radius: 12px; }
-      .null-nav-trigger-label { display: none; }
-      .null-nav-panel { right: 20px; top: calc(100% + 9px); }
+      .null-nav-trigger { width: 32px; flex-basis: 32px; height: 42px; }
+      .null-nav-panel { left: 20px; top: calc(100% + 9px); }
     }
     @media (max-width: 410px) {
       .null-header-waitlist-full { display: none; }
@@ -1112,14 +1095,18 @@
   <!-- ======================================================================= -->
   <header class="null-site-header w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
     <div class="null-header-inner max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
-      <!-- Brand logo -->
-      <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL - back to top">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
-          alt="NULL Logo"
-          class="h-8 sm:h-9 w-auto object-contain"
-        />
-      </a>
+      <div class="null-header-left">
+        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Open navigation menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
+          <span class="null-nav-trigger-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <a href="#top" class="null-header-logo flex items-center select-none" aria-label="NULL - back to top">
+          <img
+            src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/Black_And_White_Minimalist_Coffee_Store_Logo_1.png?v=1792017284"
+            alt="NULL Logo"
+            class="h-8 sm:h-9 w-auto object-contain"
+          />
+        </a>
+      </div>
 
       <div class="null-header-actions">
         <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Join the waitlist">
@@ -1127,28 +1114,20 @@
           <span class="null-header-waitlist-short">Join</span>
           <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
         </a>
-
-        <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Open navigation menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
-          <span class="null-nav-trigger-label" aria-hidden="true">Menu</span>
-          <span class="null-nav-trigger-icon" aria-hidden="true"><span></span><span></span></span>
-        </button>
       </div>
 
       <nav class="null-nav-panel" id="null-nav-panel" aria-label="Site navigation" hidden>
-        <div class="null-nav-panel-top">
-          <span>EXPLORE NULL</span>
-          <span class="null-nav-panel-symbol" aria-hidden="true">✳</span>
-        </div>
+        <div class="null-nav-panel-top">EXPLORE NULL</div>
         <div class="null-nav-links">
-          <a href="#products" class="null-nav-link"><span class="null-nav-index">01</span><span>Our pouches</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
-          <a href="#about" class="null-nav-link"><span class="null-nav-index">02</span><span>What is NULL?</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
-          <a href="#ingredients" class="null-nav-link"><span class="null-nav-index">03</span><span>Ingredients</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
-          <a href="#null-comparison" class="null-nav-link"><span class="null-nav-index">04</span><span>Why NULL?</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
-          <a href="#faq" class="null-nav-link"><span class="null-nav-index">05</span><span>FAQ</span><span class="null-nav-arrow" aria-hidden="true">↗</span></a>
+          <a href="#products" class="null-nav-link"><span class="null-nav-index">01</span><span>Our pouches</span></a>
+          <a href="#about" class="null-nav-link"><span class="null-nav-index">02</span><span>What is NULL?</span></a>
+          <a href="#ingredients" class="null-nav-link"><span class="null-nav-index">03</span><span>Ingredients</span></a>
+          <a href="#null-comparison" class="null-nav-link"><span class="null-nav-index">04</span><span>Why NULL?</span></a>
+          <a href="#faq" class="null-nav-link"><span class="null-nav-index">05</span><span>FAQ</span></a>
         </div>
         <a href="#waitlist-form" class="null-nav-cta">
           <span>Join the waitlist</span>
-          <span aria-hidden="true">↗</span>
+          
         </a>
         <div class="null-nav-panel-foot">ZERO NICOTINE. THREE WAYS TO NULL.</div>
       </nav>
