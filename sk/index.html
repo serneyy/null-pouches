@@ -1403,6 +1403,13 @@
     .null-language-trigger:focus-visible, .null-language-option:focus-visible { outline: 2px solid #a978ff; outline-offset: 2px; }
     @media (max-width: 880px) { .null-footer-bottom { flex-direction: column; align-items: flex-start; } .null-footer-controls { justify-content: flex-start; } }
     @media (max-width: 380px) { .null-footer-controls { gap: 7px 16px; } .null-language-menu { right: auto; left: 0; } }
+    /* Compact but explicit waitlist labels on smaller screens. */
+    @media (max-width: 410px) {
+      .null-header-waitlist { padding-left: 9px; padding-right: 9px; font-size: 10px; }
+      .null-header-logo img { max-width: 87px; }
+      .null-hero-copy .null-waitlist-form button[type="submit"],
+      .null-nav-signup .null-waitlist-form button[type="submit"] { padding-left: 9px; padding-right: 9px; font-size: 10px; gap: 4px; }
+    }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -1428,9 +1435,9 @@
 
       <div class="null-header-actions">
 
-        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Pridať sa na čakaciu listinu">
-          <span class="null-header-waitlist-full">Pridaj sa na čakaciu listinu</span>
-          <span class="null-header-waitlist-short">Pridať sa</span>
+        <a href="#waitlist-form" class="null-header-waitlist btn-outline-purple rounded-full px-4 sm:px-5 py-2 text-[11px] sm:text-[12px] font-medium text-white/90 flex items-center gap-2" aria-label="Prejsť na čakaciu listinu">
+          <span class="null-header-waitlist-full">Čakacia listina</span>
+          <span class="null-header-waitlist-short">Čakacia listina</span>
           <span class="text-white/80 text-xs leading-none" aria-hidden="true">→</span>
         </a>
       </div>
@@ -1454,8 +1461,8 @@
             </svg>
             <input type="email" id="null-nav-waitlist-email" required aria-label="Tvoj e-mail" autocomplete="email" placeholder="Tvoj e-mail" class="bg-transparent text-[12.5px] sm:text-[13px] text-white placeholder-white/45 focus:outline-none w-full" />
           </div>
-          <button type="submit" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
-            <span>Pridať sa</span>
+          <button type="submit" aria-label="Zapísať sa na čakaciu listinu" class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer">
+            <span>Čakacia listina</span>
             <span class="text-xs leading-none" aria-hidden="true">→</span>
           </button>
         </div>
@@ -1489,8 +1496,7 @@
           </h1>
 
           <p class="text-[14px] sm:text-[15px] leading-[1.55] text-white/75 max-w-[360px] mb-7 font-normal">
-            Vrecúška bez nikotínu s funkčnými zložkami<br />
-            pre sústredenie, energiu a večerný oddych.
+            Vrecúška bez nikotínu navrhnuté tak, aby ti pomohli lepšie sa sústrediť, dodať energiu a kvalitnejšie spať.
           </p>
 
           <!-- Waitlist Pill Form -->
@@ -1510,10 +1516,10 @@
               />
             </div>
             <button
-              type="submit"
+              aria-label="Zapísať sa na čakaciu listinu" type="submit"
               class="btn-purple-glow rounded-full px-4 sm:px-5 py-2.5 text-[11.5px] sm:text-[12px] font-semibold text-white shrink-0 flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Pridať sa</span>
+              <span>Čakacia listina</span>
               <span class="text-xs leading-none">→</span>
             </button>
           </div>
@@ -1615,18 +1621,18 @@
           </h2>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-5">
-            NULL sú vrecúška bez nikotínu a tabaku, navrhnuté na podporu sústredenia, energie a kvalitnejšieho spánku pomocou funkčných zložiek.
+            NULL sú funkčné vrecúška bez nikotínu a tabaku. Vďaka starostlivo vybraným funkčným zložkám sú navrhnuté tak, aby podporili tvoje sústredenie, dodali energiu a pomohli ti lepšie spať.
           </p>
 
           <p class="text-[14px] sm:text-[14.5px] leading-[1.6] text-white/75 max-w-[400px] mb-8">
-            Moderná alternatíva pre každého, kto chce zo svojho dňa viac. Bez nikotínu, bez dymu, bez kompromisov.
+            Moderná alternatíva pre každého, kto chce zo svojho dňa vyťažiť viac. Bez nikotínu, bez dymu a bez zbytočných kompromisov.
           </p>
 
           <a
             href="#waitlist-form"
             class="btn-outline-dark inline-flex items-center gap-3 rounded-full px-6 py-2.5 text-[12px] font-medium text-white/90"
           >
-            <span>Pridať sa</span>
+            <span>Čakacia listina</span>
             <span class="text-white/70 text-xs leading-none">→</span>
           </a>
         </div>
@@ -1775,32 +1781,32 @@
           </thead>
           <tbody>
             <tr>
-              <td><span class="null-compare-feature">FUNKČNÉ ZLOŽKY</span><span class="null-compare-detail">Nootropiká, aminokyseliny a rastlinné extrakty s jasným účelom.</span></td>
+              <td><span class="null-compare-feature">FUNKČNÉ ZLOŽKY</span><span class="null-compare-detail">Nootropiká, aminokyseliny a rastlinné extrakty, z ktorých má každá zložka svoj účel.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">BEZ NIKOTÍNOVEJ ZÁVISLOSTI</span><span class="null-compare-detail">Bez nikotínu a s ním spojenej závislosti.</span></td>
+              <td><span class="null-compare-feature">BEZ NIKOTÍNOVEJ ZÁVISLOSTI</span><span class="null-compare-detail">Žiadny nikotín znamená žiadny kolobeh nikotínovej závislosti.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Vyber si vrecúško podľa toho, čo práve potrebuješ.</span></td>
+              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Vyber si vrecúško, ktoré sa hodí presne na tvoj moment.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">PRE TVOJE KAŽDODENNÉ MOMENTY</span><span class="null-compare-detail">Sústreď sa pri učení, doplň energiu alebo večer vypni.</span></td>
+              <td><span class="null-compare-feature">PRE TVOJE KAŽDODENNÉ MOMENTY</span><span class="null-compare-detail">Či sa učíš, ideš naplno alebo chceš večer jednoducho vypnúť.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">BEZ NIKOTÍNOVÉHO ÚTLMU</span><span class="null-compare-detail">Žiadny nikotínový nával ani následný útlm.</span></td>
+              <td><span class="null-compare-feature">BEZ NIKOTÍNOVÉHO ÚTLMU</span><span class="null-compare-detail">Bez nikotínového návalu a následného poklesu energie.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="Nie"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">DISKRÉTNE A BEZ DYMU</span><span class="null-compare-detail">Jednoduché, čisté a dôverne známe používanie.</span></td>
+              <td><span class="null-compare-feature">DISKRÉTNE A BEZ DYMU</span><span class="null-compare-detail">Jednoduché a diskrétne používanie bez dymu.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Áno"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
@@ -1832,7 +1838,7 @@
           href="#waitlist-form"
           class="btn-outline-purple self-start sm:self-end rounded-full px-5 py-2.5 text-[12px] font-medium text-white/90 inline-flex items-center gap-2.5 mb-1"
         >
-          <span>Pridať sa</span>
+          <span>Čakacia listina</span>
           <span class="text-white/80 text-xs leading-none">→</span>
         </a>
       </div>
@@ -1852,8 +1858,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Nie. Všetky vrecúška NULL sú úplne bez nikotínu a tabaku. Obsahujú funkčné zložky, ako sú nootropiká, prírodný kofeín, adaptogény a látky určené na podporu spánku.
-            </p>
+            Nie. Všetky vrecúška NULL sú 100 % bez nikotínu aj tabaku. Obsahujú iba funkčné zložky podložené vedeckými poznatkami, napríklad nootropiká, prírodný kofeín, adaptogény a látky určené na podporu spánku.
+          </p>
           </div>
         </div>
 
@@ -1869,8 +1875,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Vrecúška NULL sú vyrobené z rastlinných vlákien vhodných na použitie v potravinách. Obsahujú funkčné vitamíny, aminokyseliny a rastlinné extrakty v dávkach navrhnutých s dôrazom na bezpečnosť a účinnosť.
-            </p>
+            Áno. Vrecúška NULL sú vyrobené z rastlinných vlákien vhodných na kontakt s potravinami. Obsahujú dôkladne testované funkčné vitamíny, aminokyseliny a rastlinné extrakty v bezpečných a účinných dávkach.
+          </p>
           </div>
         </div>
 
@@ -1886,8 +1892,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Vlož jedno vrecúško medzi hornú peru a ďasno. Aktívne látky sa vstrebávajú cez ústnu sliznicu a sú určené na podporu sústredenia, energie alebo uvoľnenia. Bez dymu a cukru.
-            </p>
+            Jednoducho vlož jedno vrecúško medzi hornú peru a ďasno. Aktívne látky sa rýchlo vstrebávajú cez ústnu sliznicu, aby podporili sústredenie, energiu alebo uvoľnenie. A to bez dymu či cukru.
+          </p>
           </div>
         </div>
 
@@ -1903,8 +1909,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Pripravujeme prvú limitovanú výrobnú várku. Zadaj svoj e-mail do čakacej listiny a získaj informácie o uvedení a exkluzívnej úvodnej ponuke medzi prvými.
-            </p>
+            Práve pripravujeme našu prvú limitovanú výrobnú várku. Pridaj svoj e-mail na čakaciu listinu a získaj prednostné informácie o spustení aj prístup k exkluzívnym úvodným cenám skôr než ostatní.
+          </p>
           </div>
         </div>
 
@@ -1920,8 +1926,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Vrecúška NULL sú navrhnuté na každodenné používanie podľa zvoleného variantu. FOCUS je určený na sústredenie, ENERGY na aktívne chvíle a SLEEP na večerné uvoľnenie. Vždy dodržiavaj odporúčané dávkovanie.
-            </p>
+            Samozrejme. Vrecúška NULL sú navrhnuté ako jednoduchý každodenný rituál bez nikotínu. Siahni po FOCUS, keď sa chceš naplno sústrediť na prácu či učenie, po ENERGY pred tréningom alebo počas nabitého popoludnia a po SLEEP, keď chceš večer prirodzene vypnúť.
+          </p>
           </div>
         </div>
 
@@ -1937,8 +1943,8 @@
           </button>
           <div class="faq-answer px-5 sm:px-6">
             <p class="pb-4 text-[13px] leading-relaxed text-white/60">
-              Vrecúška NULL sa vyrábajú v Estónsku v certifikovanom výrobnom závode. Vyrobené v Európskej únii.
-            </p>
+            Vrecúška NULL sa vyrábajú v Estónsku, v certifikovanom výrobnom závode v Európe. Sme hrdí na to, že pochádzajú z Európskej únie.
+          </p>
           </div>
         </div>
 
