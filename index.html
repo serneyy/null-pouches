@@ -229,12 +229,23 @@
       background: rgba(var(--null-accent-rgb), .24);
     }
     .null-ingredient-footer p {
-      max-width: 260px;
-      margin: 0;
-      color: rgba(255,255,255,.65);
-      font-size: 12.5px;
-      font-weight: 400;
-      line-height: 1.65;
+      max-width: none;
+      margin: 0 auto;
+      color: rgba(255,255,255,.72);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -.025em;
+      line-height: 1.55;
+      text-align: center;
+    }
+    .null-ingredient-footer p span {
+      display: block;
+      white-space: nowrap;
+    }
+    .null-ingredient-footer p span + span {
+      color: #f6f4fb;
+      font-weight: 700;
     }
     @media (min-width: 768px) and (max-width: 1040px) {
       .ingredient-card { padding: 21px 17px 23px; }
@@ -1547,7 +1558,7 @@
             </ul>
           </div>
           <div class="null-ingredient-footer">
-            <p>Built for the moments when you want to lock in.</p>
+            <p><span>Studying or need to focus?</span><span>Get in your zone.</span></p>
           </div>
         </article>
 
@@ -1573,7 +1584,7 @@
             </ul>
           </div>
           <div class="null-ingredient-footer">
-            <p>A caffeine-powered formula for busy days.</p>
+            <p><span>Big day ahead?</span><span>Keep your momentum.</span></p>
           </div>
         </article>
 
@@ -1599,7 +1610,7 @@
             </ul>
           </div>
           <div class="null-ingredient-footer">
-            <p>An evening formula made for your wind-down ritual.</p>
+            <p><span>Time to switch off?</span><span>Make room to unwind.</span></p>
           </div>
         </article>
       </div>
