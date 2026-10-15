@@ -492,6 +492,206 @@
       }
     }
 
+
+    /* NULL product lineup: restrained electric backdrop and isolated floating tins */
+    .null-lineup {
+      position: relative;
+      padding: 30px 0 40px;
+      background: #030305;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .null-lineup-inner { max-width: 1060px; margin: 0 auto; }
+    .null-lineup-head {
+      padding: 0 32px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .null-lineup-heading {
+      margin: 0;
+      color: rgba(255,255,255,.89);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -.025em;
+    }
+    .null-lineup-hint {
+      color: rgba(255,255,255,.42);
+      font-size: 11px;
+      font-weight: 500;
+      white-space: nowrap;
+      letter-spacing: .035em;
+    }
+    .null-lineup-track {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+      gap: 16px;
+    }
+    .null-lineup-item {
+      position: relative;
+      min-width: 0;
+      margin: 0;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+    .null-lineup-visual {
+      position: relative;
+      height: 276px;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      perspective: 900px;
+      isolation: isolate;
+    }
+    .null-lineup-visual::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 19% 9% 9%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(85,0,255,.42) 0%, rgba(103,26,247,.20) 32%, rgba(85,0,255,.04) 61%, transparent 78%);
+      filter: blur(21px);
+      animation: nullLineupGlow 7s ease-in-out infinite;
+    }
+    .null-lineup-visual::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      width: 67%;
+      height: 53%;
+      top: 23%;
+      left: 16%;
+      transform: rotate(-19deg);
+      border-radius: 50%;
+      border: 1px solid rgba(152,99,255,.21);
+      box-shadow: 0 0 26px rgba(85,0,255,.19), inset 0 0 18px rgba(85,0,255,.09);
+      pointer-events: none;
+    }
+    .null-lineup-item--energy .null-lineup-visual::before { background: radial-gradient(ellipse at center, rgba(127,20,255,.44) 0%, rgba(104,19,245,.19) 34%, transparent 76%); }
+    .null-lineup-item--sleep .null-lineup-visual::before { background: radial-gradient(ellipse at center, rgba(71,42,246,.41) 0%, rgba(72,41,225,.17) 34%, transparent 76%); }
+    .null-lineup-lightning {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      opacity: .64;
+      filter: drop-shadow(0 0 5px rgba(125,63,255,.62));
+    }
+    .null-lineup-lightning path {
+      fill: none;
+      stroke: #9861ff;
+      stroke-width: 1.15;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .68;
+    }
+    .null-lineup-lightning path:last-child { opacity: .33; stroke-width: .85; }
+    .null-lineup-product {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: min(91%, 274px);
+      height: auto;
+      max-height: 98%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+      transform-style: preserve-3d;
+      filter: drop-shadow(0 23px 21px rgba(0,0,0,.55)) drop-shadow(0 10px 28px rgba(88,0,255,.18));
+      animation: nullLineupFloat 7.4s ease-in-out infinite;
+      will-change: transform;
+    }
+    .null-lineup-item--energy .null-lineup-product { animation-delay: -2.2s; }
+    .null-lineup-item--sleep .null-lineup-product { animation-delay: -4.5s; }
+    .null-lineup-item--energy .null-lineup-visual::before { animation-delay: -1.8s; }
+    .null-lineup-item--sleep .null-lineup-visual::before { animation-delay: -3.3s; }
+    .null-lineup-caption { margin: -2px 0 0; text-align: center; }
+    .null-lineup-name {
+      font-family: 'Unbounded', sans-serif;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+    .null-lineup-caption p {
+      color: rgba(255,255,255,.51);
+      font-size: 12px;
+      line-height: 1.55;
+      margin: 7px 0 0;
+    }
+    .null-lineup-dots { display: none; }
+    @keyframes nullLineupFloat {
+      0%, 100% { transform: translate3d(0,3px,0) rotateX(2deg) rotateY(-3deg) rotateZ(-1.4deg); }
+      50% { transform: translate3d(0,-9px,0) rotateX(-2deg) rotateY(3deg) rotateZ(1deg); }
+    }
+    @keyframes nullLineupGlow {
+      0%, 100% { opacity: .69; transform: scale(.94); }
+      50% { opacity: 1; transform: scale(1.09); }
+    }
+    @media (max-width: 767px) {
+      .null-lineup { padding: 30px 0 32px; }
+      .null-lineup-head { padding: 0 20px; margin-bottom: 3px; }
+      .null-lineup-heading { font-size: 15px; }
+      .null-lineup-hint { font-size: 10px; }
+      .null-lineup-track {
+        display: flex;
+        gap: 12px;
+        align-items: stretch;
+        padding: 0 12% 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 12%;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+      }
+      .null-lineup-track::-webkit-scrollbar { display: none; }
+      .null-lineup-item { flex: 0 0 76%; }
+      .null-lineup-visual { height: clamp(220px, 65vw, 285px); }
+      .null-lineup-product { width: min(92%, 260px); }
+      .null-lineup-caption { margin-top: -2px; }
+      .null-lineup-name { font-size: 14px; }
+      .null-lineup-caption p { font-size: 11px; margin-top: 6px; }
+      .null-lineup-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 17px 0 0;
+      }
+      .null-lineup-dot {
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,.22);
+        transition: background .25s ease, transform .25s ease, width .25s ease;
+        cursor: pointer;
+      }
+      .null-lineup-dot.is-active {
+        width: 21px;
+        border-radius: 6px;
+        background: #8f4bff;
+      }
+      .null-lineup-dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .null-lineup-product, .null-lineup-visual::before { animation: none !important; }
+      .null-lineup-track { scroll-behavior: auto; }
+      .null-lineup-dot { transition: none; }
+    }
+
   </style>
 </head>
 <body class="selection:bg-purple-600 selection:text-white">
@@ -594,6 +794,65 @@
     </div>
   </section>
 
+  <!-- ======================================================================= -->
+  <!-- NULL PRODUCT LINEUP: floating tins, desktop trio and swipeable mobile -->
+  <!-- ======================================================================= -->
+  <section class="null-lineup" aria-labelledby="null-lineup-title">
+    <div class="null-lineup-inner">
+      <div class="null-lineup-head">
+        <h2 class="null-lineup-heading" id="null-lineup-title">Meet the lineup.</h2>
+        <span class="null-lineup-hint">FOCUS / ENERGY / SLEEP</span>
+      </div>
+      <div class="null-lineup-track" id="null-lineup-track" aria-label="NULL product lineup, swipe to view more">
+        <figure class="null-lineup-item null-lineup-item--focus" data-lineup-index="0">
+          <div class="null-lineup-visual">
+            <svg class="null-lineup-lightning" viewBox="0 0 320 280" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M29 163 L69 135 L92 151 L110 111 L136 124"/>
+              <path d="M198 111 L230 92 L249 112 L279 88 L297 101"/>
+            </svg>
+            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus.png?v=1792061193" alt="NULL FOCUS nicotine-free pouch tin" loading="eager" decoding="async" width="1024" height="1024" draggable="false">
+          </div>
+          <figcaption class="null-lineup-caption">
+            <div class="null-lineup-name">FOCUS</div>
+            <p>Make room for clarity.</p>
+          </figcaption>
+        </figure>
+        <figure class="null-lineup-item null-lineup-item--energy" data-lineup-index="1">
+          <div class="null-lineup-visual">
+            <svg class="null-lineup-lightning" viewBox="0 0 320 280" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M29 163 L69 135 L92 151 L110 111 L136 124"/>
+              <path d="M198 111 L230 92 L249 112 L279 88 L297 101"/>
+            </svg>
+            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/energy.png?v=1792061190" alt="NULL ENERGY nicotine-free pouch tin" loading="lazy" decoding="async" width="1024" height="1024" draggable="false">
+          </div>
+          <figcaption class="null-lineup-caption">
+            <div class="null-lineup-name">ENERGY</div>
+            <p>For your on-the-go moments.</p>
+          </figcaption>
+        </figure>
+        <figure class="null-lineup-item null-lineup-item--sleep" data-lineup-index="2">
+          <div class="null-lineup-visual">
+            <svg class="null-lineup-lightning" viewBox="0 0 320 280" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M29 163 L69 135 L92 151 L110 111 L136 124"/>
+              <path d="M198 111 L230 92 L249 112 L279 88 L297 101"/>
+            </svg>
+            <img class="null-lineup-product" src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/sleep.png?v=1792061197" alt="NULL SLEEP nicotine-free pouch tin" loading="lazy" decoding="async" width="1024" height="1024" draggable="false">
+          </div>
+          <figcaption class="null-lineup-caption">
+            <div class="null-lineup-name">SLEEP</div>
+            <p>Switch to evening mode.</p>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="null-lineup-dots" aria-label="Choose a product">
+        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="0" aria-label="Show Focus" aria-pressed="true"></button>
+        <button class="null-lineup-dot" type="button" data-lineup-dot="1" aria-label="Show Energy" aria-pressed="false"></button>
+        <button class="null-lineup-dot" type="button" data-lineup-dot="2" aria-label="Show Sleep" aria-pressed="false"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================= -->
   <!-- ======================================================================= -->
   <!-- 2. "WHAT IS NULL?" SECTION                                              -->
   <!-- ======================================================================= -->
@@ -987,6 +1246,50 @@
         tilt.style.removeProperty('--null-rotate-x');
         tilt.style.removeProperty('--null-rotate-y');
       });
+    })();
+
+    // Product lineup: native touch scrolling with centered snap and live pagination.
+    (() => {
+      const track = document.getElementById('null-lineup-track');
+      if (!track) return;
+      const slides = Array.from(track.querySelectorAll('.null-lineup-item'));
+      const dots = Array.from(document.querySelectorAll('[data-lineup-dot]'));
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let queued = false;
+
+      const syncDots = () => {
+        queued = false;
+        const visibleCenter = track.getBoundingClientRect().left + track.clientWidth / 2;
+        let active = 0;
+        let closest = Infinity;
+        slides.forEach((slide, index) => {
+          const rect = slide.getBoundingClientRect();
+          const distance = Math.abs(rect.left + rect.width / 2 - visibleCenter);
+          if (distance < closest) { closest = distance; active = index; }
+        });
+        dots.forEach((dot, index) => {
+          const selected = index === active;
+          dot.classList.toggle('is-active', selected);
+          dot.setAttribute('aria-pressed', String(selected));
+        });
+      };
+
+      track.addEventListener('scroll', () => {
+        if (!queued) {
+          queued = true;
+          window.requestAnimationFrame(syncDots);
+        }
+      }, { passive: true });
+
+      dots.forEach((dot, index) => dot.addEventListener('click', () => {
+        slides[index].scrollIntoView({
+          behavior: reducedMotion.matches ? 'instant' : 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }));
+      window.addEventListener('resize', syncDots, { passive: true });
+      syncDots();
     })();
   </script>
 </body>
