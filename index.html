@@ -835,7 +835,11 @@
       width: 23%;
     }
     .null-compare-table thead th:nth-child(2) {
-      border-bottom: 2px solid #8650ff;
+      border-bottom: 2px solid rgba(138,92,255,.95);
+      background: rgba(85,0,255,.06);
+    }
+    .null-compare-table tbody td:nth-child(2) {
+      background: rgba(85,0,255,.05);
     }
     .null-compare-table tbody td:first-child { padding-left: 0; }
     .null-compare-brand {
@@ -888,15 +892,11 @@
       font-weight: 400;
       line-height: 1;
     }
-    .null-compare-mark--yes { color: #a478ff; }
-    .null-compare-mark--no { color: rgba(255,255,255,.56); }
-    .null-compare-footnote {
-      margin: 14px 0 0;
-      max-width: 780px;
-      color: rgba(255,255,255,.39);
-      font-size: 11px;
-      line-height: 1.7;
+    .null-compare-mark--yes {
+      color: #a779ff;
+      text-shadow: 0 0 8px rgba(157,108,255,.43), 0 0 18px rgba(85,0,255,.24);
     }
+    .null-compare-mark--no { color: rgba(255,255,255,.56); }
     @media (max-width: 767px) {
       .null-compare-section { padding: 43px 0 32px; }
       .null-compare-inner { padding: 0 20px; }
@@ -917,13 +917,19 @@
       .null-compare-table tbody td:first-child,
       .null-compare-table thead th:first-child { padding-left: 0; }
       .null-compare-feature { font-size: 12px; line-height: 1.4; }
-      .null-compare-detail { display: none; }
+      .null-compare-detail {
+        display: block;
+        margin-top: 4px;
+        font-size: 9.5px;
+        line-height: 1.35;
+      }
       .null-compare-brand { font-size: 10px; letter-spacing: 0; }
       .null-compare-mark { font-size: 22px; }
     }
     @media (max-width: 359px) {
       .null-compare-inner { padding: 0 15px; }
       .null-compare-feature { font-size: 11px; }
+      .null-compare-detail { font-size: 9px; }
       .null-compare-brand { font-size: 9px; }
       .null-compare-mark { font-size: 20px; }
     }
@@ -1286,32 +1292,32 @@
             </thead>
             <tbody>
             <tr>
-              <td><span class="null-compare-feature">No nicotine dependence</span><span class="null-compare-detail">Zero nicotine. Nothing here to build a nicotine habit.</span></td>
+              <td><span class="null-compare-feature">No nicotine dependence</span><span class="null-compare-detail">No nicotine inside. No nicotine habit to build.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">No chasing the next hit</span><span class="null-compare-detail">No nicotine in NULL to fuel new nicotine cravings.</span></td>
+              <td><span class="null-compare-feature">No chasing the next hit</span><span class="null-compare-detail">No nicotine buzz that keeps pulling you back.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">No nicotine crash</span><span class="null-compare-detail">No nicotine buzz to wear off and pull you back.</span></td>
+              <td><span class="null-compare-feature">No nicotine crash</span><span class="null-compare-detail">No fading nicotine buzz. No “I need another one”.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">No nicotine overload</span><span class="null-compare-detail">No high-strength nicotine dose to make you feel sick.</span></td>
+              <td><span class="null-compare-feature">No nicotine overload</span><span class="null-compare-detail">No strong nicotine hit that can feel too much.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">More than just a buzz</span><span class="null-compare-detail">FOCUS. ENERGY. SLEEP. Pick your mode.</span></td>
+              <td><span class="null-compare-feature">More than just a buzz</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP for real moments.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No">×</span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">Still discreet</span><span class="null-compare-detail">No smoke. No vapor. Just a pouch.</span></td>
+              <td><span class="null-compare-feature">Still discreet</span><span class="null-compare-detail">Same easy pouch format. No smoke. No vapor.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes">✓</span></td>
             </tr>
@@ -1319,7 +1325,6 @@
           </table>
         </div>
       </div>
-      <p class="null-compare-footnote">Nicotine-related effects vary by person and dose. NULL contains no nicotine, but other ingredients can still have effects. Not a quit-smoking treatment. Comparison is with typical nicotine pouches; formulations may vary.</p>
     </div>
   </section>
 
