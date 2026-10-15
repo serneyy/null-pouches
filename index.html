@@ -92,57 +92,168 @@
       transform: scale(1.02);
     }
 
-    /* Ingredient Cards */
+    /* Ingredients: product-first editorial cards, using the real NULL renders */
     .ingredient-card {
-      background: linear-gradient(180deg, rgba(14, 14, 20, 0.7) 0%, rgba(7, 7, 10, 0.9) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-    }
-
-    /* Open pouch imagery with subtle colored ambient light */
-    .ingredient-card { position: relative; isolation: isolate; }
-    .null-ingredient-visual {
+      --null-accent: #f14ebd;
+      --null-accent-rgb: 241, 78, 189;
       position: relative;
       isolation: isolate;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      min-width: 0;
+      padding: 24px 23px 25px;
+      background: radial-gradient(ellipse at 55% 24%, rgba(var(--null-accent-rgb), .095), transparent 59%), #09090d;
+      border: 1px solid rgba(var(--null-accent-rgb), .22);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .ingredient-card--focus { --null-accent: #ff4fbd; --null-accent-rgb: 255, 79, 189; }
+    .ingredient-card--energy { --null-accent: #f523db; --null-accent-rgb: 245, 35, 219; }
+    .ingredient-card--sleep { --null-accent: #8370ff; --null-accent-rgb: 131, 112, 255; }
+    .null-ingredient-heading {
+      display: flex;
       align-items: center;
+      gap: 12px;
+      color: var(--null-accent);
+    }
+    .null-ingredient-heading > svg {
+      display: block;
+      width: 23px;
+      height: 23px;
+      flex: 0 0 auto;
+    }
+    .null-ingredient-heading::after {
+      content: "";
+      width: 1px;
+      height: 23px;
+      background: rgba(var(--null-accent-rgb), .45);
+      order: 1;
+    }
+    .null-ingredient-heading h3 {
+      order: 2;
+      margin: 0;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.025em;
+      line-height: 1.25;
+    }
+    .null-ingredient-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      isolation: isolate;
+      height: 268px;
       width: 100%;
-      height: 240px;
-      margin: 3px 0 20px;
+      margin: 3px auto 8px;
     }
     .null-ingredient-visual::before {
       content: "";
       position: absolute;
       z-index: -1;
-      width: 98%;
-      height: 76%;
-      top: 13%;
-      left: 1%;
+      inset: 10% -8% 5%;
       border-radius: 50%;
-      background: radial-gradient(ellipse at center, rgba(var(--null-ingredient-glow), .28) 0%, rgba(var(--null-ingredient-glow), .13) 37%, transparent 74%);
-      filter: blur(19px);
+      background: radial-gradient(ellipse at 48% 50%, rgba(var(--null-accent-rgb), .26), rgba(var(--null-accent-rgb), .10) 42%, transparent 73%);
+      filter: blur(17px);
       pointer-events: none;
     }
-    .null-ingredient-visual--focus { --null-ingredient-glow: 154, 65, 255; }
-    .null-ingredient-visual--energy { --null-ingredient-glow: 225, 26, 225; }
-    .null-ingredient-visual--sleep { --null-ingredient-glow: 99, 78, 255; }
     .null-ingredient-visual img {
       position: relative;
       z-index: 1;
       display: block;
       width: 100%;
-      max-width: 290px;
+      max-width: 305px;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 18px 19px rgba(0, 0, 0, .34));
+      filter: drop-shadow(0 14px 19px rgba(0, 0, 0, .47));
+    }
+    .null-ingredient-tagline {
+      margin: 0 0 18px;
+      color: #faf8ff;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -.035em;
+      line-height: 1.5;
+    }
+    .null-ingredient-label {
+      margin: 0 0 7px;
+      color: rgba(255,255,255,.44);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .null-ingredient-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .null-ingredient-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 0;
+      color: rgba(255,255,255,.83);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .null-ingredient-row-icon {
+      display: inline-flex;
+      flex: 0 0 34px;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      color: var(--null-accent);
+      border: 1px solid rgba(var(--null-accent-rgb), .21);
+      border-radius: 9px;
+      background: rgba(var(--null-accent-rgb), .045);
+    }
+    .null-ingredient-row-icon svg { display: block; width: 18px; height: 18px; }
+    .null-ingredient-footer {
+      margin-top: auto;
+      padding-top: 20px;
+    }
+    .null-ingredient-footer::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin-bottom: 17px;
+      background: rgba(var(--null-accent-rgb), .24);
+    }
+    .null-ingredient-footer p {
+      max-width: 260px;
+      margin: 0;
+      color: rgba(255,255,255,.65);
+      font-size: 12.5px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+    @media (min-width: 768px) and (max-width: 1040px) {
+      .ingredient-card { padding: 21px 17px 23px; }
+      .null-ingredient-visual { height: 236px; }
+      .null-ingredient-list li { font-size: 12px; gap: 9px; }
+      .null-ingredient-tagline { font-size: 11px; }
     }
     @media (max-width: 767px) {
-      .null-ingredient-visual { height: 255px; margin: 1px 0 17px; }
-      .null-ingredient-visual img { max-width: 300px; }
+      .ingredient-card { padding: 23px 22px 25px; }
+      .null-ingredient-visual { height: clamp(245px, 72vw, 330px); margin: 4px auto 12px; }
+      .null-ingredient-visual img { max-width: 350px; }
+      .null-ingredient-heading h3 { font-size: 17px; }
+      .null-ingredient-tagline { font-size: 13px; }
+      .null-ingredient-list li { padding: 8px 0; font-size: 13.5px; }
+      .null-ingredient-footer { padding-top: 22px; }
     }
     @media (max-width: 359px) {
-      .null-ingredient-visual { height: 220px; }
+      .ingredient-card { padding: 19px 17px 22px; }
+      .null-ingredient-visual { height: 238px; }
     }
 
     /* FAQ Accordion */
@@ -1406,142 +1517,91 @@
   <!-- ======================================================================= -->
   <section id="ingredients" class="pt-8 pb-12 sm:py-16 relative">
     <div class="max-w-[1060px] mx-auto px-5 sm:px-8">
-
-      <!-- Section Heading -->
       <div class="mb-9">
-        <span class="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#8b5cf6] mb-3">
-          KEY INGREDIENTS
-        </span>
+        <span class="block text-[11px] font-bold uppercase tracking-[0.08em] text-[#8b5cf6] mb-3">KEY INGREDIENTS</span>
         <h2 class="font-display font-bold text-[26px] sm:text-[33px] leading-[1.15] text-white">
-          Backed by ingredients<br />
-          that work.
+          What's inside matters.
         </h2>
       </div>
 
-      <!-- 3 Columns Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
         <!-- INGREDIENT CARD 1: FOCUS -->
-        <div class="ingredient-card p-6 sm:p-7 flex flex-col justify-between">
+        <article class="ingredient-card ingredient-card--focus" aria-labelledby="null-ingredient-focus-title">
           <div>
-            <!-- Icon + Title -->
-            <div class="flex items-center gap-3 mb-2">
-              <!-- Brain Outline SVG Icon -->
-              <svg class="w-6 h-6 text-[#a855f7] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/>
-                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/>
-              </svg>
-              <h3 class="font-display font-bold uppercase text-[15px] tracking-wide text-[#a855f7]">
-                FOCUS
-              </h3>
+            <div class="null-ingredient-heading">
+              <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>
+              <h3 id="null-ingredient-focus-title">FOCUS</h3>
             </div>
-
-            <!-- Open NULL FOCUS pouch render -->
-            <div class="null-ingredient-visual null-ingredient-visual--focus">
+            <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus_details.png?v=1792074119"
-                   alt="Open NULL FOCUS container with white pouches and ingredient illustration"
+                   alt="Open NULL FOCUS tin showing white functional pouches alongside ingredient imagery"
                    width="1224" height="1224" loading="lazy" decoding="async" />
             </div>
-
-            <!-- Ingredient List -->
-            <ul class="space-y-2 text-[13.5px] text-white/80 mb-5">
-              <li>L-Theanine</li>
-              <li>Bacopa Monnieri</li>
-              <li>Alpha-GPC</li>
-              <li>B Vitamins</li>
+            <p class="null-ingredient-tagline">Less noise. More focus.</p>
+            <p class="null-ingredient-label">What's inside</p>
+            <ul class="null-ingredient-list">
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span>L-Theanine</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21v-9"/><path d="M12 12C7 12 4 9 4 4c5 0 8 3 8 8Z"/><path d="M12 15c0-5 3-8 8-8 0 5-3 8-8 8Z"/></svg></span><span>Bacopa Monnieri</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span>Alpha-GPC</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2l1.9 7.9L22 12l-8.1 2.1L12 22l-1.9-7.9L2 12l8.1-2.1L12 2Z"/></svg></span><span>B Vitamins</span></li>
             </ul>
           </div>
-
-          <div>
-            <div class="border-t border-white/[0.08] my-5"></div>
-            <p class="text-[13px] leading-[1.5] text-white/75">
-              Supports concentration,<br />
-              mental clarity and<br />
-              cognitive performance.
-            </p>
+          <div class="null-ingredient-footer">
+            <p>Built for the moments when you want to lock in.</p>
           </div>
-        </div>
+        </article>
 
         <!-- INGREDIENT CARD 2: ENERGY -->
-        <div class="ingredient-card p-6 sm:p-7 flex flex-col justify-between">
+        <article class="ingredient-card ingredient-card--energy" aria-labelledby="null-ingredient-energy-title">
           <div>
-            <!-- Icon + Title -->
-            <div class="flex items-center gap-3 mb-2">
-              <!-- Lightning Bolt Outline SVG Icon -->
-              <svg class="w-6 h-6 text-[#a855f7] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-              </svg>
-              <h3 class="font-display font-bold uppercase text-[15px] tracking-wide text-[#a855f7]">
-                ENERGY
-              </h3>
+            <div class="null-ingredient-heading">
+              <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 2-9 12h8l-1 8 9-12h-8l1-8Z"/></svg>
+              <h3 id="null-ingredient-energy-title">ENERGY</h3>
             </div>
-
-            <!-- Open NULL ENERGY pouch render -->
-            <div class="null-ingredient-visual null-ingredient-visual--energy">
+            <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/energy_details.png?v=1792074142"
-                   alt="Open NULL ENERGY container with white pouches and ingredient illustration"
+                   alt="Open NULL ENERGY tin showing white functional pouches alongside ingredient imagery"
                    width="1224" height="1224" loading="lazy" decoding="async" />
             </div>
-
-            <!-- Ingredient List -->
-            <ul class="space-y-2 text-[13.5px] text-white/80 mb-5">
-              <li>Caffeine (natural)</li>
-              <li>L-Tyrosine</li>
-              <li>B Vitamins</li>
-              <li>Guarana Extract</li>
+            <p class="null-ingredient-tagline">Keep your momentum.</p>
+            <p class="null-ingredient-label">What's inside</p>
+            <ul class="null-ingredient-list">
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h13v6a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6V9Z"/><path d="M17 10h2a3 3 0 0 1 0 6h-2M8 2v3M13 2v3"/></svg></span><span>Caffeine (natural)</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span>L-Tyrosine</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2l1.9 7.9L22 12l-8.1 2.1L12 22l-1.9-7.9L2 12l8.1-2.1L12 2Z"/></svg></span><span>B Vitamins</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span>Guarana Extract</span></li>
             </ul>
           </div>
-
-          <div>
-            <div class="border-t border-white/[0.08] my-5"></div>
-            <p class="text-[13px] leading-[1.5] text-white/75">
-              Helps increase alertness,<br />
-              energy and physical<br />
-              performance.
-            </p>
+          <div class="null-ingredient-footer">
+            <p>A caffeine-powered formula for busy days.</p>
           </div>
-        </div>
+        </article>
 
         <!-- INGREDIENT CARD 3: SLEEP -->
-        <div class="ingredient-card p-6 sm:p-7 flex flex-col justify-between">
+        <article class="ingredient-card ingredient-card--sleep" aria-labelledby="null-ingredient-sleep-title">
           <div>
-            <!-- Icon + Title -->
-            <div class="flex items-center gap-3 mb-2">
-              <!-- Crescent Moon Outline SVG Icon -->
-              <svg class="w-6 h-6 text-[#60a5fa] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-              </svg>
-              <h3 class="font-display font-bold uppercase text-[15px] tracking-wide text-[#60a5fa]">
-                SLEEP
-              </h3>
+            <div class="null-ingredient-heading">
+              <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <h3 id="null-ingredient-sleep-title">SLEEP</h3>
             </div>
-
-            <!-- Open NULL SLEEP pouch render -->
-            <div class="null-ingredient-visual null-ingredient-visual--sleep">
+            <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/sleep_details.png?v=1792074120"
-                   alt="Open NULL SLEEP container with white pouches and ingredient illustration"
+                   alt="Open NULL SLEEP tin showing white functional pouches alongside ingredient imagery"
                    width="1224" height="1224" loading="lazy" decoding="async" />
             </div>
-
-            <!-- Ingredient List -->
-            <ul class="space-y-2 text-[13.5px] text-white/80 mb-5">
-              <li>Melatonin</li>
-              <li>L-Theanine</li>
-              <li>Valerian Root</li>
-              <li>Magnesium</li>
+            <p class="null-ingredient-tagline">Switch off your way.</p>
+            <p class="null-ingredient-label">What's inside</p>
+            <ul class="null-ingredient-list">
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span><span>Melatonin</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span>L-Theanine</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 12c-4-5-2-9 0-9s4 4 0 9Zm0 0c5-4 9-2 9 0s-4 4-9 0Zm0 0c4 5 2 9 0 9s-4-4 0-9Zm0 0c-5 4-9 2-9 0s4-4 9 0Z"/><circle cx="12" cy="12" r="1.2"/></svg></span><span>Valerian Root</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 8.5 7v9L12 22l-8.5-4V9L12 2Z"/><path d="m3.5 9 8.5 5 8.5-5M12 14v8"/></svg></span><span>Magnesium</span></li>
             </ul>
           </div>
-
-          <div>
-            <div class="border-t border-white/[0.08] my-5"></div>
-            <p class="text-[13px] leading-[1.5] text-white/75">
-              Supports faster<br />
-              falling asleep and<br />
-              better sleep quality.
-            </p>
+          <div class="null-ingredient-footer">
+            <p>An evening formula made for your wind-down ritual.</p>
           </div>
-        </div>
-
+        </article>
       </div>
     </div>
   </section>
