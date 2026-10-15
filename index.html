@@ -836,6 +836,20 @@
     }
 
 
+    /* Launch waitlist opt-in */
+    .null-waitlist-form { width: 100%; }
+    .null-waitlist-consent-row {
+      display: flex; flex-wrap: wrap; align-items: flex-start; gap: 3px 8px;
+      max-width: 435px; margin: 9px 0 0; padding: 0 4px;
+      font: 10px/1.5 'Inter', sans-serif;
+    }
+    .null-waitlist-consent { display: inline-flex; align-items: flex-start; gap: 7px; color: rgba(255,255,255,.66); cursor: pointer; }
+    .null-waitlist-consent input { margin: 1px 0 0; width: 13px; height: 13px; flex: 0 0 13px; accent-color: #8659fa; cursor: pointer; }
+    .null-waitlist-privacy-link { padding: 0; border: 0; color: #bba0ff; background: transparent; font: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+    .null-waitlist-privacy-link:focus-visible { outline: 2px solid #a67bff; outline-offset: 3px; }
+    .null-waitlist-honeypot { position: absolute !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; clip-path: inset(100%) !important; }
+    .null-waitlist-form button[type="submit"]:disabled { opacity: .68; cursor: wait; }
+
     /* NULL: minimal legal footer and accessible policy modal */
     .null-site-footer {
       background: #030305;
@@ -1326,7 +1340,8 @@
       </div>
       <!-- Same waitlist pill as the hero, embedded below the menu links. -->
       <div class="null-nav-signup">
-        <form id="null-nav-waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="waitlist-pill rounded-full p-1.5 pl-4 flex items-center justify-between max-w-[435px] mb-3">
+        <form id="null-nav-waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="null-waitlist-form max-w-[435px] mb-3">
+          <div class="waitlist-pill rounded-full p-1.5 pl-4 flex items-center justify-between">
           <div class="flex items-center gap-2.5 flex-1 min-w-0 pr-2">
             <svg class="w-4 h-4 text-white/45 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -1337,6 +1352,12 @@
             <span>Join the waitlist</span>
             <span class="text-xs leading-none" aria-hidden="true">→</span>
           </button>
+        </div>
+          <div class="null-waitlist-consent-row">
+            <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>I agree to receive NULL launch and first-batch emails.</span></label>
+            <button class="null-waitlist-privacy-link" data-null-open-privacy type="button">Privacy Policy</button>
+          </div>
+          <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
         </form>
         <p id="null-nav-waitlist-feedback" class="text-[11px] text-white/50 pl-1" role="status" aria-live="polite" hidden></p>
       </div>
@@ -1367,7 +1388,8 @@
           </p>
 
           <!-- Waitlist Pill Form -->
-          <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="waitlist-pill rounded-full p-1.5 pl-4 flex items-center justify-between max-w-[435px] mb-3">
+          <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="null-waitlist-form max-w-[435px] mb-3">
+          <div class="waitlist-pill rounded-full p-1.5 pl-4 flex items-center justify-between">
             <div class="flex items-center gap-2.5 flex-1 min-w-0 pr-2">
               <!-- Envelope Icon -->
               <svg class="w-4 h-4 text-white/45 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
@@ -1388,10 +1410,16 @@
               <span>Join the waitlist</span>
               <span class="text-xs leading-none">→</span>
             </button>
-          </form>
+          </div>
+          <div class="null-waitlist-consent-row">
+            <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>I agree to receive NULL launch and first-batch emails.</span></label>
+            <button class="null-waitlist-privacy-link" data-null-open-privacy type="button">Privacy Policy</button>
+          </div>
+          <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
+        </form>
 
           <!-- Sub-caption / Confirmation message -->
-          <p id="waitlist-feedback" class="text-[11px] text-white/50 pl-1">
+          <p id="waitlist-feedback" class="text-[11px] text-white/50 pl-1" role="status" aria-live="polite">
             Be the first to know when NULL launches.
           </p>
         </div>
@@ -1861,7 +1889,7 @@
           <strong>Operated by ENORDA s.r.o.</strong><br>
           © 2026 NULL. All rights reserved.
           <p class="null-footer-prelaunch-note">
-            NULL is currently in development. Join the Waitlist is designed to measure interest in our first production batch. If enough people sign up, we'll announce the first batch to our subscribers by email.
+            NULL is still in development. Join the Waitlist to show your interest in our first production batch. Once enough people have joined, we'll announce the first batch to our subscribers by email.
           </p>
         </div>
         <button type="button" class="null-footer-link" id="null-open-privacy" aria-haspopup="dialog" aria-controls="null-privacy-dialog">Privacy Policy</button>
@@ -1878,7 +1906,7 @@
       </div>
       <div class="null-privacy-body" id="null-privacy-content">
         <p class="null-privacy-updated">Last updated: 15 October 2026</p>
-        <p id="null-privacy-intro">This Privacy Policy explains how ENORDA s.r.o. handles personal data on the NULL pre-launch website and how our launch waitlist will work when email registration is activated.</p>
+        <p id="null-privacy-intro">This Privacy Policy explains how ENORDA s.r.o. handles personal data collected through the NULL pre-launch website and its email waitlist.</p>
 
         <section>
           <h3>1. Data controller and contact</h3>
@@ -1887,28 +1915,28 @@
         </section>
         <section>
           <h3>2. Launch waitlist and email addresses</h3>
-          <p>The NULL waitlist is intended to measure demand for the first production batch. When registration is enabled, we plan to collect the email address you enter, together with the time of registration and information necessary to record your consent. We will use it to tell you whether and when the first NULL batch becomes available, and to send the launch updates you request.</p>
-          <p><strong>Current registration status:</strong> The forms on this pre-launch page are not yet connected to email storage. Until that integration is enabled, submitting a form does not add you to the waitlist and no signup email is stored by the form.</p>
+          <p>When you join the NULL waitlist, we collect your email address to measure interest in the first batch and to send the launch and first-batch announcements you request. We also record when and through which form you registered and the version of the consent notice.</p>
+          <p>Waitlist details are stored in Cloudflare D1, configured for EU data jurisdiction. We do not store your IP address in the waitlist database. Joining the waitlist does not reserve a product or place an order.</p>
         </section>
         <section>
           <h3>3. Purposes and legal basis</h3>
-          <p>When registration becomes active, we intend to process waitlist email data based on your consent (GDPR Article 6(1)(a)) to manage the waitlist and send requested NULL launch and first-batch announcements. Joining the waitlist will not, by itself, mean you have placed an order.</p>
-          <p>We may process technical information such as IP address, browser information and access times to deliver and protect the website, troubleshoot errors and prevent abuse, based on legitimate interests in operating a secure website (GDPR Article 6(1)(f)).</p>
+          <p>We process your waitlist email with your explicit consent (GDPR Article 6(1)(a)) to manage the list and notify you about the first NULL release. Your consent is requested using an unchecked checkbox.</p>
+          <p>Infrastructure providers may process technical connection data to deliver and secure this website, troubleshoot faults and prevent abuse, based on legitimate interests (GDPR Article 6(1)(f)).</p>
         </section>
         <section>
-          <h3>4. Your choices and unsubscribe</h3>
-          <p>Providing an email address for the future waitlist will be voluntary. Once email notifications are active, you will be able to withdraw consent and leave the waitlist at any time using the unsubscribe option in our emails or by contacting <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Withdrawal will not affect processing carried out before it.</p>
-          <p>We will not use your waitlist registration for unrelated marketing without a separate appropriate legal basis.</p>
+          <h3>4. Withdrawal of consent</h3>
+          <p>You may withdraw your waitlist consent at any time by contacting <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Once launch emails are sent, they will contain an unsubscribe option. Withdrawal does not affect processing lawfully carried out beforehand.</p>
+          <p>We will not use your waitlist signup for unrelated marketing without a separate appropriate legal basis.</p>
         </section>
         <section>
           <h3>5. Retention</h3>
-          <p>Once the waitlist is connected, we intend to keep subscriber details only as long as needed to administer the pre-launch list and notify you about the initial release, unless you withdraw consent earlier. After the launch campaign, we will delete or anonymise waitlist data that is no longer needed, subject to any applicable legal retention obligation. Our exact retention period will be confirmed before registration is activated.</p>
-          <p>Technical logs, where created by our hosting or content providers, are retained according to their relevant settings and operational requirements.</p>
+          <p>We retain waitlist addresses while operating the pre-launch list and communicating the first NULL batch. Data is deleted or anonymised when that purpose ends or when you withdraw consent, unless a limited legal obligation requires retention.</p>
+          <p>Technical access logs, where generated by hosting or CDN providers, follow their applicable settings and retention rules.</p>
         </section>
         <section>
           <h3>6. Service providers and international transfers</h3>
-          <p>This website uses hosting and content-delivery services, including Shopify CDN imagery, Google Fonts and Tailwind CSS CDN. Those providers may handle technical connection information to supply their services.</p>
-          <p>Before the waitlist begins collecting email addresses, we will identify and configure an email or database provider acting on our behalf and update this notice with relevant processing details. Where information is transferred outside the European Economic Area, appropriate GDPR safeguards, such as an adequacy decision or standard contractual clauses where required, will apply.</p>
+          <p>We use Cloudflare Workers to process waitlist submissions and Cloudflare D1, configured for EU data jurisdiction, to store email registrations. The site also uses infrastructure and content services such as Shopify CDN imagery, Google Fonts and Tailwind CSS CDN.</p>
+          <p>Where personal data is transferred outside the European Economic Area, applicable GDPR transfer safeguards must apply. We will update this notice with the chosen email delivery provider before sending launch emails.</p>
         </section>
         <section>
           <h3>7. Cookies, analytics and automated decisions</h3>
@@ -1921,7 +1949,7 @@
         </section>
         <section>
           <h3>9. Changes to this policy</h3>
-          <p>We will review this Privacy Policy when waitlist email storage is connected, including the chosen service provider, retention rules and the live opt-in and unsubscribe process, before accepting signups. The revision date above indicates the latest update.</p>
+          <p>We review this policy when our data handling or service providers change, including before activating email delivery. The date above reflects the latest revision.</p>
         </section>
       </div>
     </div>
@@ -2030,20 +2058,51 @@
     }
 
     // 2. Waitlist Form Submission Handler
-    function handleWaitlistSubmit(e) {
+    async function handleWaitlistSubmit(e) {
       e.preventDefault();
       const form = e.currentTarget;
-      const emailInput = form.querySelector('input[type="email"]');
-      const feedbackId = form.id === 'null-nav-waitlist-form' ? 'null-nav-waitlist-feedback' : 'waitlist-feedback';
-      const feedback = document.getElementById(feedbackId);
-      if (emailInput && emailInput.value.trim() && feedback) {
+      const email = form.querySelector('input[type="email"]');
+      const consent = form.querySelector('input[name="null-waitlist-consent"]');
+      const honeypot = form.querySelector('input[name="website"]');
+      const button = form.querySelector('button[type="submit"]');
+      const feedback = document.getElementById(form.id === 'null-nav-waitlist-form' ? 'null-nav-waitlist-feedback' : 'waitlist-feedback');
+      if (!email || !consent || !button || !feedback || !form.reportValidity()) return;
+      const label = button.querySelector('span'), oldLabel = label?.textContent;
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      if (label) label.textContent = 'Joining...';
+      try {
+        const response = await fetch('https://null-waitlist-api.threadid.workers.dev/api/waitlist', {
+          method: 'POST', mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email.value.trim(), consent: consent.checked,
+            source: form.id === 'null-nav-waitlist-form' ? 'menu' : 'hero',
+            website: honeypot?.value || ''
+          })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.success !== true) throw new Error(data.error || 'Could not join the waitlist. Please try again.');
+        feedback.textContent = "You're on the list. We'll email you when NULL launches.";
         feedback.hidden = false;
-        feedback.textContent = "Waitlist signup is not connected yet. Please check back soon.";
-        feedback.classList.remove('text-white/50');
         feedback.classList.add('text-purple-300', 'font-medium');
-        // Keep the email entered in this form until signup is actually connected.
+        feedback.classList.remove('text-white/50');
+        form.reset();
+      } catch (error) {
+        feedback.textContent = error instanceof Error ? error.message : 'Could not join the waitlist. Please try again.';
+        feedback.hidden = false;
+        feedback.classList.remove('text-purple-300');
+        feedback.classList.add('text-white/50');
+      } finally {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+        if (label) label.textContent = oldLabel;
       }
     }
+
+    document.querySelectorAll('[data-null-open-privacy]').forEach((button) => {
+      button.addEventListener('click', () => document.getElementById('null-open-privacy')?.click());
+    });
 
     // 3. Pouch atmosphere: tiny animated sparks, placed behind the transparent pouch image.
     //    Deterministic positions avoid layout jumps; all motion is CSS-driven.
