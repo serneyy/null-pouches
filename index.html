@@ -853,6 +853,7 @@
     }
     .null-waitlist-consent { display: inline-flex; align-items: flex-start; gap: 7px; color: rgba(255,255,255,.66); cursor: pointer; }
     .null-waitlist-consent input { margin: 1px 0 0; width: 13px; height: 13px; flex: 0 0 13px; accent-color: #8659fa; cursor: pointer; }
+    .null-meta-consent { flex-basis: 100%; margin-top: 5px; }
     .null-waitlist-privacy-link { padding: 0; border: 0; color: #bba0ff; background: transparent; font: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
     .null-waitlist-privacy-link:focus-visible { outline: 2px solid #a67bff; outline-offset: 3px; }
     .null-waitlist-honeypot { position: absolute !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; clip-path: inset(100%) !important; }
@@ -1363,6 +1364,7 @@
         </div>
           <div class="null-waitlist-consent-row">
             <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>I agree to receive NULL launch and first-batch emails.</span></label>
+            <label class="null-waitlist-consent null-meta-consent"><input type="checkbox" name="null-meta-consent"><span>Optional: I agree to Meta advertising measurement of my registration.</span></label>
             <button class="null-waitlist-privacy-link" data-null-open-privacy type="button">Privacy Policy</button>
           </div>
           <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
@@ -1422,6 +1424,7 @@
           </div>
           <div class="null-waitlist-consent-row">
             <label class="null-waitlist-consent"><input type="checkbox" name="null-waitlist-consent" required><span>I agree to receive NULL launch and first-batch emails.</span></label>
+            <label class="null-waitlist-consent null-meta-consent"><input type="checkbox" name="null-meta-consent"><span>Optional: I agree to Meta advertising measurement of my registration.</span></label>
             <button class="null-waitlist-privacy-link" data-null-open-privacy type="button">Privacy Policy</button>
           </div>
           <input name="website" type="text" class="null-waitlist-honeypot" autocomplete="off" tabindex="-1" aria-hidden="true">
@@ -1948,7 +1951,8 @@
         </section>
         <section>
           <h3>7. Cookies, analytics and automated decisions</h3>
-          <p>The current landing page does not include its own advertising or analytics tracking scripts. External infrastructure providers may use technical mechanisms necessary to deliver the site. Optional future analytics or marketing tracking will be explained and, where required, used only after consent.</p>
+          <p>Meta Pixel and Meta Conversions API (Meta Platforms) are used only for visitors who separately opt in to advertising measurement when joining the waitlist. On a new opted-in registration, Meta can receive a Lead event, a unique event identifier, SHA-256 hashed email address, page URL, IP address, browser user agent, and available Facebook browser and click identifiers. The browser Pixel loads only after an opted-in new registration and tracks PageView and Lead at that time.</p>
+          <p>Marketing measurement consent is optional and separate from consent to receive launch emails. Refusing measurement does not prevent joining the waitlist. We record an advertising consent timestamp for new registrations that opt in. To withdraw consent for future processing, contact <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Data already transmitted to Meta may also be subject to Meta's own retention and privacy controls.</p>
           <p>We do not currently use automated decision-making that produces legal or similarly significant effects based on data collected through this website.</p>
         </section>
         <section>
@@ -2065,6 +2069,33 @@
       }
     }
 
+    // Meta Pixel only loads after an opted-in, successfully stored NEW registration.
+    const NULL_META_PIXEL_ID = "1782758953034642";
+    let nullMetaLoaded = false;
+
+    function nullMetaCookie(name) {
+      const parts = document.cookie.split("; ");
+      const row = parts.find(value => value.startsWith(name + "="));
+      return row ? decodeURIComponent(row.slice(name.length + 1)) : undefined;
+    }
+
+    function nullMetaPixelLead(eventId) {
+      if (!/^null_lead_[a-f0-9-]{36}$/i.test(eventId)) return;
+      if (!nullMetaLoaded) {
+        (function(f,b,e,v,n,t,el) {
+          if (f.fbq) return;
+          n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+          n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+          el=b.getElementsByTagName(e)[0];el.parentNode.insertBefore(t,el);
+        })(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+        nullMetaLoaded=true;
+        window.fbq("init",NULL_META_PIXEL_ID);
+        window.fbq("track","PageView");
+      }
+      window.fbq("track","Lead",{}, {eventID:eventId});
+    }
+
     // Render per-form Turnstile only when the visitor submits.
     const nullTurnstileWidgetIds = new WeakMap();
     const nullTurnstilePending = new WeakMap();
@@ -2120,6 +2151,7 @@
       const form = e.currentTarget;
       const email = form.querySelector('input[type="email"]');
       const consent = form.querySelector('input[name="null-waitlist-consent"]');
+      const metaConsent = form.querySelector('input[name="null-meta-consent"]');
       const honeypot = form.querySelector('input[name="website"]');
       const button = form.querySelector('button[type="submit"]');
       const feedback = document.getElementById(form.id === 'null-nav-waitlist-form' ? 'null-nav-waitlist-feedback' : 'waitlist-feedback');
@@ -2135,6 +2167,10 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: email.value.trim(), consent: consent.checked,
+            marketingConsent: Boolean(metaConsent?.checked),
+            pageUrl: window.location.href,
+            fbp: metaConsent?.checked ? nullMetaCookie("_fbp") : undefined,
+            fbc: metaConsent?.checked ? nullMetaCookie("_fbc") : undefined,
             source: form.id === 'null-nav-waitlist-form' ? 'menu' : 'hero',
             website: honeypot?.value || '',
             turnstileToken
@@ -2142,6 +2178,9 @@
         });
         const data = await response.json().catch(() => ({}));
         if (!response.ok || data.success !== true) throw new Error(data.error || 'Could not join the waitlist. Please try again.');
+        if (metaConsent?.checked && data.isNew === true && typeof data.leadEventId === "string") {
+          nullMetaPixelLead(data.leadEventId);
+        }
         feedback.textContent = "You're on the list. We'll email you when NULL launches.";
         feedback.hidden = false;
         feedback.classList.add('text-purple-300', 'font-medium');
