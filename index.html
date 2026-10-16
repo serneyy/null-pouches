@@ -60,6 +60,98 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    /* NULL: first-paint layout. These rules work before the deferred Tailwind CDN.
+       Keep inlined: social-app browsers can delay or block third-party scripts. */
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    html, body { width: 100%; max-width: 100%; }
+    body { margin: 0; }
+    img, svg, video { max-width: 100%; }
+    img { display: block; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: inherit; }
+    [hidden] { display: none !important; }
+    .null-site-header {
+      position: sticky; top: 0; z-index: 40; width: 100%;
+      background: rgba(3,3,5,.92);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    }
+    .null-header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 1060px; height: 68px;
+      margin: 0 auto; padding: 0 20px;
+    }
+    .null-header-logo { display: flex; align-items: center; }
+    .null-header-logo img { height: 32px; width: auto; object-fit: contain; }
+    .null-header-waitlist {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 9999px;
+      color: rgba(255,255,255,.90); font-size: 11px; font-weight: 500;
+      line-height: 1.25; text-decoration: none;
+    }
+    .null-hero-section { position: relative; overflow: hidden; padding: 32px 0 48px; }
+    .null-hero-section > div:first-child {
+      position: relative; max-width: 1060px; margin: 0 auto; padding: 0 20px;
+    }
+    .null-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
+    .null-hero-copy { position: relative; z-index: 20; min-width: 0; padding-top: 8px; }
+    .null-hero-copy h1 {
+      margin: 0 0 20px; font-family: 'Unbounded', sans-serif;
+      font-size: 32px; font-weight: 800; line-height: 1.06;
+      letter-spacing: -.02em; text-transform: uppercase; color: #fff;
+      overflow-wrap: normal;
+    }
+    .null-hero-copy > p {
+      max-width: 360px; margin: 0 0 28px;
+      color: rgba(255,255,255,.75); font-size: 14px; font-weight: 400; line-height: 1.55;
+    }
+    .null-waitlist-form { width: 100%; max-width: 435px; margin-bottom: 12px; }
+    .waitlist-pill {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 6px 6px 6px 16px; border-radius: 9999px;
+    }
+    .waitlist-pill > div:first-child {
+      display: flex; align-items: center; gap: 10px;
+      flex: 1 1 auto; min-width: 0; padding-right: 8px;
+    }
+    .waitlist-pill > div:first-child svg { flex: 0 0 16px; width: 16px; height: 16px; }
+    .waitlist-pill input[type="email"] {
+      width: 100%; min-width: 0; padding: 0;
+      border: 0; outline: 0; background: transparent;
+      color: #fff; font-size: 12.5px;
+    }
+    .waitlist-pill button[type="submit"] {
+      display: inline-flex; align-items: center; gap: 6px;
+      flex-shrink: 0; padding: 10px 16px; border-radius: 9999px;
+      font-size: 11.5px; font-weight: 600; color: #fff; white-space: nowrap;
+    }
+    .null-hero-media {
+      display: flex; position: relative; align-items: center;
+      justify-content: center; width: 100%; min-width: 0;
+    }
+    .null-hero-art { position: relative; width: 100%; max-width: 540px; }
+    .null-hero-image { display: block; width: 100%; height: auto; object-fit: cover; }
+    .null-hero-fade-left, .null-hero-fade-right,
+    .null-hero-fade-top, .null-hero-fade-bottom { pointer-events: none; }
+    @media (min-width: 640px) {
+      .null-header-inner, .null-hero-section > div:first-child { padding-left: 32px; padding-right: 32px; }
+      .null-header-logo img { height: 36px; }
+      .null-header-waitlist { padding: 8px 20px; font-size: 12px; }
+      .null-hero-section { padding-top: 48px; padding-bottom: 80px; }
+      .null-hero-copy { padding-top: 24px; }
+      .null-hero-copy h1 { font-size: 42px; }
+      .null-hero-copy > p { font-size: 15px; }
+      .waitlist-pill button[type="submit"] { padding-left: 20px; padding-right: 20px; font-size: 12px; }
+      .waitlist-pill input[type="email"] { font-size: 13px; }
+    }
+    @media (min-width: 768px) { .null-hero-copy h1 { font-size: 46px; } }
+    @media (min-width: 1024px) {
+      .null-hero-grid { grid-template-columns: repeat(12,minmax(0,1fr)); gap: 16px; }
+      .null-hero-copy, .null-hero-media { grid-column: span 6 / span 6; }
+    }
+
+
     :root {
       --bg-black: #030305;
       --purple-main: #8b5cf6;
