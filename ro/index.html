@@ -2239,7 +2239,7 @@
   <section class="null-meta-consent-banner" id="null-meta-consent-banner" role="region" aria-label="Cookie-uri publicitare opționale" hidden>
     <div class="null-meta-consent-copy">
       <strong>Folosim cookie-uri</strong>
-      <span>Cookie-urile esențiale asigură funcționarea site-ului. Cu acordul tău, Meta Pixel măsoară vizitele și înscrierile. Poți refuza cookie-urile opționale. <button class="null-waitlist-privacy-link" type="button" data-null-open-privacy>Politica de confidențialitate</button></span>
+      <span>Cookie-urile esențiale asigură funcționarea site-ului. Cu acordul tău, Meta Pixel măsoară vizitele și înscrierile pentru publicitate, iar Microsoft Clarity analizează utilizarea site-ului prin hărți termice și înregistrări de sesiune pentru a îmbunătăți experiența utilizatorului. Poți refuza cookie-urile opționale. <button class="null-waitlist-privacy-link" type="button" data-null-open-privacy>Politica de confidențialitate</button></span>
     </div>
     <div class="null-meta-consent-actions">
       <button type="button" id="null-meta-consent-reject" class="null-meta-consent-decline">Refuză opționalele</button>
@@ -2255,7 +2255,7 @@
         <button type="button" class="null-privacy-close" id="null-close-privacy" aria-label="Închide Politica de confidențialitate">×</button>
       </div>
       <div class="null-privacy-body" id="null-privacy-content">
-        <p class="null-privacy-updated">Ultima actualizare: 15 octombrie 2026</p>
+        <p class="null-privacy-updated">Last updated: 16 octombrie 2026</p>
         <p id="null-privacy-intro">Această Politică de confidențialitate explică modul în care ENORDA s.r.o. prelucrează datele cu caracter personal colectate prin site-ul NULL înainte de lansarea produselor și prin lista de înscriere pentru notificări prin e-mail.</p>
 
         <section>
@@ -2291,6 +2291,7 @@
         <section>
           <h3>7. Cookie-uri, analiză și decizii automatizate</h3>
           <p>Meta Pixel și Meta Conversions API (Meta Platforms) sunt folosite numai dacă vizitatorii acceptă explicit cookie-urile publicitare opționale din banner. În cazul unei înscrieri noi cu acest consimțământ, Meta poate primi un eveniment Lead, un identificator unic al evenimentului, adresa de e-mail transformată într-un hash SHA-256, URL-ul paginii, adresa IP, agentul utilizator al browserului și identificatorii disponibili ai browserului și ai clicurilor Facebook. După acordarea consimțământului publicitar opțional, atât Meta Pixel, cât și Conversions API pot măsura evenimentul PageView cu același identificator. Evenimentul Lead este măsurat prin ambele metode numai după o înscriere nouă reușită, cât timp același consimțământ este activ.</p>
+          <p>Microsoft Clarity (Microsoft Corporation) este încărcat numai după acceptarea explicită a analizei opționale în bannerul de cookie-uri. Clarity ne ajută să înțelegem utilizarea site-ului prin date despre interacțiuni, inclusiv clicuri, derulare, hărți termice și înregistrări de sesiune. Microsoft poate prelucra date despre browser și dispozitiv și poate utiliza cookie-uri analitice precum _clck și _clsk. Îți poți retrage acordul din Setări cookie din subsol; Clarity nu este încărcat înainte de consimțământ.</p>
           <p>Meta Pixel poate crea identificatori ai browserului, precum _fbp și _fbc, după acordarea consimțământului. Preferința privind măsurarea vizitelor este salvată în stocarea locală a browserului și poate fi modificată din Setările cookie din subsolul site-ului. Refuzul sau retragerea consimțământului nu împiedică înscrierea pe listă. Consimțământul pentru cookie-urile publicitare este opțional și separat de consimțământul pentru e-mailurile de lansare. Refuzul măsurării nu împiedică înscrierea. Pentru înscrierile noi cu consimțământ publicitar, înregistrăm momentul acordării acestuia. Pentru retragerea consimțământului privind prelucrările viitoare, scrie la <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Datele deja transmise către Meta pot fi supuse propriilor politici de păstrare și confidențialitate ale acesteia.</p>
           <p>În prezent nu folosim procese decizionale automatizate care să producă efecte juridice sau efecte similare semnificative pe baza datelor colectate prin acest site.</p>
         </section>
@@ -2433,6 +2434,11 @@
     // General visit tracking and per-registration measurement are separate choices.
     const NULL_META_PIXEL_ID = "1782758953034642";
     const NULL_META_VISIT_CONSENT_KEY = "null_meta_visit_consent_v1";
+    const NULL_CLARITY_PROJECT_ID = "yynqv5yzqg";
+    // A separate key prevents consent to the older Meta-only banner from activating Clarity.
+    const NULL_CLARITY_CONSENT_KEY = "null_clarity_consent_v1";
+    let nullClarityLoaded = false;
+    let nullClarityConsentFallback = null;
     let nullMetaLoaded = false;
     let nullMetaPageViewSent = false;
     let nullMetaConsentFallback = null;
@@ -2450,6 +2456,38 @@
       try {
         localStorage.setItem(NULL_META_VISIT_CONSENT_KEY, value);
       } catch {}
+    }
+
+    // Clarity runs only after explicit opt-in; never inject its remote script beforehand.
+    function nullClarityReadConsent() {
+      try {
+        return localStorage.getItem(NULL_CLARITY_CONSENT_KEY);
+      } catch {
+        return nullClarityConsentFallback;
+      }
+    }
+
+    function nullClaritySaveConsent(value) {
+      nullClarityConsentFallback = value;
+      try {
+        localStorage.setItem(NULL_CLARITY_CONSENT_KEY, value);
+      } catch {}
+    }
+
+    function nullClarityLoad() {
+      if (nullClarityReadConsent() !== "allowed") return;
+      if (nullClarityLoaded) {
+        window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
+        return;
+      }
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", NULL_CLARITY_PROJECT_ID);
+      nullClarityLoaded = true;
+      // Enable analytics storage, not Microsoft advertising storage.
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
     }
 
     function nullMetaCookie(name) {
@@ -2526,22 +2564,33 @@
       if (!banner || !allow || !reject || !settings) return;
 
       function refreshBanner() {
-        banner.hidden = nullMetaReadVisitConsent() === "allowed" ||
-          nullMetaReadVisitConsent() === "rejected";
+        const metaChoice = nullMetaReadVisitConsent();
+        const clarityChoice = nullClarityReadConsent();
+        banner.hidden = (metaChoice === "allowed" || metaChoice === "rejected") &&
+          (clarityChoice === "allowed" || clarityChoice === "rejected");
       }
       allow.addEventListener("click", () => {
         nullMetaSaveVisitConsent("allowed");
+        nullClaritySaveConsent("allowed");
         refreshBanner();
         nullMetaPageView();
+        nullClarityLoad();
       });
       reject.addEventListener("click", () => {
         nullMetaSaveVisitConsent("rejected");
+        nullClaritySaveConsent("rejected");
         if (nullMetaLoaded && typeof window.fbq === "function") {
           window.fbq("consent", "revoke");
         }
         nullMetaClearCookie("_fbp");
         nullMetaClearCookie("_fbc");
+        if (nullClarityLoaded && typeof window.clarity === "function") {
+          window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "denied" });
+        }
         refreshBanner();
+        // Already-running third-party scripts cannot be unloaded safely.
+        // Reload to stop Clarity / Meta requests after consent is withdrawn.
+        if (nullClarityLoaded || nullMetaLoaded) window.location.reload();
       });
       settings.addEventListener("click", () => {
         banner.hidden = false;
@@ -2549,6 +2598,7 @@
       });
       refreshBanner();
       if (nullMetaReadVisitConsent() === "allowed") nullMetaPageView();
+      if (nullClarityReadConsent() === "allowed") nullClarityLoad();
     })();
 
     // Render per-form Turnstile only when the visitor submits.

@@ -2239,7 +2239,7 @@
   <section class="null-meta-consent-banner" id="null-meta-consent-banner" role="region" aria-label="Volitelné reklamní cookies" hidden>
     <div class="null-meta-consent-copy">
       <strong>Používáme cookies</strong>
-      <span>Nezbytné cookies umožňují fungování webu. S tvým souhlasem Meta Pixel měří návštěvy a registrace. Volitelné cookies můžeš odmítnout. <button class="null-waitlist-privacy-link" type="button" data-null-open-privacy>Ochrana osobních údajů</button></span>
+      <span>Nezbytné cookies umožňují fungování webu. S tvým souhlasem Meta Pixel měří návštěvy a registrace pro reklamu a Microsoft Clarity analyzuje používání webu pomocí heatmap a záznamů relací pro zlepšení použitelnosti. Volitelné cookies můžeš odmítnout. <button class="null-waitlist-privacy-link" type="button" data-null-open-privacy>Ochrana osobních údajů</button></span>
     </div>
     <div class="null-meta-consent-actions">
       <button type="button" id="null-meta-consent-reject" class="null-meta-consent-decline">Odmítnout volitelné</button>
@@ -2255,7 +2255,7 @@
         <button type="button" class="null-privacy-close" id="null-close-privacy" aria-label="Zavřít zásady ochrany osobních údajů">×</button>
       </div>
       <div class="null-privacy-body" id="null-privacy-content">
-        <p class="null-privacy-updated">Poslední aktualizace: 15. října 2026</p>
+        <p class="null-privacy-updated">Last updated: 16. října 2026</p>
         <p id="null-privacy-intro">Tyto zásady ochrany osobních údajů vysvětlují, jak společnost ENORDA s.r.o. zpracovává osobní údaje získané prostřednictvím webu NULL před uvedením produktů na trh a e-mailového seznamu zájemců.</p>
 
         <section>
@@ -2291,6 +2291,7 @@
         <section>
           <h3>7. Cookies, analytika a automatizované rozhodování</h3>
           <p>Meta Pixel a Meta Conversions API (Meta Platforms) používáme pouze tehdy, když návštěvník výslovně přijme volitelné reklamní cookies v cookie liště. Při nové registraci s tímto souhlasem může Meta obdržet událost Lead, jedinečný identifikátor události, e-mailovou adresu zahashovanou pomocí SHA-256, URL stránky, IP adresu, identifikaci prohlížeče (user agent) a dostupné identifikátory prohlížeče a kliknutí Facebooku. Po udělení volitelného reklamního souhlasu mohou Meta Pixel i Conversions API měřit událost PageView se shodným identifikátorem. Událost Lead se oběma metodami měří až po úspěšné nové registraci za trvání téhož souhlasu.</p>
+          <p>Microsoft Clarity (Microsoft Corporation) načítáme pouze po výslovném souhlasu s volitelnou analytikou v cookie liště. Clarity nám pomáhá porozumět používání webu díky údajům o interakcích včetně kliknutí, posouvání stránky, heatmap a záznamů relací. Microsoft může zpracovávat údaje o prohlížeči a zařízení a používat analytické cookies, například _clck a _clsk. Souhlas můžeš odvolat přes Nastavení cookies v patičce; před souhlasem Clarity nenačítáme.</p>
           <p>Meta Pixel může po udělení souhlasu vytvářet identifikátory prohlížeče, například _fbp a _fbc. Volba měření návštěv se ukládá do místního úložiště prohlížeče a lze ji změnit pomocí Nastavení cookies v patičce. Odmítnutí ani odvolání tohoto souhlasu nebrání registraci na seznamu zájemců. Souhlas s reklamními cookies je dobrovolný a oddělený od souhlasu se zasíláním e-mailů o uvedení produktů. Pokud měření odmítnete, můžete se přesto registrovat. U nových registrací s reklamním souhlasem zaznamenáváme čas udělení souhlasu. Pro odvolání souhlasu s budoucím zpracováním nás kontaktujte na <a href="mailto:contact@enorda.eu">contact@enorda.eu</a>. Na údaje již předané společnosti Meta se mohou vztahovat také její vlastní pravidla uchovávání a ochrany soukromí.</p>
           <p>V současnosti nepoužíváme automatizované rozhodování, které by na základě osobních údajů získaných přes tento web mělo právní nebo obdobně významné účinky.</p>
         </section>
@@ -2433,6 +2434,11 @@
     // General visit tracking and per-registration measurement are separate choices.
     const NULL_META_PIXEL_ID = "1782758953034642";
     const NULL_META_VISIT_CONSENT_KEY = "null_meta_visit_consent_v1";
+    const NULL_CLARITY_PROJECT_ID = "yynqv5yzqg";
+    // A separate key prevents consent to the older Meta-only banner from activating Clarity.
+    const NULL_CLARITY_CONSENT_KEY = "null_clarity_consent_v1";
+    let nullClarityLoaded = false;
+    let nullClarityConsentFallback = null;
     let nullMetaLoaded = false;
     let nullMetaPageViewSent = false;
     let nullMetaConsentFallback = null;
@@ -2450,6 +2456,38 @@
       try {
         localStorage.setItem(NULL_META_VISIT_CONSENT_KEY, value);
       } catch {}
+    }
+
+    // Clarity runs only after explicit opt-in; never inject its remote script beforehand.
+    function nullClarityReadConsent() {
+      try {
+        return localStorage.getItem(NULL_CLARITY_CONSENT_KEY);
+      } catch {
+        return nullClarityConsentFallback;
+      }
+    }
+
+    function nullClaritySaveConsent(value) {
+      nullClarityConsentFallback = value;
+      try {
+        localStorage.setItem(NULL_CLARITY_CONSENT_KEY, value);
+      } catch {}
+    }
+
+    function nullClarityLoad() {
+      if (nullClarityReadConsent() !== "allowed") return;
+      if (nullClarityLoaded) {
+        window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
+        return;
+      }
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", NULL_CLARITY_PROJECT_ID);
+      nullClarityLoaded = true;
+      // Enable analytics storage, not Microsoft advertising storage.
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
     }
 
     function nullMetaCookie(name) {
@@ -2526,22 +2564,33 @@
       if (!banner || !allow || !reject || !settings) return;
 
       function refreshBanner() {
-        banner.hidden = nullMetaReadVisitConsent() === "allowed" ||
-          nullMetaReadVisitConsent() === "rejected";
+        const metaChoice = nullMetaReadVisitConsent();
+        const clarityChoice = nullClarityReadConsent();
+        banner.hidden = (metaChoice === "allowed" || metaChoice === "rejected") &&
+          (clarityChoice === "allowed" || clarityChoice === "rejected");
       }
       allow.addEventListener("click", () => {
         nullMetaSaveVisitConsent("allowed");
+        nullClaritySaveConsent("allowed");
         refreshBanner();
         nullMetaPageView();
+        nullClarityLoad();
       });
       reject.addEventListener("click", () => {
         nullMetaSaveVisitConsent("rejected");
+        nullClaritySaveConsent("rejected");
         if (nullMetaLoaded && typeof window.fbq === "function") {
           window.fbq("consent", "revoke");
         }
         nullMetaClearCookie("_fbp");
         nullMetaClearCookie("_fbc");
+        if (nullClarityLoaded && typeof window.clarity === "function") {
+          window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "denied" });
+        }
         refreshBanner();
+        // Already-running third-party scripts cannot be unloaded safely.
+        // Reload to stop Clarity / Meta requests after consent is withdrawn.
+        if (nullClarityLoaded || nullMetaLoaded) window.location.reload();
       });
       settings.addEventListener("click", () => {
         banner.hidden = false;
@@ -2549,6 +2598,7 @@
       });
       refreshBanner();
       if (nullMetaReadVisitConsent() === "allowed") nullMetaPageView();
+      if (nullClarityReadConsent() === "allowed") nullClarityLoad();
     })();
 
     // Render per-form Turnstile only when the visitor submits.
