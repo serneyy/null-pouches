@@ -2509,6 +2509,10 @@
         el=b.getElementsByTagName(e)[0];el.parentNode.insertBefore(t,el);
       })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
       nullMetaLoaded = true;
+      // Keep PageView/Lead exclusively on the manual Pixel + CAPI path with matching event IDs.
+      // Meta Pixel can otherwise emit extra PageViews automatically on URL history changes.
+      window.fbq.disablePushState = true;
+      window.fbq("set", "autoConfig", false, NULL_META_PIXEL_ID);
       window.fbq("init", NULL_META_PIXEL_ID);
     }
 
