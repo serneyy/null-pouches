@@ -59,41 +59,6 @@
     button { cursor: pointer; }
     a { color: inherit; text-decoration: inherit; }
     [hidden] { display: none !important; }
-    /* NULL launch announcement: single-line, responsive and visible on first paint. */
-    .null-launch-banner {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; height: 34px; padding: 0 10px; overflow: hidden;
-      background: linear-gradient(90deg, #100c1e 0%, #21143b 50%, #100c1e 100%);
-      border-bottom: 1px solid rgba(168, 85, 247, .24);
-      color: rgba(255, 255, 255, .92);
-    }
-    .null-launch-dot {
-      flex: 0 0 6px; width: 6px; height: 6px; border-radius: 50%;
-      background: #35d5a5; box-shadow: 0 0 0 3px rgba(53, 213, 165, .10), 0 0 10px rgba(53, 213, 165, .40);
-    }
-    .null-launch-message {
-      font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
-      letter-spacing: .035em; line-height: 1.2; white-space: nowrap;
-    }
-    .null-launch-message strong { color: #e5d5ff; font-weight: 800; }
-    .null-launch-divider { padding: 0 7px; color: rgba(255, 255, 255, .45); }
-    .null-launch-mobile { display: none; }
-    @media (max-width: 520px) {
-      .null-launch-banner { gap: 7px; padding: 0 8px; }
-      .null-launch-message { font-size: clamp(8px, 2.4vw, 10px); letter-spacing: .005em; }
-      .null-launch-divider { padding: 0 4px; }
-      .null-launch-desktop { display: none; }
-      .null-launch-mobile { display: inline; }
-    }
-    /* Quiet live-status pulse; respects reduced-motion preferences. */
-    .null-launch-dot { animation: null-launch-pulse 2s ease-in-out infinite; }
-    @keyframes null-launch-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 3px rgba(53,213,165,.1), 0 0 10px rgba(53,213,165,.4); }
-      50% { opacity: .25; transform: scale(.75); box-shadow: 0 0 0 1px rgba(53,213,165,.04), 0 0 3px rgba(53,213,165,.12); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .null-launch-dot { animation: none; }
-    }
     .null-site-header {
       position: sticky; top: 0; z-index: 40; width: 100%;
       background: rgba(3,3,5,.92);
@@ -1508,10 +1473,10 @@
       /* Keep the signup in view; only the section links scroll on short screens. */
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 102px);
-      height: calc(100dvh - 102px);
-      max-height: calc(100vh - 102px);
-      max-height: calc(100dvh - 102px);
+      height: calc(100vh - 68px);
+      height: calc(100dvh - 68px);
+      max-height: calc(100vh - 68px);
+      max-height: calc(100dvh - 68px);
       overflow: hidden;
       overscroll-behavior: contain;
       padding: 0;
@@ -1574,7 +1539,7 @@
     }
 
 
-    #top, #products, #about, #ingredients, #null-comparison, #faq, #waitlist-form { scroll-margin-top: 120px; }
+    #top, #products, #about, #ingredients, #null-comparison, #faq, #waitlist-form { scroll-margin-top: 86px; }
     @media (max-width: 639px) {
       .null-header-inner { gap: 8px; }
       .null-header-left { gap: 8px; }
@@ -1749,14 +1714,6 @@
   <!-- TOP NAVIGATION BAR                                                      -->
   <!-- ======================================================================= -->
   <header class="null-site-header w-full border-b border-white/[0.12] shadow-[0_1px_0_rgba(255,255,255,0.06)] bg-[#030305]/92 backdrop-blur-md sticky top-0 z-40">
-    <!-- Launch update stays visible with the sticky header. -->
-    <div class="null-launch-banner">
-      <span class="null-launch-dot" aria-hidden="true"></span>
-      <span class="null-launch-message">
-        <span class="null-launch-desktop">PRODUKCJA RUSZA WKRÓTCE<span class="null-launch-divider" aria-hidden="true">•</span><strong>PRZEDSPRZEDAŻ W POŁOWIE LISTOPADA</strong></span>
-        <span class="null-launch-mobile">PRODUKCJA WKRÓTCE<span class="null-launch-divider" aria-hidden="true">•</span><strong>PRZEDSPRZEDAŻ W POŁOWIE LISTOPADA</strong></span>
-      </span>
-    </div>
     <div class="null-header-inner max-w-[1060px] mx-auto px-5 sm:px-8 h-[68px] flex items-center justify-between">
       <div class="null-header-left">
         <button class="null-nav-trigger" type="button" id="null-nav-trigger" aria-label="Otwórz menu" aria-haspopup="true" aria-expanded="false" aria-controls="null-nav-panel">
