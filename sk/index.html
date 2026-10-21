@@ -299,23 +299,38 @@
       letter-spacing: -.025em;
       line-height: 1.25;
     }
-    /* Focus-only pre-order status, aligned right of the card title. */
-    .null-focus-preorder-badge {
+    /* Product status chips share one design, but use each formula's own accent. */
+    .ingredient-card--focus { --null-status-text: #d7baff; --null-status-dot: #a875ff; }
+    .ingredient-card--energy { --null-status-text: #ffb6f1; --null-status-dot: #f523db; }
+    .ingredient-card--sleep { --null-status-text: #d8d0ff; --null-status-dot: #9585ff; }
+    .null-ingredient-status-badge {
       display: inline-flex; align-items: center; justify-content: center;
       order: 3; margin-left: auto; flex: 0 0 auto;
-      padding: 6px 9px; border: 1px solid rgba(165, 109, 255, .33);
-      border-radius: 999px; background: rgba(124, 58, 237, .12);
-      color: #d7baff; font: 700 8.5px/1.1 'Inter', sans-serif;
-      letter-spacing: .035em; white-space: nowrap;
+      padding: 6px 9px;
+      border: 1px solid rgba(var(--null-accent-rgb), .33);
+      border-radius: 999px;
+      background: rgba(var(--null-accent-rgb), .10);
+      color: var(--null-status-text);
+      font: 700 8.5px/1.1 'Inter', sans-serif;
+      letter-spacing: .025em; white-space: nowrap;
     }
-    .null-focus-preorder-badge::before {
+    .null-ingredient-status-badge::before {
       content: ''; width: 5px; height: 5px; flex: 0 0 5px;
-      margin-right: 6px; border-radius: 50%; background: #a875ff;
-      box-shadow: 0 0 7px rgba(168, 117, 255, .48);
+      margin-right: 6px; border-radius: 50%;
+      background: var(--null-status-dot);
+      box-shadow: 0 0 7px rgba(var(--null-accent-rgb), .48);
+      animation: null-ingredient-status-pulse 2s ease-in-out infinite;
+    }
+    @keyframes null-ingredient-status-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 7px rgba(var(--null-accent-rgb), .6); }
+      50% { opacity: .28; transform: scale(.7); box-shadow: 0 0 2px rgba(var(--null-accent-rgb), .12); }
     }
     @media (max-width: 370px) {
-      .ingredient-card--focus .null-ingredient-heading { gap: 8px; }
-      .null-focus-preorder-badge { padding: 5px 7px; font-size: 7.5px; }
+      .null-ingredient-heading { gap: 8px; }
+      .null-ingredient-status-badge { padding: 5px 7px; font-size: 7.5px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .null-ingredient-status-badge::before { animation: none; }
     }
     .null-ingredient-visual {
       position: relative;
@@ -409,17 +424,6 @@
       .ingredient-card--focus .null-focus-ingredient-list li { gap: 9px; }
       .ingredient-card--focus .null-focus-ingredient-name { font-size: 12px; }
       .ingredient-card--focus .null-focus-ingredient-amount { font-size: 9.5px; }
-    }
-    /* Keep the already approved pulsing pre-order status. */
-    .null-focus-preorder-badge::before {
-      animation: null-focus-status-pulse 2s ease-in-out infinite;
-    }
-    @keyframes null-focus-status-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 7px rgba(168,117,255,.6); }
-      50% { opacity: .25; transform: scale(.7); box-shadow: 0 0 2px rgba(168,117,255,.12); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .null-focus-preorder-badge::before { animation: none; }
     }
     .null-ingredient-list {
       display: flex;
@@ -2018,7 +2022,7 @@
             <div class="null-ingredient-heading">
               <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/></svg>
               <h3 id="null-ingredient-focus-title">FOCUS</h3>
-              <span class="null-focus-preorder-badge">PRE-ORDERS SOON</span>
+              <span class="null-ingredient-status-badge">VÝROBA ČOSKORO</span>
             </div>
             <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/focus_details.png?v=1792074119"
@@ -2048,6 +2052,7 @@
             <div class="null-ingredient-heading">
               <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m13 2-9 12h8l-1 8 9-12h-8l1-8Z"/></svg>
               <h3 id="null-ingredient-energy-title">ENERGY</h3>
+              <span class="null-ingredient-status-badge">VO VÝVOJI</span>
             </div>
             <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/energy_details.png?v=1792074142"
@@ -2074,6 +2079,7 @@
             <div class="null-ingredient-heading">
               <svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
               <h3 id="null-ingredient-sleep-title">SLEEP</h3>
+              <span class="null-ingredient-status-badge">VO VÝVOJI</span>
             </div>
             <div class="null-ingredient-visual">
               <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/sleep_details.png?v=1792074120"
