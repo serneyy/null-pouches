@@ -364,40 +364,53 @@
       letter-spacing: .11em;
       text-transform: uppercase;
     }
-    /* FOCUS: approved six-ingredient formula with separate flavor. */
-    .ingredient-card--focus .null-focus-ingredient-list { gap: 2px; }
+    /* FOCUS uses the same ingredient icon rows as ENERGY and SLEEP. */
     .ingredient-card--focus .null-focus-ingredient-list li {
-      display: flex; align-items: baseline; justify-content: space-between;
-      gap: 9px; min-width: 0; padding: 7px 0;
-      border-bottom: 1px solid rgba(124, 58, 237, .12);
-      line-height: 1.4;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 0;
+      border: 0;
     }
-    .ingredient-card--focus .null-focus-ingredient-list li:last-child { border-bottom: 0; }
     .null-focus-ingredient-name {
-      flex: 1 1 auto; min-width: 0;
-      color: rgba(255,255,255,.84);
-      font-size: 12px; font-weight: 500; overflow-wrap: break-word;
+      flex: 1 1 auto;
+      min-width: 0;
+      color: rgba(255, 255, 255, .83);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
     }
-    .null-focus-ingredient-name strong { color: #f2eaff; font-weight: 700; }
+    .null-focus-ingredient-name strong {
+      color: inherit;
+      font-weight: 600;
+    }
     .null-focus-ingredient-amount {
-      flex: 0 0 auto; white-space: nowrap;
-      color: #d4b4ff; font: 700 10.5px/1.3 'Inter', sans-serif;
+      flex: 0 0 auto;
+      margin-left: auto;
+      color: rgba(220, 195, 255, .80);
+      font: 600 10.5px/1.35 'Inter', sans-serif;
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
-    .null-focus-flavor {
-      display: flex; align-items: center; flex-wrap: wrap;
-      gap: 6px 8px; margin-top: 13px; padding: 10px 11px;
-      border: 1px solid rgba(139,92,246,.24);
-      border-radius: 10px; background: rgba(139,92,246,.065);
-      font-size: 11px; line-height: 1.45;
+    .ingredient-card--focus .null-focus-flavor-row { margin-top: 4px; }
+    .null-focus-flavor-label {
+      color: rgba(255, 255, 255, .50);
+      font-weight: 500;
     }
-    .null-focus-flavor::before {
-      content: ''; width: 7px; height: 7px; flex: 0 0 7px;
-      border-radius: 50%; background: #a78bfa;
-      box-shadow: 0 0 8px rgba(167,139,250,.35);
+    .null-focus-flavor-name {
+      color: rgba(255, 255, 255, .83);
+      font-weight: 600;
     }
-    .null-focus-flavor-label { color: rgba(255,255,255,.52); font-weight: 600; }
-    .null-focus-flavor-name { color: #eee3ff; font-weight: 700; }
+    @media (min-width: 768px) and (max-width: 1040px) {
+      .ingredient-card--focus .null-focus-ingredient-list li { gap: 8px; }
+      .ingredient-card--focus .null-focus-ingredient-name { font-size: 11.5px; }
+      .ingredient-card--focus .null-focus-ingredient-amount { font-size: 9px; }
+    }
+    @media (max-width: 370px) {
+      .ingredient-card--focus .null-focus-ingredient-list li { gap: 9px; }
+      .ingredient-card--focus .null-focus-ingredient-name { font-size: 12px; }
+      .ingredient-card--focus .null-focus-ingredient-amount { font-size: 9.5px; }
+    }
+    /* Keep the already approved pulsing pre-order status. */
     .null-focus-preorder-badge::before {
       animation: null-focus-status-pulse 2s ease-in-out infinite;
     }
@@ -2015,14 +2028,14 @@
             <p class="null-ingredient-tagline">Mai puține distrageri. Mai multă concentrare.</p>
             <p class="null-ingredient-label">Ce conțin</p>
             <ul class="null-ingredient-list null-focus-ingredient-list">
-              <li><span class="null-focus-ingredient-name">L-teanină</span><span class="null-focus-ingredient-amount">75 mg</span></li>
-              <li><span class="null-focus-ingredient-name">Alpha-GPC</span><span class="null-focus-ingredient-amount">70 mg</span></li>
-              <li><span class="null-focus-ingredient-name">Extract de Ginkgo biloba</span><span class="null-focus-ingredient-amount">40 mg</span></li>
-              <li><span class="null-focus-ingredient-name">Extract de Rhodiola rosea</span><span class="null-focus-ingredient-amount">45 mg</span></li>
-              <li><span class="null-focus-ingredient-name">Vitamina B6</span><span class="null-focus-ingredient-amount">5 mg</span></li>
-              <li><span class="null-focus-ingredient-name"><strong>Vitamina B12</strong></span><span class="null-focus-ingredient-amount">50 µg / 0,05 mg</span></li>
+              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-focus-ingredient-name">L-teanină</span><span class="null-focus-ingredient-amount">75 mg</span></li>
+              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span class="null-focus-ingredient-name">Alpha-GPC</span><span class="null-focus-ingredient-amount">70 mg</span></li>
+              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 21V11"/><path d="M12 12C8 10 6 7 6 4c2 0 4 1 6 4 2-3 4-4 6-4 0 3-2 6-6 8Z"/><path d="m12 12-5-5m5 5 5-5"/></svg></span><span class="null-focus-ingredient-name">Extract de Ginkgo biloba</span><span class="null-focus-ingredient-amount">40 mg</span></li>
+              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 21v-7m0 2-4-2m4-1 4-3"/><circle cx="12" cy="7" r="2"/><path d="M12 5V2m2 5h3m-7 0H7m4 2-2 2m5-2 2 2"/></svg></span><span class="null-focus-ingredient-name">Extract de Rhodiola rosea</span><span class="null-focus-ingredient-amount">45 mg</span></li>
+              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m8 3 8 0 5 9-5 9H8l-5-9 5-9Z"/><path d="m8 12 4-4 4 4-4 4-4-4Z"/></svg></span><span class="null-focus-ingredient-name">Vitamina B6</span><span class="null-focus-ingredient-amount">5 mg</span></li>
+              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4Z"/><path d="M8 12h8m-4-4v8"/></svg></span><span class="null-focus-ingredient-name"><strong>Vitamina B12</strong></span><span class="null-focus-ingredient-amount">50 µg / 0,05 mg</span></li>
+              <li class="null-focus-flavor-row"><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M19.5 3.5C12 4 7 7 7 13c0 3 2 5 5 5 6 0 9-7 7.5-14.5Z"/><path d="M5 21c3-5 6-9 11-13"/><path d="m11 14-1-4m1 4 4-1"/></svg></span><span class="null-focus-ingredient-name"><span class="null-focus-flavor-label">Aromă:</span> <span class="null-focus-flavor-name">Sweet Spearmint</span></span></li>
             </ul>
-            <div class="null-focus-flavor"><span class="null-focus-flavor-label">Aromă:</span><span class="null-focus-flavor-name">Sweet Spearmint</span></div>
           </div>
           <div class="null-ingredient-footer">
             <p><span>Înveți sau ai nevoie de concentrare?</span><span>Intră în ritmul tău.</span></p>
