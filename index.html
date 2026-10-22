@@ -801,8 +801,8 @@
     }
 
 
-    /* Keep the entire hero video visible instead of using the oversized photo crop.
-       All existing mobile/desktop vignette overlays and masks stay intact. */
+    /* NULL hero video: moderate zoom so footage extends naturally behind
+       the desktop copy, while retaining the original cinematic dark fades. */
     .null-hero-section .null-hero-art > video.null-hero-image {
       position: absolute;
       inset: 0;
@@ -812,11 +812,16 @@
       height: 100%;
       object-fit: contain;
       object-position: right center;
-      transform: none;
+      transform: scale(1.32);
+      transform-origin: right center;
     }
+    /* On mobile fill the top of the headline area; keep the whole banner size
+       and the original dark overlay/edge vignette exactly as before. */
     @media (max-width: 1023px) {
       .null-hero-section .null-hero-art > video.null-hero-image {
         object-position: center center;
+        transform: translateY(-16px) scale(1.20);
+        transform-origin: center center;
       }
     }
 
