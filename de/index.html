@@ -788,6 +788,25 @@
     }
 
 
+    /* Keep the entire hero video visible instead of using the oversized photo crop.
+       All existing mobile/desktop vignette overlays and masks stay intact. */
+    .null-hero-section .null-hero-art > video.null-hero-image {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      object-fit: contain;
+      object-position: right center;
+      transform: none;
+    }
+    @media (max-width: 1023px) {
+      .null-hero-section .null-hero-art > video.null-hero-image {
+        object-position: center center;
+      }
+    }
+
     /* NULL product lineup: restrained electric backdrop and isolated floating tins */
     .null-lineup {
       position: relative;
