@@ -278,39 +278,6 @@
       letter-spacing: -.025em;
       line-height: 1.25;
     }
-    /* Product status chips share one design, but use each formula's own accent. */
-    .ingredient-card--focus { --null-status-text: #d7baff; --null-status-dot: #a875ff; }
-    .ingredient-card--energy { --null-status-text: #ffb6f1; --null-status-dot: #f523db; }
-    .ingredient-card--sleep { --null-status-text: #d8d0ff; --null-status-dot: #9585ff; }
-    .null-ingredient-status-badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      order: 3; margin-left: auto; flex: 0 0 auto;
-      padding: 6px 9px;
-      border: 1px solid rgba(var(--null-accent-rgb), .33);
-      border-radius: 999px;
-      background: rgba(var(--null-accent-rgb), .10);
-      color: var(--null-status-text);
-      font: 700 8.5px/1.1 'Inter', sans-serif;
-      letter-spacing: .025em; white-space: nowrap;
-    }
-    .null-ingredient-status-badge::before {
-      content: ''; width: 5px; height: 5px; flex: 0 0 5px;
-      margin-right: 6px; border-radius: 50%;
-      background: var(--null-status-dot);
-      box-shadow: 0 0 7px rgba(var(--null-accent-rgb), .48);
-      animation: null-ingredient-status-pulse 2s ease-in-out infinite;
-    }
-    @keyframes null-ingredient-status-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 7px rgba(var(--null-accent-rgb), .6); }
-      50% { opacity: .28; transform: scale(.7); box-shadow: 0 0 2px rgba(var(--null-accent-rgb), .12); }
-    }
-    @media (max-width: 370px) {
-      .null-ingredient-heading { gap: 8px; }
-      .null-ingredient-status-badge { padding: 5px 7px; font-size: 7.5px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .null-ingredient-status-badge::before { animation: none; }
-    }
     .null-ingredient-visual {
       position: relative;
       display: flex;
@@ -357,52 +324,6 @@
       font-weight: 700;
       letter-spacing: .11em;
       text-transform: uppercase;
-    }
-    /* FOCUS uses the same ingredient icon rows as ENERGY and SLEEP. */
-    .ingredient-card--focus .null-focus-ingredient-list li {
-      align-items: center;
-      gap: 12px;
-      padding: 7px 0;
-      border: 0;
-    }
-    .null-focus-ingredient-name {
-      flex: 1 1 auto;
-      min-width: 0;
-      color: rgba(255, 255, 255, .83);
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.35;
-    }
-    .null-focus-ingredient-name strong {
-      color: inherit;
-      font-weight: 600;
-    }
-    .null-focus-ingredient-amount {
-      flex: 0 0 auto;
-      margin-left: auto;
-      color: rgba(220, 195, 255, .80);
-      font: 600 10.5px/1.35 'Inter', sans-serif;
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
-    }
-    .ingredient-card--focus .null-focus-flavor-row { margin-top: 4px; }
-    .null-focus-flavor-label {
-      color: rgba(255, 255, 255, .50);
-      font-weight: 500;
-    }
-    .null-focus-flavor-name {
-      color: rgba(255, 255, 255, .83);
-      font-weight: 600;
-    }
-    @media (min-width: 768px) and (max-width: 1040px) {
-      .ingredient-card--focus .null-focus-ingredient-list li { gap: 8px; }
-      .ingredient-card--focus .null-focus-ingredient-name { font-size: 11.5px; }
-      .ingredient-card--focus .null-focus-ingredient-amount { font-size: 9px; }
-    }
-    @media (max-width: 370px) {
-      .ingredient-card--focus .null-focus-ingredient-list li { gap: 9px; }
-      .ingredient-card--focus .null-focus-ingredient-name { font-size: 12px; }
-      .ingredient-card--focus .null-focus-ingredient-amount { font-size: 9.5px; }
     }
     .null-ingredient-list {
       display: flex;
@@ -2000,14 +1921,11 @@
             </div>
             <p class="null-ingredient-tagline">Less noise. More focus.</p>
             <p class="null-ingredient-label">What's inside</p>
-            <ul class="null-ingredient-list null-focus-ingredient-list">
-              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-focus-ingredient-name">L-Theanine</span><span class="null-focus-ingredient-amount">75 mg</span></li>
-              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span class="null-focus-ingredient-name">Alpha-GPC</span><span class="null-focus-ingredient-amount">70 mg</span></li>
-              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 21V11"/><path d="M12 12C8 10 6 7 6 4c2 0 4 1 6 4 2-3 4-4 6-4 0 3-2 6-6 8Z"/><path d="m12 12-5-5m5 5 5-5"/></svg></span><span class="null-focus-ingredient-name">Ginkgo Biloba Extract</span><span class="null-focus-ingredient-amount">40 mg</span></li>
-              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 21v-7m0 2-4-2m4-1 4-3"/><circle cx="12" cy="7" r="2"/><path d="M12 5V2m2 5h3m-7 0H7m4 2-2 2m5-2 2 2"/></svg></span><span class="null-focus-ingredient-name">Rhodiola Extract</span><span class="null-focus-ingredient-amount">45 mg</span></li>
-              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m8 3 8 0 5 9-5 9H8l-5-9 5-9Z"/><path d="m8 12 4-4 4 4-4 4-4-4Z"/></svg></span><span class="null-focus-ingredient-name">Vitamin B6</span><span class="null-focus-ingredient-amount">5 mg</span></li>
-              <li><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4Z"/><path d="M8 12h8m-4-4v8"/></svg></span><span class="null-focus-ingredient-name"><strong>Vitamin B12</strong></span><span class="null-focus-ingredient-amount">50 mcg / 0.05 mg</span></li>
-              <li class="null-focus-flavor-row"><span class="null-ingredient-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M19.5 3.5C12 4 7 7 7 13c0 3 2 5 5 5 6 0 9-7 7.5-14.5Z"/><path d="M5 21c3-5 6-9 11-13"/><path d="m11 14-1-4m1 4 4-1"/></svg></span><span class="null-focus-ingredient-name"><span class="null-focus-flavor-label">Flavor:</span> <span class="null-focus-flavor-name">Sweet Spearmint</span></span></li>
+            <ul class="null-ingredient-list">
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12c.6-5 4-8 8-8s7.4 3 8 8c-2.6 2-5.3 2.5-8 2.5S6.6 14 4 12Z"/><path d="M10 14v6h4v-6"/></svg></span><span>Lion’s Mane</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span>Alpha-GPC</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span>L-Theanine</span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21V11"/><path d="M12 12C8 10 6 7 6 4c2 0 4 1 6 4 2-3 4-4 6-4 0 3-2 6-6 8Z"/><path d="m12 12-5-5m5 5 5-5"/></svg></span><span>Ginkgo Biloba</span></li>
             </ul>
           </div>
           <div class="null-ingredient-footer">
