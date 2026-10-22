@@ -1777,14 +1777,21 @@
         <div class="null-hero-media lg:col-span-6 relative flex items-center justify-center lg:justify-end">
           <div class="null-hero-art relative w-full max-w-[540px] lg:max-w-none lg:w-[125%] lg:-ml-[25%]">
 
-            <!-- SAME desktop-format image on both. On mobile this entire media layer is absolutely positioned behind the copy. -->
-            <img
-              src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217"
-              alt="Cutii cu pliculețe funcționale NULL FOCUS, SLEEP și ENERGY"
+            <!-- Same hero composition on desktop and mobile; decorative video replaces the still image. -->
+            <video
               class="null-hero-image w-full h-auto object-cover select-none"
-              fetchpriority="high"
-              decoding="async"
-            />
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217"
+              aria-hidden="true"
+              tabindex="-1"
+            >
+              <source src="https://cdn.shopify.com/videos/c/o/v/0a6778cee3f749e78a79ec7a5e964b5c.mp4" type="video/mp4" />
+              <img src="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" alt="Cutii cu pliculețe funcționale NULL FOCUS, SLEEP și ENERGY" />
+            </video>
 
             <!-- Smooth edge vignette gradients so the photo blends seamlessly into #030305 -->
             <div class="null-hero-fade-left pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#030305] via-[#030305]/60 to-transparent"></div>
