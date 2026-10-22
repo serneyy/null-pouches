@@ -1876,8 +1876,8 @@
         </figure>
       </div>
       <div class="null-lineup-dots" role="group" aria-label="Vybrať produkt NULL">
-        <button class="null-lineup-dot" type="button" data-lineup-dot="0" aria-label="Zobraziť Focus" aria-pressed="false"></button>
-        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="1" aria-label="Zobraziť Energy" aria-pressed="true"></button>
+        <button class="null-lineup-dot is-active" type="button" data-lineup-dot="0" aria-label="Zobraziť Focus" aria-pressed="true"></button>
+        <button class="null-lineup-dot" type="button" data-lineup-dot="1" aria-label="Zobraziť Energy" aria-pressed="false"></button>
         <button class="null-lineup-dot" type="button" data-lineup-dot="2" aria-label="Zobraziť Sleep" aria-pressed="false"></button>
       </div>
     </div>
@@ -2968,7 +2968,7 @@
         if (loopEnabled) return;
         populate();
         loopEnabled = true;
-        jump(groupSize + 1); // ENERGY is initially centered.
+        jump(groupSize); // FOCUS is initially centered on mobile.
       };
       const deactivate = () => {
         if (!loopEnabled) return;
