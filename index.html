@@ -825,6 +825,35 @@
       }
     }
 
+    /* Seamless four-edge vignette: dissolve the video into the site's #030305
+       without changing hero sizing, video zoom or text/form positions.
+       This is layered above the video, below the existing readability scrim. */
+    .null-hero-section .null-hero-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg,
+          #030305 0%, rgba(3,3,5,.66) 7%, transparent 20%,
+          transparent 76%, rgba(3,3,5,.55) 88%, #030305 100%),
+        linear-gradient(180deg,
+          #030305 0%, rgba(3,3,5,.65) 7%, transparent 21%,
+          transparent 67%, rgba(3,3,5,.66) 86%, #030305 100%);
+    }
+    @media (max-width: 1023px) {
+      .null-hero-section .null-hero-art::before {
+        background:
+          linear-gradient(90deg,
+            #030305 0%, rgba(3,3,5,.70) 8%, transparent 22%,
+            transparent 75%, rgba(3,3,5,.67) 89%, #030305 100%),
+          linear-gradient(180deg,
+            #030305 0%, rgba(3,3,5,.70) 9%, transparent 23%,
+            transparent 62%, rgba(3,3,5,.66) 81%, #030305 100%);
+      }
+    }
+
     /* NULL product lineup: restrained electric backdrop and isolated floating tins */
     .null-lineup {
       position: relative;
