@@ -1687,27 +1687,10 @@
     }
     @media (prefers-reduced-motion: reduce) { .null-success-instagram, .null-success-close { transition: none; } }
 
-    /* Gentle violet breathing glow for the second half of the hero headline. */
+    /* Static hero headline at the former animation's maximum violet glow. */
     .null-hero-glow {
-      color: #A78BFA;
-      animation: nullHeroGlow 3.6s ease-in-out infinite;
-    }
-    @keyframes nullHeroGlow {
-      0%, 100% {
-        color: #A78BFA;
-        text-shadow: 0 0 3px rgba(167,139,250,.15), 0 0 10px rgba(139,92,246,.12);
-      }
-      50% {
-        color: #D8C8FF;
-        text-shadow: 0 0 8px rgba(196,181,253,.75), 0 0 22px rgba(167,139,250,.6), 0 0 38px rgba(124,58,237,.38);
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .null-hero-glow {
-        animation: none;
-        color: #A78BFA;
-        text-shadow: 0 0 8px rgba(167,139,250,.3);
-      }
+      color: #D8C8FF;
+      text-shadow: 0 0 8px rgba(196,181,253,.75), 0 0 22px rgba(167,139,250,.6), 0 0 38px rgba(124,58,237,.38);
     }
 
   </style>
