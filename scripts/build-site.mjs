@@ -3,7 +3,9 @@ import { join } from 'node:path';
 
 // Publish only the website HTML: never publish source files or API Workers.
 const output = 'dist';
-const languages = ['sk', 'cs', 'de', 'pl', 'ro', 'fr'];
+const languages = ['sk', 'cs', 'de', 'pl', 'ro'];
+// French is available after its translation PR is merged.
+if (existsSync(join('fr', 'index.html'))) languages.push('fr');
 if (!existsSync('index.html')) throw new Error('English homepage missing');
 for (const language of languages) {
   if (!existsSync(join(language, 'index.html'))) {
