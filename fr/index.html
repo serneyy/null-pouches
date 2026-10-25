@@ -431,6 +431,10 @@
       max-height: 240px;
       opacity: 1;
     }
+    /* Longer team FAQ needs more room than the short answers on mobile. */
+    .faq-item.null-team-faq.active .faq-answer {
+      max-height: 850px;
+    }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
       color: #a855f7;
@@ -2251,6 +2255,25 @@
           </div>
         </div>
 
+
+        <!-- Question 7: Team behind NULL -->
+        <div class="faq-item null-team-faq">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Qui se cache derrière la marque NULL ?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">NULL est une nouvelle marque, mais l’équipe qui la porte est loin d’être débutante.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Derrière NULL se trouvent les personnes qui ont également créé <a href="https://teenwear.eu/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-white">Teenwear.eu</a>, une boutique de mode en ligne qui sert des clients dans différents pays d’Europe.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Nous avons de l’expérience dans la vente à l’international, un entrepôt prêt en Slovaquie et des partenaires de livraison sous contrat.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Nous avons donc tout ce qu’il faut pour lancer NULL très bientôt et le proposer progressivement aux clients partout en Europe.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60"><strong class="text-white/90">Nouvelle marque. Équipe expérimentée. Grandes ambitions.</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

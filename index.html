@@ -469,6 +469,10 @@
       max-height: 240px;
       opacity: 1;
     }
+    /* Longer team FAQ needs more room than the short answers on mobile. */
+    .faq-item.null-team-faq.active .faq-answer {
+      max-height: 850px;
+    }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
       color: #a855f7;
@@ -2289,6 +2293,25 @@
           </div>
         </div>
 
+
+        <!-- Question 7: Team behind NULL -->
+        <div class="faq-item null-team-faq">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Who is behind NULL?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">NULL is a new brand, but the team behind it is certainly no newcomer.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">The people behind NULL also built <a href="https://teenwear.eu/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-white">Teenwear.eu</a>, an online fashion store serving customers across different European countries.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">We have experience in international sales, a warehouse ready in Slovakia, and contracted delivery partners.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">That means we have everything in place to launch NULL soon and gradually bring it to customers across Europe.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60"><strong class="text-white/90">New brand. Experienced team. Big plans.</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

@@ -417,6 +417,10 @@
       max-height: 240px;
       opacity: 1;
     }
+    /* Longer team FAQ needs more room than the short answers on mobile. */
+    .faq-item.null-team-faq.active .faq-answer {
+      max-height: 850px;
+    }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
       color: #a855f7;
@@ -2238,6 +2242,25 @@
           </div>
         </div>
 
+
+        <!-- Question 7: Team behind NULL -->
+        <div class="faq-item null-team-faq">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Kto stojí za značkou NULL?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">NULL je nová značka, no tím, ktorý za ňou stojí, rozhodne nie je žiadnym nováčikom.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Za NULL stoja ľudia, ktorí vybudovali aj <a href="https://teenwear.eu/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-white">Teenwear.eu</a>, internetový obchod s módou, ktorý obsluhuje zákazníkov z rôznych krajín Európy.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Máme za sebou skúsenosti s medzinárodným predajom, pripravený sklad na Slovensku a zazmluvnených dopravných partnerov.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Vďaka tomu máme všetko potrebné na to, aby sme NULL už čoskoro uviedli na trh a postupne ho priniesli zákazníkom naprieč Európou.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60"><strong class="text-white/90">Nová značka. Skúsený tím. Veľké plány.</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

@@ -417,6 +417,10 @@
       max-height: 240px;
       opacity: 1;
     }
+    /* Longer team FAQ needs more room than the short answers on mobile. */
+    .faq-item.null-team-faq.active .faq-answer {
+      max-height: 850px;
+    }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
       color: #a855f7;
@@ -2238,6 +2242,25 @@
           </div>
         </div>
 
+
+        <!-- Question 7: Team behind NULL -->
+        <div class="faq-item null-team-faq">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Cine se află în spatele brandului NULL?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">NULL este un brand nou, dar echipa din spatele lui nu este deloc la început de drum.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">În spatele NULL se află oamenii care au construit și <a href="https://teenwear.eu/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-white">Teenwear.eu</a>, un magazin online de modă care deservește clienți din diferite țări europene.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Avem experiență în vânzări internaționale, un depozit pregătit în Slovacia și parteneri de curierat cu care avem contracte.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Astfel, avem tot ce ne trebuie pentru a lansa NULL în curând și pentru a-l aduce treptat clienților din întreaga Europă.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60"><strong class="text-white/90">Brand nou. Echipă cu experiență. Planuri mari.</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

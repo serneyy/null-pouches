@@ -417,6 +417,10 @@
       max-height: 240px;
       opacity: 1;
     }
+    /* Longer team FAQ needs more room than the short answers on mobile. */
+    .faq-item.null-team-faq.active .faq-answer {
+      max-height: 850px;
+    }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
       color: #a855f7;
@@ -2238,6 +2242,25 @@
           </div>
         </div>
 
+
+        <!-- Question 7: Team behind NULL -->
+        <div class="faq-item null-team-faq">
+          <button
+            type="button"
+            onclick="toggleFaq(this)"
+            class="w-full px-5 sm:px-6 py-4 text-left flex items-center justify-between text-[13.5px] sm:text-[14px] text-white/85 hover:text-white transition-colors cursor-pointer"
+          >
+            <span>Kdo stojí za značkou NULL?</span>
+            <span class="faq-icon text-white/70 text-lg font-light transition-transform duration-200 leading-none">+</span>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">NULL je nová značka, ale tým, který za ní stojí, rozhodně nejsou žádní nováčci.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Za NULL stojí lidé, kteří vybudovali také <a href="https://teenwear.eu/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-white">Teenwear.eu</a>, internetový obchod s módou, který obsluhuje zákazníky z různých evropských zemí.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Máme zkušenosti s mezinárodním prodejem, připravený sklad na Slovensku a smluvně zajištěné dopravní partnery.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60">Díky tomu máme vše potřebné k tomu, abychom NULL už brzy uvedli na trh a postupně ho přinesli zákazníkům po celé Evropě.</p>
+            <p class="pb-4 text-[13px] leading-relaxed text-white/60"><strong class="text-white/90">Nová značka. Zkušený tým. Velké plány.</strong></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
