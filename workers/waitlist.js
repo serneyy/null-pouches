@@ -240,15 +240,21 @@ export default {
 
     const source = payload.source === "menu" ? "menu" : "hero";
     const marketingConsent = payload.marketingConsent === true;
+    // Store only the visitor's two-letter IP country (not their IP address).
+    // Older entries remain unchanged and their country remains unknown.
+    const cfCountry = request.cf?.country;
+    const country = typeof cfCountry === "string" && /^[A-Z]{2}$/.test(cfCountry) && cfCountry !== "XX"
+      ? cfCountry : null;
     const now = new Date().toISOString();
     try {
       // The UNIQUE email index and INSERT OR IGNORE prevent duplicate signups.
       const inserted = await env.DB.prepare(
-        "INSERT OR IGNORE INTO waitlist (email, consent_at, consent_version, source, marketing_consent_at, marketing_consent_version) VALUES (?, ?, ?, ?, ?, ?)"
+        "INSERT OR IGNORE INTO waitlist (email, consent_at, consent_version, source, marketing_consent_at, marketing_consent_version, country) VALUES (?, ?, ?, ?, ?, ?, ?)"
       ).bind(
         email, now, CONSENT_VERSION, source,
         marketingConsent ? now : null,
-        marketingConsent ? MARKETING_CONSENT_VERSION : null
+        marketingConsent ? MARKETING_CONSENT_VERSION : null,
+        country
       ).run();
       const isNew = inserted.meta?.changes === 1;
       let leadEventId = null;
