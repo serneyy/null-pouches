@@ -39,16 +39,54 @@
   <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0685/9060/0494/files/product_image_pc.png?v=1792017217" />
 
 
-  <!-- Respect explicit language choices and browser language on entry to the home page. -->
+  <!-- Country-based entry routing via Cloudflare IP geolocation.
+       Explicitly chosen languages take priority; browser language is not used. -->
   <script>
     (function () {
       if (location.pathname !== '/' && location.pathname !== '/index.html') return;
+
+      const countryToLanguage = {
+        FR: 'fr', SK: 'sk', CZ: 'cs', DE: 'de',
+        AT: 'de', PL: 'pl', RO: 'ro'
+      };
       const allowed = ['en', 'sk', 'cs', 'pl', 'ro', 'de', 'fr'];
       let saved = null;
-      try { saved = localStorage.getItem('null_language_preference_v1'); } catch (e) {}
-      const langs = Array.isArray(navigator.languages) && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
-      const preferred = allowed.includes(saved) ? saved : (langs.map(lang => String(lang).toLowerCase().split('-')[0]).find(lang => allowed.includes(lang)) || 'en');
-      if (preferred !== 'en') location.replace('/' + preferred + '/' + location.search + location.hash);
+      try { saved = localStorage.getItem('null_language_preference_v1'); } catch (error) {}
+
+      function redirect(language) {
+        if (language && language !== 'en') {
+          location.replace('/' + language + '/' + location.search + location.hash);
+        }
+      }
+
+      // A visitor's own language-switcher choice always wins over their IP.
+      if (allowed.includes(saved)) {
+        redirect(saved);
+        return;
+      }
+
+      // This same-origin Cloudflare endpoint reports the visitor's IP country.
+      // Use only loc=XX, not the IP address or browser-language settings.
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 2000);
+      fetch('/cdn-cgi/trace', {
+        method: 'GET',
+        cache: 'no-store',
+        signal: controller.signal
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('IP country unavailable');
+          return response.text();
+        })
+        .then(trace => {
+          const match = trace.match(/^loc=([A-Z]{2})\s*$/m);
+          const language = match ? countryToLanguage[match[1]] : null;
+          redirect(language);
+        })
+        .catch(() => {
+          // If Cloudflare cannot determine the country, keep English.
+        })
+        .finally(() => clearTimeout(timeout));
     })();
   </script>
 
