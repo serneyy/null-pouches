@@ -16,6 +16,7 @@
   <link rel="alternate" hreflang="pl" href="https://nullpouches.com/pl/" />
   <link rel="alternate" hreflang="ro" href="https://nullpouches.com/ro/" />
   <link rel="alternate" hreflang="de" href="https://nullpouches.com/de/" />
+  <link rel="alternate" hreflang="fr" href="https://nullpouches.com/fr/" />
   <link rel="alternate" hreflang="x-default" href="https://nullpouches.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NULL" />
@@ -26,6 +27,7 @@
   <meta property="og:locale:alternate" content="ro_RO" />
   
   <meta property="og:locale:alternate" content="de_DE" />
+  <meta property="og:locale:alternate" content="fr_FR" />
   <meta property="og:url" content="https://nullpouches.com/sk/" />
   <meta property="og:title" content="NULL | Funkčné vrecúška bez nikotínu: Focus, Energy, Sleep" />
   <meta property="og:description" content="Spoznaj NULL, funkčné vrecúška bez nikotínu a tabaku. Tri varianty FOCUS, ENERGY a SLEEP. Pridaj sa na čakaciu listinu a dozvieš sa o spustení ako prvý." />
@@ -1680,6 +1682,19 @@
     @media (prefers-reduced-motion: reduce) { .null-success-instagram, .null-success-close { transition: none; } }
 
 
+  
+    /* Keep multi-line consent copy clear of the next section on phones/tablets.
+       Preserve the hero artwork clipping and all existing typography. */
+    @media (max-width: 1023px) {
+      .null-hero-section { padding-bottom: 28px; }
+      .null-hero-section .null-hero-copy { padding-bottom: 20px; }
+    }
+    .null-waitlist-consent-row { position: relative; z-index: 4; }
+    .null-waitlist-consent > span { min-width: 0; overflow-wrap: break-word; }
+
+    /* On very short viewports, let the menu signup scroll instead of
+       cropping its mandatory consent checkbox at the panel boundary. */
+    .null-nav-signup { min-height: 0; flex-shrink: 1; overflow-y: auto; }
   </style>
   <!-- NULL navigation stylesheet placement validated for deployment. -->
 </head>
@@ -2290,6 +2305,7 @@
             <a class="null-language-option" href="/pl/" hreflang="pl" lang="pl" data-null-language="pl"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#fff" d="M0 0h32v20H0z"/><path fill="#DC143C" d="M0 10h32v10H0z"/></svg><span>Poland</span></a>
             <a class="null-language-option" href="/ro/" hreflang="ro" lang="ro" data-null-language="ro"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#002B7F" d="M0 0h11v20H0z"/><path fill="#FCD116" d="M11 0h10v20H11z"/><path fill="#CE1126" d="M21 0h11v20H21z"/></svg><span>Romania</span></a>
             <a class="null-language-option" href="/de/" hreflang="de" lang="de" data-null-language="de"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#000" d="M0 0h32v20H0z"/><path fill="#DD0000" d="M0 6.667h32v13.333H0z"/><path fill="#FFCE00" d="M0 13.333h32v6.667H0z"/></svg><span>Germany</span></a>
+            <a class="null-language-option" href="/fr/" hreflang="fr" lang="fr" data-null-language="fr"><svg class="null-language-flag" viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path fill="#0055A4" d="M0 0h10.667v20H0z"/><path fill="#fff" d="M10.667 0h10.666v20H10.667z"/><path fill="#EF4135" d="M21.333 0H32v20H21.333z"/></svg><span>France</span></a>
             </div>
           </div>
         </div>
@@ -3056,7 +3072,7 @@
       options.forEach((option) => {
         option.addEventListener('click', () => {
           const code = option.getAttribute('data-null-language');
-          if (['en', 'sk', 'cs', 'pl', 'ro', 'de'].includes(code)) {
+          if (['en', 'sk', 'cs', 'pl', 'ro', 'de', 'fr'].includes(code)) {
             try { localStorage.setItem('null_language_preference_v1', code); } catch (error) {}
           }
         });
