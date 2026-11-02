@@ -396,9 +396,20 @@
       background: rgba(var(--null-accent-rgb), .045);
     }
     .null-ingredient-row-icon svg { display: block; width: 18px; height: 18px; }
-    .null-ingredient-copy { display: block; min-width: 0; color: rgba(255,255,255,.78); font-weight: 400; }
-    .null-ingredient-copy strong { color: #f7f6fb; font-weight: 700; }
-    .null-ingredient-copy .null-ingredient-description { color: rgba(255,255,255,.72); }
+    /* Compact ingredient labels; full descriptions remain in the disclosure below. */
+    .null-ingredient-copy { display: flex; flex: 1 1 auto; align-items: baseline; justify-content: space-between; gap: 8px; min-width: 0; }
+    .null-ingredient-copy strong { flex: 0 1 auto; min-width: 0; color: #f7f6fb; font-weight: 700; overflow-wrap: anywhere; }
+    .null-ingredient-benefit { flex: 0 1 55%; min-width: 0; color: rgba(255,255,255,.64); font-size: 11.5px; line-height: 1.35; font-weight: 400; text-align: right; }
+    .null-ingredient-more { margin-top: 13px; border-top: 1px solid rgba(var(--null-accent-rgb),.14); }
+    .null-ingredient-more summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 0 4px; color: rgba(255,255,255,.68); font-size: 11px; font-weight: 650; letter-spacing: .01em; cursor: pointer; list-style: none; }
+    .null-ingredient-more summary::-webkit-details-marker { display: none; }
+    .null-ingredient-more summary::after { content: "+"; color: var(--null-accent); font-size: 17px; font-weight: 400; line-height: 1; }
+    .null-ingredient-more[open] summary::after { content: "−"; }
+    .null-ingredient-more summary:hover { color: #fff; }
+    .null-ingredient-more summary:focus-visible { outline: 2px solid var(--null-accent); outline-offset: 3px; border-radius: 3px; }
+    .null-ingredient-more-content { padding: 8px 0 3px; }
+    .null-ingredient-more-content p { margin: 0 0 9px; color: rgba(255,255,255,.68); font-size: 11.5px; line-height: 1.5; }
+    .null-ingredient-more-content strong { color: rgba(255,255,255,.90); font-weight: 650; }
     .null-ingredient-footer {
       margin-top: auto;
       padding-top: 20px;
@@ -2041,12 +2052,22 @@
             <p class="null-ingredient-tagline">Less noise. More focus.</p>
             <p class="null-ingredient-label">What's inside</p>
             <ul class="null-ingredient-list">
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-ingredient-copy"><strong>L-Theanine</strong> <span class="null-ingredient-description">– for a calmer mind and concentration</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span class="null-ingredient-copy"><strong>Alpha-GPC</strong> <span class="null-ingredient-description">– a source of choline for brain function</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 8.5 7v9L12 22l-8.5-4V9L12 2Z"/><path d="m3.5 9 8.5 5 8.5-5M12 14v8"/></svg></span><span class="null-ingredient-copy"><strong>Vitamin B6</strong> <span class="null-ingredient-description">– supports normal nervous system function</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="12" cy="20" r="2"/><path d="m6 11 4-2m4 0 4 2m-6-1v8"/></svg></span><span class="null-ingredient-copy"><strong>L-Tyrosine</strong> <span class="null-ingredient-description">– an amino acid involved in neurotransmitter production</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 3 6 0 3 5-3 5H7L4 8l3-5Z"/><path d="m13 13 6 0 3 5-3 5h-6l-3-5 3-5Z"/><path d="m10 6 3 4m5 6 3 4"/></svg></span><span class="null-ingredient-copy"><strong>Cognizin (Citicoline)</strong> <span class="null-ingredient-description">– premium branded citicoline</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-ingredient-copy"><strong>L-Theanine</strong><span class="null-ingredient-benefit">Calm Focus</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><circle cx="12" cy="5" r="2"/><path d="M6 16l5-9m2 0 5 8M7 18h10"/></svg></span><span class="null-ingredient-copy"><strong>Alpha-GPC</strong><span class="null-ingredient-benefit">Choline Source</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 8.5 7v9L12 22l-8.5-4V9L12 2Z"/><path d="m3.5 9 8.5 5 8.5-5M12 14v8"/></svg></span><span class="null-ingredient-copy"><strong>Vitamin B6</strong><span class="null-ingredient-benefit">Nervous System Support</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="12" cy="20" r="2"/><path d="m6 11 4-2m4 0 4 2m-6-1v8"/></svg></span><span class="null-ingredient-copy"><strong>L-Tyrosine</strong><span class="null-ingredient-benefit">Neurotransmitter Precursor</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 3 6 0 3 5-3 5H7L4 8l3-5Z"/><path d="m13 13 6 0 3 5-3 5h-6l-3-5 3-5Z"/><path d="m10 6 3 4m5 6 3 4"/></svg></span><span class="null-ingredient-copy"><strong>Cognizin (Citicoline)</strong><span class="null-ingredient-benefit">Premium Citicoline</span></span></li>
             </ul>
+            <details class="null-ingredient-more">
+              <summary>Explore Ingredients</summary>
+              <div class="null-ingredient-more-content">
+                <p><strong>L-Theanine</strong> – for a calmer mind and concentration</p>
+                <p><strong>Alpha-GPC</strong> – a source of choline for brain function</p>
+                <p><strong>Vitamin B6</strong> – supports normal nervous system function</p>
+                <p><strong>L-Tyrosine</strong> – an amino acid involved in neurotransmitter production</p>
+                <p><strong>Cognizin (Citicoline)</strong> – premium branded citicoline</p>
+              </div>
+            </details>
           </div>
           <div class="null-ingredient-footer">
             <p><span>Studying or need to focus?</span><span>Get in your zone.</span></p>
@@ -2068,10 +2089,18 @@
             <p class="null-ingredient-tagline">Keep your momentum.</p>
             <p class="null-ingredient-label">What's inside</p>
             <ul class="null-ingredient-list">
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h13v6a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6V9Z"/><path d="M17 10h2a3 3 0 0 1 0 6h-2M8 2v3M13 2v3"/></svg></span><span class="null-ingredient-copy"><strong>Caffeine</strong> <span class="null-ingredient-description">– for alertness and faster reactions</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-ingredient-copy"><strong>L-Theanine</strong> <span class="null-ingredient-description">– for calmer focus</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="12" cy="20" r="2"/><path d="m6 11 4-2m4 0 4 2m-6-1v8"/></svg></span><span class="null-ingredient-copy"><strong>Taurine</strong> <span class="null-ingredient-description">– an amino-acid-like compound in the energy formula</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 9h13v6a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6V9Z"/><path d="M17 10h2a3 3 0 0 1 0 6h-2M8 2v3M13 2v3"/></svg></span><span class="null-ingredient-copy"><strong>Caffeine</strong><span class="null-ingredient-benefit">Alertness &amp; Energy</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-ingredient-copy"><strong>L-Theanine</strong><span class="null-ingredient-benefit">Calm Focus</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="4" cy="12" r="2"/><circle cx="12" cy="8" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="12" cy="20" r="2"/><path d="m6 11 4-2m4 0 4 2m-6-1v8"/></svg></span><span class="null-ingredient-copy"><strong>Taurine</strong><span class="null-ingredient-benefit">Amino Compound</span></span></li>
             </ul>
+            <details class="null-ingredient-more">
+              <summary>Explore Ingredients</summary>
+              <div class="null-ingredient-more-content">
+                <p><strong>Caffeine</strong> – for alertness and faster reactions</p>
+                <p><strong>L-Theanine</strong> – for calmer focus</p>
+                <p><strong>Taurine</strong> – an amino-acid-like compound in the energy formula</p>
+              </div>
+            </details>
           </div>
           <div class="null-ingredient-footer">
             <p><span>Big day ahead?</span><span>Keep your momentum.</span></p>
@@ -2093,12 +2122,22 @@
             <p class="null-ingredient-tagline">Switch off your way.</p>
             <p class="null-ingredient-label">What's inside</p>
             <ul class="null-ingredient-list">
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-ingredient-copy"><strong>L-Theanine</strong> <span class="null-ingredient-description">– for a calmer mind</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span><span class="null-ingredient-copy"><strong>Melatonin</strong> <span class="null-ingredient-description">– helps reduce the time it takes to fall asleep</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2"/><path d="M12 10C8 5 8 3 12 3s4 2 0 7Zm2 2c5-4 7-4 7 0s-2 4-7 0Zm-2 2c4 5 4 7 0 7s-4-2 0-7Zm-2-2c-5 4-7 4-7 0s2-4 7 0Z"/></svg></span><span class="null-ingredient-copy"><strong>Valerian Extract</strong> <span class="null-ingredient-description">– a herb traditionally used for evening relaxation</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 3 6 0 3 5-3 5H7L4 8l3-5Z"/><path d="m13 13 6 0 3 5-3 5h-6l-3-5 3-5Z"/><path d="m10 6 3 4m5 6 3 4"/></svg></span><span class="null-ingredient-copy"><strong>GABA</strong> <span class="null-ingredient-description">– a naturally occurring inhibitory neurotransmitter</span></span></li>
-              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="6" rx="2.4" ry="3"/><ellipse cx="18" cy="10" rx="3" ry="2.4" transform="rotate(60 18 10)"/><ellipse cx="16" cy="17" rx="3" ry="2.4" transform="rotate(120 16 17)"/><ellipse cx="8" cy="17" rx="3" ry="2.4" transform="rotate(60 8 17)"/><ellipse cx="6" cy="10" rx="3" ry="2.4" transform="rotate(120 6 10)"/></svg></span><span class="null-ingredient-copy"><strong>Chamomile Extract</strong> <span class="null-ingredient-description">– chamomile traditionally associated with relaxation and rest</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 4c-7 0-12 3-12 10 0 3 2 5 5 5 7 0 9-8 7-15Z"/><path d="M5 21c1-5 5-9 10-12"/></svg></span><span class="null-ingredient-copy"><strong>L-Theanine</strong><span class="null-ingredient-benefit">Relaxation</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span><span class="null-ingredient-copy"><strong>Melatonin</strong><span class="null-ingredient-benefit">Sleep Onset</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2"/><path d="M12 10C8 5 8 3 12 3s4 2 0 7Zm2 2c5-4 7-4 7 0s-2 4-7 0Zm-2 2c4 5 4 7 0 7s-4-2 0-7Zm-2-2c-5 4-7 4-7 0s2-4 7 0Z"/></svg></span><span class="null-ingredient-copy"><strong>Valerian Extract</strong><span class="null-ingredient-benefit">Herbal Extract</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 3 6 0 3 5-3 5H7L4 8l3-5Z"/><path d="m13 13 6 0 3 5-3 5h-6l-3-5 3-5Z"/><path d="m10 6 3 4m5 6 3 4"/></svg></span><span class="null-ingredient-copy"><strong>GABA</strong><span class="null-ingredient-benefit">Inhibitory Neurotransmitter</span></span></li>
+              <li><span class="null-ingredient-row-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="6" rx="2.4" ry="3"/><ellipse cx="18" cy="10" rx="3" ry="2.4" transform="rotate(60 18 10)"/><ellipse cx="16" cy="17" rx="3" ry="2.4" transform="rotate(120 16 17)"/><ellipse cx="8" cy="17" rx="3" ry="2.4" transform="rotate(60 8 17)"/><ellipse cx="6" cy="10" rx="3" ry="2.4" transform="rotate(120 6 10)"/></svg></span><span class="null-ingredient-copy"><strong>Chamomile Extract</strong><span class="null-ingredient-benefit">Botanical Extract</span></span></li>
             </ul>
+            <details class="null-ingredient-more">
+              <summary>Explore Ingredients</summary>
+              <div class="null-ingredient-more-content">
+                <p><strong>L-Theanine</strong> – for a calmer mind</p>
+                <p><strong>Melatonin</strong> – helps reduce the time it takes to fall asleep</p>
+                <p><strong>Valerian Extract</strong> – a herb traditionally used for evening relaxation</p>
+                <p><strong>GABA</strong> – a naturally occurring inhibitory neurotransmitter</p>
+                <p><strong>Chamomile Extract</strong> – chamomile traditionally associated with relaxation and rest</p>
+              </div>
+            </details>
           </div>
           <div class="null-ingredient-footer">
             <p><span>Time to switch off?</span><span>Make room to unwind.</span></p>
