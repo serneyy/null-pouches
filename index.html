@@ -1317,7 +1317,7 @@
       text-align: center;
     }
     .null-compare-table thead th:first-child {
-      width: 55%;
+      width: 40%;
       padding-left: 0;
       text-align: left;
       color: rgba(255,255,255,.40);
@@ -1327,16 +1327,16 @@
     }
     .null-compare-table thead th:nth-child(2),
     .null-compare-table tbody td:nth-child(2) {
-      width: 23%;
+      width: 15%;
       background: rgba(116,76,186,.105);
     }
     .null-compare-table thead th:nth-child(2) {
       border-top: 1px solid rgba(177,139,255,.17);
       border-radius: 15px 15px 0 0;
     }
-    .null-compare-table thead th:nth-child(3) {
-      width: 22%;
-    }
+    .null-compare-table thead th:nth-child(3) { width: 14%; }
+    .null-compare-table thead th:nth-child(4) { width: 16%; }
+    .null-compare-table thead th:nth-child(5) { width: 15%; }
     .null-compare-table tbody tr:last-child td { border-bottom: 0; }
     .null-compare-table tbody tr:last-child td:nth-child(2) {
       border-bottom: 1px solid rgba(177,139,255,.17);
@@ -1407,7 +1407,7 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .null-compare-table tbody td:nth-child(3) .null-compare-mark--yes {
+    .null-compare-table tbody td:nth-child(n+3) .null-compare-mark--yes {
       background: rgba(255,255,255,.18);
       border-color: rgba(255,255,255,.2);
       box-shadow: none;
@@ -1416,6 +1416,18 @@
       border: 1.6px solid rgba(255,255,255,.34);
       background: transparent;
     }
+    .null-compare-price {
+      display: inline-block;
+      color: #f7f7f9;
+      font-size: 14px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .null-compare-price--null { color: #b994ff; }
+    .null-compare-label-mobile { display: none; }
+    .null-compare-partial { color: rgba(255,255,255,.60); font-size: 19px; font-weight: 600; }
+    .null-compare-footnote { margin: 15px 0 0; color: rgba(255,255,255,.43); font-size: 10px; line-height: 1.55; }
     @media (max-width: 767px) {
       .null-compare-section { padding: 40px 0 39px; }
       .null-compare-inner { padding: 0 18px; }
@@ -1423,23 +1435,29 @@
       .null-compare-subtitle { font-size: 12.5px; }
       .null-compare-shell { margin-top: 23px; }
       .null-compare-table { width: 100%; min-width: 0; table-layout: fixed; }
-      .null-compare-table thead th:first-child { width: 48%; }
-      .null-compare-table thead th:nth-child(2) { width: 27%; }
-      .null-compare-table thead th:nth-child(3) { width: 25%; }
+      .null-compare-table thead th:first-child { width: 40%; }
+      .null-compare-table thead th:nth-child(2) { width: 15%; }
+      .null-compare-table thead th:nth-child(3) { width: 14%; }
+      .null-compare-table thead th:nth-child(4) { width: 16%; }
+      .null-compare-table thead th:nth-child(5) { width: 15%; }
       .null-compare-table thead th {
         height: 62px;
-        padding: 10px 4px 11px;
+        padding: 10px 1px 11px;
         font-size: 9px;
       }
       .null-compare-table tbody td {
         height: 70px;
-        padding: 12px 5px;
+        padding: 12px 2px;
       }
       .null-compare-table tbody td:first-child { padding-left: 0; }
       .null-compare-feature { font-size: 10.6px; line-height: 1.35; }
-      .null-compare-detail { font-size: 9.5px; line-height: 1.45; margin-top: 4px; }
+      .null-compare-detail { display: none; }
+      .null-compare-feature { overflow-wrap: anywhere; hyphens: auto; }
+      .null-compare-label-desktop { display: none; }
+      .null-compare-label-mobile { display: inline; }
+      .null-compare-price { font-size: 10px; white-space: nowrap; }
       .null-compare-brand--null { font-size: 13px; }
-      .null-compare-brand--nicotine { font-size: 9px; }
+      .null-compare-brand--nicotine { font-size: 8.6px; line-height: 1.3; }
       .null-compare-mark { width: 24px; height: 24px; }
       .null-compare-mark--yes svg { width: 15px; height: 15px; }
     }
@@ -1448,7 +1466,7 @@
       .null-compare-feature { font-size: 10px; }
       .null-compare-detail { font-size: 9px; }
       .null-compare-brand--null { font-size: 12px; }
-      .null-compare-brand--nicotine { font-size: 8.5px; }
+      .null-compare-brand--nicotine { font-size: 8px; }
       .null-compare-mark { width: 22px; height: 22px; }
     }
 
@@ -2158,47 +2176,69 @@
       <p class="null-compare-subtitle">Made for more than a nicotine hit. Meet three functional formulas: FOCUS, ENERGY and SLEEP.</p>
 
       <div class="null-compare-shell">
-        <table class="null-compare-table" aria-label="NULL compared with nicotine pouches">
+        <table class="null-compare-table" aria-label="Comparison of NULL, coffee, energy drinks and nicotine pouches">
           <thead>
             <tr>
               <th scope="col">THE DIFFERENCE</th>
               <th scope="col"><span class="null-compare-brand null-compare-brand--null">NULL</span></th>
-              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">NICOTINE<br>POUCHES</span></th>
+              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine">COFFEE</span></th>
+              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine"><span class="null-compare-label-desktop">ENERGY DRINK</span><span class="null-compare-label-mobile">ENERGY</span></span></th>
+              <th scope="col"><span class="null-compare-brand null-compare-brand--nicotine"><span class="null-compare-label-desktop">NICOTINE POUCHES</span><span class="null-compare-label-mobile">NICOTINE</span></span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><span class="null-compare-feature">FUNCTIONAL INGREDIENTS</span><span class="null-compare-detail">Nootropics, amino acids and botanicals with a purpose.</span></td>
+              <td><span class="null-compare-feature">PRICE PER SERVING</span><span class="null-compare-detail">Indicative price per serving in Slovakia.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-price null-compare-price--null">€0.38</span></td>
+              <td class="null-compare-choice"><span class="null-compare-price">€2.20</span></td>
+              <td class="null-compare-choice"><span class="null-compare-price">€1.75</span></td>
+              <td class="null-compare-choice"><span class="null-compare-price">€0.24</span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">NICOTINE-FREE</span><span class="null-compare-detail">Made without nicotine.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">NO NICOTINE ADDICTION</span><span class="null-compare-detail">No nicotine means no addictive cycle.</span></td>
+              <td><span class="null-compare-feature">DISCREET USE</span><span class="null-compare-detail">A convenient option without a drink in hand.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">NO DRINK NEEDED</span><span class="null-compare-detail">No cup or can required.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">NO PREPARATION</span><span class="null-compare-detail">Ready to use, with nothing to mix.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-partial" role="img" aria-label="Depends on preparation">~</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+            </tr>
+            <tr>
+              <td><span class="null-compare-feature">3 FUNCTIONAL VARIANTS</span><span class="null-compare-detail">FOCUS, ENERGY and SLEEP for different moments.</span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
+              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
             </tr>
             <tr>
-              <td><span class="null-compare-feature">FOCUS. ENERGY. SLEEP.</span><span class="null-compare-detail">Pick the pouch that fits your moment.</span></td>
+              <td><span class="null-compare-feature">SLEEP VARIANT</span><span class="null-compare-detail">A dedicated SLEEP formula.</span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
-            </tr>
-            <tr>
-              <td><span class="null-compare-feature">BUILT FOR HOW YOU FEEL</span><span class="null-compare-detail">Study harder, move faster or switch off easier.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
-            </tr>
-            <tr>
-              <td><span class="null-compare-feature">NO NICOTINE COMEDOWN</span><span class="null-compare-detail">No nicotine rush and no crash after it.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
               <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--no" role="img" aria-label="No"></span></td>
-            </tr>
-            <tr>
-              <td><span class="null-compare-feature">DISCREET & SMOKE-FREE</span><span class="null-compare-detail">Easy to use, clean and familiar.</span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
-              <td class="null-compare-choice"><span class="null-compare-mark null-compare-mark--yes" role="img" aria-label="Yes"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.4 4.4L19.5 7"/></svg></span></td>
             </tr>
           </tbody>
         </table>
+        <p class="null-compare-footnote">* Indicative prices per serving in Slovakia: café espresso, Red Bull 250 ml and one nicotine pouch. Prices may vary. ~ Depends on preparation.</p>
       </div>
     </div>
   </section>
